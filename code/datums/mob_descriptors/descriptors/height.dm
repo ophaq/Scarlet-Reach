@@ -6,6 +6,10 @@
 	name = "Moderate"
 	prefix = "a"
 
+/datum/mob_descriptor/height/middling
+	name = "Middling"
+	prefix = "a"
+
 /datum/mob_descriptor/height/tall
 	name = "Tall"
 	prefix = "a"

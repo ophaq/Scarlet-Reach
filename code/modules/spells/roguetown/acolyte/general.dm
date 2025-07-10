@@ -46,6 +46,11 @@
 	. = ..()
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
+		if(HAS_TRAIT(target, TRAIT_PSYDONITE))
+			target.visible_message(span_info("[target] stirs for a moment, the miracle dissipates."), span_notice("A dull warmth swells in your heart, only to fade as quickly as it arrived."))
+			user.playsound_local(user, 'sound/magic/PSY.ogg', 100, FALSE, -1)
+			playsound(target, 'sound/magic/PSY.ogg', 100, FALSE, -1)
+			return FALSE
 		if(user.patron?.undead_hater && (target.mob_biotypes & MOB_UNDEAD)) //positive energy harms the undead
 			target.visible_message(span_danger("[target] is burned by holy light!"), span_userdanger("I'm burned by holy light!"))
 			target.adjustFireLoss(10)
@@ -61,9 +66,6 @@
 		var/message_self
 		//this if chain is stupid, replace with variables on /datum/patron when possible?
 		switch(user.patron.type)
-			if(/datum/patron/old_god)
-				message_out = span_info("A strange stirring feeling pours from [target]!")
-				message_self = span_info("Sentimental thoughts drive away my pains!")
 			if(/datum/patron/divine/astrata)
 				message_out = span_info("A wreath of gentle light passes over [target]!")
 				message_self = ("I'm bathed in holy light!")
@@ -200,6 +202,14 @@
 			to_chat(user, "Channeling my patron's power is easier in these conditions!")
 			healing += situational_bonus
 
+		// Block excommunicated targets from receiving divine healing
+		var/is_divine = ispath(user.patron?.type, /datum/patron/divine)
+		if(is_divine && (target.real_name in GLOB.excommunicated_players))
+			to_chat(user, span_danger("The gods recoil from [target]! Divine fire scorches your hands as your plea is rejected!"))
+			target.visible_message(span_danger("[target] is seared by divine wrath! The gods hate them!"), span_userdanger("I am seared by divine wrath! The gods hate me!"))
+			revert_cast()
+			return FALSE
+
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
 			var/no_embeds = TRUE
@@ -258,17 +268,23 @@
 	. = ..()
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
-		// Block if excommunicated and caster is divine pantheon
-		if(user.patron?.type in ALL_DIVINE_PATRONS && target.real_name in GLOB.excommunicated_players)
-			to_chat(user, span_danger("The gods recoil from [target]! Divine fire scorches your hands as your plea is rejected!"))
-			target.visible_message(span_danger("[target] is seared by divine wrath! The gods hate them!"), span_userdanger("I am seared by divine wrath! The gods hate me!"))
-			revert_cast()
+		if(HAS_TRAIT(target, TRAIT_PSYDONITE))
+			target.visible_message(span_info("[target] stirs for a moment, the miracle dissipates."), span_notice("A dull warmth swells in your heart, only to fade as quickly as it arrived."))
+			user.playsound_local(user, 'sound/magic/PSY.ogg', 100, FALSE, -1)
+			playsound(target, 'sound/magic/PSY.ogg', 100, FALSE, -1)
 			return FALSE
 		if(user.patron?.undead_hater && (target.mob_biotypes & MOB_UNDEAD)) //positive energy harms the undead
 			target.visible_message(span_danger("[target] is burned by holy light!"), span_userdanger("I'm burned by holy light!"))
 			target.adjustFireLoss(25)
 			target.fire_act(1,10)
 			return TRUE
+		// Block if excommunicated and caster is divine pantheon
+		var/is_divine = ispath(user.patron?.type, /datum/patron/divine)
+		if(is_divine && (target.real_name in GLOB.excommunicated_players))
+			to_chat(user, span_danger("The gods recoil from [target]! Divine fire scorches your hands as your plea is rejected!"))
+			target.visible_message(span_danger("[target] is seared by divine wrath! The gods hate them!"), span_userdanger("I am seared by divine wrath! The gods hate me!"))
+			revert_cast()
+			return FALSE
 		target.visible_message(span_info("A wreath of gentle light passes over [target]!"), span_notice("I'm bathed in holy light!"))
 		if(iscarbon(target))
 			var/mob/living/carbon/C = target
@@ -331,7 +347,7 @@
 		var/healing = 2.5
 		if(target.has_status_effect(/datum/status_effect/buff/stasis))
 			healing += 2.5
-		
+		target.apply_status_effect(/datum/status_effect/buff/healing, healing)
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
 			var/obj/item/bodypart/target_limb = get_most_damaged_limb(H)
@@ -339,10 +355,6 @@
 				// Heal the most damaged/bleeding limb
 				target_limb.heal_damage(healing * 10, healing * 10) // Convert healing to damage values
 				H.update_damage_overlays()
-			else
-				target.apply_status_effect(/datum/status_effect/buff/healing, healing)
-		else
-			target.apply_status_effect(/datum/status_effect/buff/healing, healing)
 		return TRUE
 	revert_cast()
 	return FALSE
@@ -405,6 +417,7 @@
 	var/toxin = 0
 	var/turf/origin
 	var/firestacks = 0
+	var/divinefirestacks = 0
 	var/blood = 0
 	miracle = TRUE
 	devotion_cost = 30
@@ -420,6 +433,7 @@
 		toxin = target.getToxLoss()
 		origin = get_turf(target)
 		firestacks = target.fire_stacks
+		divinefirestacks = target.divine_fire_stacks
 		blood = target.blood_volume
 		to_chat(target, span_warning("I feel a part of me was left behind..."))
 		play_indicator(target,'icons/mob/overhead_effects.dmi', "timestop", 100, OBJ_LAYER)
@@ -430,6 +444,7 @@
 /obj/effect/proc_holder/spell/invoked/stasis/proc/remove_buff(mob/living/carbon/target)
 	do_teleport(target, origin, no_effects=TRUE)
 	target.adjust_fire_stacks(target.fire_stacks*-1 + firestacks)
+	target.adjust_divine_fire_stacks(target.divine_fire_stacks*-1 + divinefirestacks)
 	var/brutenew = target.getBruteLoss()
 	var/burnnew = target.getFireLoss()
 	var/oxynew = target.getOxyLoss()

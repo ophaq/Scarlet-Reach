@@ -59,6 +59,21 @@
 /datum/mob_descriptor/face/full
 	name = "Full"
 
+/datum/mob_descriptor/face/narrow
+	name = "Narrow"
+
+/datum/mob_descriptor/face/wrinkled
+	name = "Wrinkled"
+
+/datum/mob_descriptor/face/emaciated
+	name = "Emaciated"
+
+/datum/mob_descriptor/face/skeletal
+	name = "Skeletal"
+
+/datum/mob_descriptor/face/long
+	name = "Long"
+
 /datum/mob_descriptor/face_exp
 	abstract_type = /datum/mob_descriptor/face_exp
 	suffix = "face"
@@ -127,6 +142,12 @@
 /datum/mob_descriptor/face_exp/jaded
 	name = "Jaded"
 
+/datum/mob_descriptor/face_exp/hardened
+	name = "Hardened"
+
+/datum/mob_descriptor/face_exp/hopeful
+	name = "Hopeful"
+
 /datum/mob_descriptor/face_exp/inquisitive
 	name = "Inquisitive"
 
@@ -153,3 +174,24 @@
 
 /datum/mob_descriptor/face_exp/smug
 	name = "Smug"
+
+/datum/mob_descriptor/face_exp/serene
+	name = "Serene"
+
+/datum/mob_descriptor/face_exp/compassionate
+	name = "Compassionate"
+
+/datum/mob_descriptor/face_exp/odious
+	name = "Odious"
+
+/datum/mob_descriptor/face_exp/selfassured
+	name = "Self-assured"
+
+/datum/mob_descriptor/face_exp/confident
+	name = "Confident"
+
+/datum/mob_descriptor/face_exp/nervous
+	name = "Nervous"
+
+/datum/mob_descriptor/face_exp/worried
+	name = "Worried"

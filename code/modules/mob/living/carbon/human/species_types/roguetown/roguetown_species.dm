@@ -22,7 +22,7 @@
 		if("Lupian accent")
 			return strings("polish_replacement.json", type, convert_HTML = TRUE)
 		if("Tiefling accent")
-			return strings("spanish_replacement.json", type, convert_HTML = TRUE)
+			return strings("tiefling_replacement.json", type, convert_HTML = TRUE)
 		if("Half Orc accent")
 			return strings("middlespeak.json", type, convert_HTML = TRUE)
 		if("Urban Orc accent")
@@ -35,6 +35,10 @@
 			return strings("feline_replacement.json", type, convert_HTML = TRUE)
 		if("Slopes accent")
 			return strings("welsh_replacement.json", type, convert_HTML = TRUE)
+		if("Saut al-Atash accent")
+			return
+		if("Valley accent")
+			return strings("valley_replacement.json", type, convert_HTML = TRUE)
 
 /datum/species/proc/get_accent(mob/living/carbon/human/H)
 	return get_accent_list(H,"full")

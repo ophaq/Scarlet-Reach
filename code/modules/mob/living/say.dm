@@ -177,6 +177,13 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	if(saymode && !saymode.handle_message(src, message, language))
 		return
 
+	message = treat_message(message) // unfortunately we still need this
+	var/sigreturn = SEND_SIGNAL(src, COMSIG_MOB_SAY, args)
+	if (sigreturn & COMPONENT_UPPERCASE_SPEECH)
+		message = uppertext(message)
+	if(!message)
+		return
+
 	if(!can_speak_vocal(message))
 //		visible_message("<b>[src]</b> makes a muffled noise.")
 		to_chat(src, span_warning("I can't talk."))
@@ -203,13 +210,6 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	else
 		src.log_talk(message, LOG_SAY, forced_by=forced)
 
-	message = treat_message(message) // unfortunately we still need this
-	var/sigreturn = SEND_SIGNAL(src, COMSIG_MOB_SAY, args)
-	if (sigreturn & COMPONENT_UPPERCASE_SPEECH)
-		message = uppertext(message)
-	if(!message)
-		return
-
 	if(src.client)
 		record_featured_stat(FEATURED_STATS_SPEAKERS, src)	//Yappin'
 	if(findtext(message, "Abyssor"))	//funni
@@ -219,14 +219,24 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 
 	if(language)
 		var/datum/language/L = GLOB.language_datum_instances[language]
+		var/list/chosen_spans
 		if(ishuman(src))
 			var/mob/living/carbon/human/H = src
+			//Species-specific language spans
 			if(H.dna?.species)
-				var/list/stuff = H.dna.species.get_span_language(L)
-				if(stuff)
-					spans |= stuff
+				chosen_spans = H.dna.species.get_span_language(L)
+			//Priority 2: Accent spans for imperial language (only if no species spans)
+			if(!chosen_spans?.len && L.type == /datum/language/common && H.char_accent && GLOB.accent_spans)
+				chosen_spans = GLOB.accent_spans[H.char_accent]
+			//Priority 3: Default language spans
+			if(!chosen_spans?.len && L.spans?.len)
+				chosen_spans = L.spans
 		else
-			spans |= L.spans
+			if(L.spans?.len)
+				chosen_spans = L.spans
+		
+		if(chosen_spans?.len && islist(chosen_spans))
+			spans |= chosen_spans
 
 	var/radio_return = radio(message, message_mode, spans, language)
 	if(radio_return & ITALICS)
@@ -314,7 +324,11 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	//time for emoting!!
 	var/datum/language/D = GLOB.language_datum_instances[message_language]
 	var/sign_verb = pick(D.signlang_verb)
-	var/chatmsg = "<b>[src]</b> " + sign_verb + "."
+	var/mob_color = "FFFFFF"
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+		mob_color = H.voice_color
+	var/chatmsg = "<font color = #[mob_color]><b>[src]</b></font> " + sign_verb + "."
 	visible_message(chatmsg, runechat_message = sign_verb, log_seen = SEEN_LOG_EMOTE, ignored_mobs = understanders)
 
 	//speech bubble

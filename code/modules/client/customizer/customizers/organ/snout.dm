@@ -9,6 +9,8 @@
 	organ_slot = ORGAN_SLOT_SNOUT
 
 /datum/customizer/organ/snout/lizard
+	allows_disabling = TRUE
+	default_disabled = FALSE
 	customizer_choices = list(/datum/customizer_choice/organ/snout/lizard)
 
 /datum/customizer_choice/organ/snout/lizard
@@ -159,6 +161,7 @@
 		/datum/sprite_accessory/snout/hanubus,
 		/datum/sprite_accessory/snout/hpanda,
 		/datum/sprite_accessory/snout/hjackal,
+		/datum/sprite_accessory/snout/hspots,
 		/datum/sprite_accessory/snout/hhorse,
 		/datum/sprite_accessory/snout/hzebra,
 		/datum/sprite_accessory/snout/front/bird,

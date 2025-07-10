@@ -26,6 +26,11 @@
 		/datum/mob_descriptor/face/chubby,
 		/datum/mob_descriptor/face/mousy,
 		/datum/mob_descriptor/face/full,
+		/datum/mob_descriptor/face/narrow,
+		/datum/mob_descriptor/face/wrinkled,
+		/datum/mob_descriptor/face/emaciated,
+		/datum/mob_descriptor/face/skeletal,
+		/datum/mob_descriptor/face/long,
 	)
 
 /datum/descriptor_choice/face_exp
@@ -52,6 +57,8 @@
 		/datum/mob_descriptor/face_exp/stern,
 		/datum/mob_descriptor/face_exp/genuine,
 		/datum/mob_descriptor/face_exp/jaded,
+		/datum/mob_descriptor/face_exp/hopeful,
+		/datum/mob_descriptor/face_exp/hardened,
 		/datum/mob_descriptor/face_exp/inquisitive,
 		/datum/mob_descriptor/face_exp/suspicious,
 		/datum/mob_descriptor/face_exp/tender,
@@ -61,6 +68,13 @@
 		/datum/mob_descriptor/face_exp/suave,
 		/datum/mob_descriptor/face_exp/humble,
 		/datum/mob_descriptor/face_exp/smug,
+		/datum/mob_descriptor/face_exp/serene,
+		/datum/mob_descriptor/face_exp/compassionate,
+		/datum/mob_descriptor/face_exp/odious,
+		/datum/mob_descriptor/face_exp/selfassured,
+		/datum/mob_descriptor/face_exp/confident,
+		/datum/mob_descriptor/face_exp/nervous,
+		/datum/mob_descriptor/face_exp/worried,
 	)
 
 /datum/descriptor_choice/body
@@ -71,6 +85,7 @@
 		/datum/mob_descriptor/body/athletic,
 		/datum/mob_descriptor/body/muscular,
 		/datum/mob_descriptor/body/herculean,
+		/datum/mob_descriptor/body/toned,
 		/datum/mob_descriptor/body/plump,
 		/datum/mob_descriptor/body/pearshaped,
 		/datum/mob_descriptor/body/pudgy,
@@ -104,11 +119,24 @@
 	descriptors = list(
 		/datum/mob_descriptor/stature/man,
 		/datum/mob_descriptor/stature/gentleman,
+		/datum/mob_descriptor/stature/hag,
+		/datum/mob_descriptor/stature/patriarch,
+		/datum/mob_descriptor/stature/villain,
 		/datum/mob_descriptor/stature/thug,
 		/datum/mob_descriptor/stature/snob,
 		/datum/mob_descriptor/stature/slob,
 		/datum/mob_descriptor/stature/brute,
 		/datum/mob_descriptor/stature/highbrow,
+		/datum/mob_descriptor/stature/scholar,
+		/datum/mob_descriptor/stature/rogue,
+		/datum/mob_descriptor/stature/hermit,
+		/datum/mob_descriptor/stature/pushover,
+		/datum/mob_descriptor/stature/beguiler,
+		/datum/mob_descriptor/stature/fiend,
+		/datum/mob_descriptor/stature/adventurer,
+		/datum/mob_descriptor/stature/valiant,
+		/datum/mob_descriptor/stature/daredevil,
+		/datum/mob_descriptor/stature/stoic,
 		/datum/mob_descriptor/stature/stooge,
 		/datum/mob_descriptor/stature/fool,
 		/datum/mob_descriptor/stature/bookworm,
@@ -222,6 +250,7 @@
 	default_descriptor = /datum/mob_descriptor/height/moderate
 	descriptors = list(
 		/datum/mob_descriptor/height/moderate,
+		/datum/mob_descriptor/height/middling,
 		/datum/mob_descriptor/height/tall,
 		/datum/mob_descriptor/height/short,
 		/datum/mob_descriptor/height/towering,

@@ -246,7 +246,7 @@
 	smeltresult = /obj/item/ingot/copper
 
 /obj/item/clothing/neck/roguetown/fencerguard
-	name = "fencer neckguard"
+	name = "fencing guard"
 	icon_state = "fencercollar"
 	armor = ARMOR_BEVOR
 	smeltresult = /obj/item/ingot/iron
@@ -259,6 +259,18 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = PLATEHIT
 	allowed_race = NON_DWARVEN_RACE_TYPES
+	detail_tag = "_detail"
+	color = "#282e83"
+	detail_color = "#c7732f"
+
+/obj/item/clothing/neck/roguetown/fencerguard/update_icon()
+	cut_overlays()
+	if(get_detail_tag())
+		var/mutable_appearance/pic = mutable_appearance(icon(icon, "[icon_state][detail_tag]"))
+		pic.appearance_flags = RESET_COLOR
+		if(get_detail_color())
+			pic.color = get_detail_color()
+		add_overlay(pic)
 
 /obj/item/clothing/neck/roguetown/gorget/forlorncollar
 	name = "forlorn collar"
@@ -278,17 +290,6 @@
 	max_integrity = 300
 	smeltresult = /obj/item/ingot/aaslag
 
-/obj/item/clothing/neck/roguetown/gorget/prisoner/Initialize()
-	. = ..()
-	name = "cursed collar"
-	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
-
-/obj/item/clothing/neck/roguetown/gorget/prisoner/dropped(mob/living/carbon/human/user)
-	. = ..()
-	if(QDELETED(src))
-		return
-	qdel(src)
-
 /obj/item/clothing/neck/roguetown/gorget/cursed_collar
 	name = "cursed collar"
 	desc = "A metal collar that seems to radiate an ominous aura."
@@ -303,6 +304,18 @@
 	body_parts_covered = NECK
 	prevent_crits = list()
 	blocksound = PLATEHIT
+
+/obj/item/clothing/neck/roguetown/gorget/cursed_collar/Initialize()
+	. = ..()
+	name = "cursed collar"
+	ADD_TRAIT(src, TRAIT_NO_SELF_UNEQUIP, CURSED_ITEM_TRAIT)
+/*
+/obj/item/clothing/neck/roguetown/gorget/cursed_collar/dropped(mob/living/carbon/human/user)
+	. = ..()
+	if(QDELETED(src))
+		return
+	qdel(src)
+*/
 
 /obj/item/clothing/neck/roguetown/psicross
 	name = "psycross"
@@ -329,11 +342,15 @@
 	
 	return TRUE
 
+/obj/item/clothing/neck/roguetown/psicross/attack_right(mob/user)
+	..()
+	user.emote("pray")
+	return
+
 /obj/item/clothing/neck/roguetown/psicross/aalloy
 	name = "decrepit psicross"
 	desc = "Surely this one endures?"
 	icon_state = "psycross_a"
-
 
 /obj/item/clothing/neck/roguetown/zcross/aalloy
 	name = "decrepit zcross"
