@@ -9,8 +9,6 @@
 			return strings("dwarfcleaner_replacement.json", type, convert_HTML = TRUE)
 		if("Dark Elf accent")
 			return strings("french_replacement.json", type, convert_HTML = TRUE)
-		if("Snow Elf accent")
-			return strings("russian_replacement.json", type, convert_HTML = TRUE)
 		if("Grenzelhoft accent")
 			return strings("german_replacement.json", type, convert_HTML = TRUE)
 		if("Hammerhold accent")

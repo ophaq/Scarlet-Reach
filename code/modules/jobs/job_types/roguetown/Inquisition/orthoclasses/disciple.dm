@@ -37,11 +37,12 @@
 /datum/outfit/job/roguetown/disciple/proc/brute_equip(mob/living/carbon/human/H)
 	backpack_contents = list(/obj/item/roguekey/inquisition = 1)
 	belt = /obj/item/storage/belt/rogue/leather/rope
-	pants = /obj/item/clothing/under/roguetown/tights/black
+	armor = /obj/item/clothing/suit/roguetown/armor/leather/studded
+	pants = /obj/item/clothing/under/roguetown/heavy_leather_pants
 	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
 	cloak = /obj/item/clothing/cloak/psydontabard/alt
 	H.adjust_skillrank(/datum/skill/misc/athletics, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
+	H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
@@ -53,13 +54,58 @@
 	H.change_stat("constitution", 3)
 	H.change_stat("intelligence", -2)
 	H.change_stat("speed", -1)
-	ADD_TRAIT(H, TRAIT_CIVILIZEDBARBARIAN, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_INQUISITION, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NOPAINSTUN, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_OUTLANDER, TRAIT_GENERIC)		//You're a foreigner, a guest of the realm.
+	ADD_TRAIT(H, TRAIT_OUTLANDER, TRAIT_GENERIC) //You're a foreigner, a guest of the realm.
 	H.grant_language(/datum/language/otavan)
+
+/datum/outfit/job/roguetown/disciple/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
+	if(visualsOnly) return
+	H.drop_all_held_items()
+	var/weapons = list("Steel Greataxe", "Longsword", "Steel Mace", "Spear", "Sword & Shield", "MY BARE HANDS!!!", "Dual Wield")
+	var/weapon_choice = input("Choose your weapon.", "TAKE UP ARMS") as anything in weapons
+	switch(weapon_choice)
+		if("Steel Greataxe")
+			H.adjust_skillrank(/datum/skill/combat/axes, 4, TRUE)
+			var/obj/item/I = new /obj/item/rogueweapon/greataxe/steel/doublehead(H)
+			H.put_in_hands(I, TRUE)
+		if("Longsword")
+			H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+			var/obj/item/I = new /obj/item/rogueweapon/greatsword/zwei(H)
+			H.put_in_hands(I, TRUE)
+			var/obj/item/strap = new /obj/item/gwstrap(H)
+			H.equip_to_slot(strap, SLOT_BACK_R)
+		if("Steel Mace")
+			H.adjust_skillrank(/datum/skill/combat/maces, 4, TRUE)
+			var/obj/item/I = new /obj/item/rogueweapon/mace/goden/steel(H)
+			H.put_in_hands(I, TRUE)
+		if("Spear")
+			H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
+			var/obj/item/I = new /obj/item/rogueweapon/spear/psyspear(H)
+			H.put_in_hands(I, TRUE)
+		if("Sword & Shield")
+			H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+			H.adjust_skillrank(/datum/skill/combat/shields, 4, TRUE)
+			var/obj/item/sword = new /obj/item/rogueweapon/sword/sabre/shamshir(H)
+			H.equip_to_slot(sword, SLOT_BELT_R)
+			var/obj/item/shield = new /obj/item/rogueweapon/shield/tower/metal(H)
+			H.equip_to_slot(shield, SLOT_BACK_R)
+		if ("MY BARE HANDS!!!")
+			H.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+			ADD_TRAIT(H, TRAIT_CIVILIZEDBARBARIAN, TRAIT_GENERIC)
+			ADD_TRAIT(H, TRAIT_STRONGBITE, TRAIT_GENERIC)
+			var/obj/item/katar = new /obj/item/rogueweapon/katar(H)
+			H.equip_to_slot(katar, SLOT_BELT_R)
+			var/obj/item/knuckles = new /obj/item/rogueweapon/knuckles/eora(H)
+			H.equip_to_slot(knuckles, SLOT_IN_BACKPACK)
+		if("Dual Wield")
+			H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+			var/obj/item/sabre1 = new /obj/item/rogueweapon/sword/sabre/shamshir(H)
+			var/obj/item/sabre2 = new /obj/item/rogueweapon/sword/sabre/shamshir(H)
+			H.equip_to_slot(sabre1, SLOT_BELT_R)
+			H.equip_to_slot(sabre2, SLOT_BACK_R)
 
 
 /datum/outfit/job/roguetown/disciple/proc/naledi_equip(mob/living/carbon/human/H)

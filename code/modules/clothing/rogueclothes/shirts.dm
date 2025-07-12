@@ -568,6 +568,7 @@
 	desc = "An elegant dress fit for nobility, crafted with the finest materials and adorned with intricate details."
 	body_parts_covered = CHEST|GROIN|ARMS|VITALS
 	icon_state = "nobledress"
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts.dmi'
 	boobed = TRUE
 
 
@@ -604,7 +605,7 @@
 	desc = "A luxurious dress made of the finest velvet, soft to the touch and rich in appearance."
 	body_parts_covered = CHEST|GROIN|ARMS|VITALS
 	icon_state = "velvetdress"
-	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts_royalty.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_shirts.dmi'
 	boobed = TRUE
 
 
