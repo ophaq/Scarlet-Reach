@@ -5,7 +5,6 @@
 		//////////////////////
 	parent_type = /datum
 
-	authenticate = 0
 		////////////////
 		//ADMIN THINGS//
 		////////////////

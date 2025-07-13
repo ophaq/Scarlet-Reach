@@ -5,7 +5,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = NON_DWARVEN_RACE_TYPES //roughneck & custodian sprites dont have dwarf variants - adjust if/when a second update comes out with dwarf sprites
 	outfit = /datum/outfit/job/roguetown/adventurer/foreigner
-	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_OUTLANDER)
+	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_OUTLANDER, TRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN)
 	category_tags = list(CTAG_ADVENTURER, CTAG_COURTAGENT)
 	classes = list("Roughneck" = "You are a foreign swordsman, carrying nothing but your sword and its scabbard.",
 					"Custodian"= "You are an ex-guardian, whenever that be a petty noble, or a small shrine. You excel in defense with quarterstaffs.",)
@@ -79,5 +79,6 @@
 			H.change_stat("endurance", 1)
 			H.change_stat("constitution", 2)
 			H.cmode_music = 'sound/music/combat_kazengite.ogg'
+
 
 	H.grant_language(/datum/language/kazengunese)

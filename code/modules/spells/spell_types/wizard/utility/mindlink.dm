@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/invoked/mindlink
 	name = "Mindlink"
-	desc = "Establish a telepathic link with an ally for one minute. Use ,y before a message to communicate telepathically."
+	desc = "Establish a telepathic link with an ally for fifteen minutes. Use ,y before a message to communicate telepathically."
 	clothes_req = FALSE
 	overlay_state = "mindlink"
 	associated_skill = /datum/skill/magic/arcane
@@ -76,7 +76,7 @@
 	to_chat(first_target, span_notice("A mindlink has been established with [second_target]! Use ,y before a message to communicate telepathically."))
 	to_chat(second_target, span_notice("A mindlink has been established with [first_target]! Use ,y before a message to communicate telepathically."))
 	
-	addtimer(CALLBACK(src, PROC_REF(break_link), link), 3 MINUTES)
+	addtimer(CALLBACK(src, PROC_REF(break_link), link), 15 MINUTES)
 	return TRUE
 
 /obj/effect/proc_holder/spell/invoked/mindlink/proc/break_link(datum/mindlink/link)

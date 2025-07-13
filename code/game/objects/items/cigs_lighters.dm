@@ -348,6 +348,15 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/cigarette/rollie/nicotine
 	list_reagents = list(/datum/reagent/drug/nicotine = 30)
 
+/obj/item/clothing/mask/cigarette/rollie/mentha // not a subtype of nicotine for crafting reasons
+	name = "mentha zig"
+	desc = "Dried westleach carefully wrapped in fine paper. It has a particularly smooth taste with a cooling effect."
+	list_reagents = list(/datum/reagent/drug/nicotine = 30, /datum/reagent/drug/mentha = 15)
+
+/obj/item/clothing/mask/cigarette/rollie/mentha/crafted
+	name = "handmade mentha zig"
+	desc = "A rewrapped westleach zig with some alchemically extracted mentha essence."
+
 /obj/item/clothing/mask/cigarette/rollie/nicotine/cheroot
 	name = "cheroot"
 	desc = "Rich smokeleaf self-rolled into an open-clipped cigarillo. Envigorating for the enthusiast, \

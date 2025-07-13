@@ -38,6 +38,11 @@
 	stressadd = -2
 	desc = list(span_green("A relaxing smoke."),span_green("A flavorful smoke."))
 
+/datum/stressevent/menthasmoke
+	timer = 1 MINUTES
+	stressadd = -1
+	desc = list(span_blue("A cooling feeling in my throat."))
+
 /datum/stressevent/weed
 	timer = 5 MINUTES
 	stressadd = -4

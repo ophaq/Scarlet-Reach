@@ -57,6 +57,9 @@
 	sellprice = 1
 	var/naledicolor = FALSE
 
+	var/cansnout = FALSE //for masks - can we MMB this to change it into a snouty sprite?
+	var/snouting = FALSE //do we have the snout-snug sprite toggled?
+
 /obj/item
 	var/blocking_behavior
 	var/wetness = 0

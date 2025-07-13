@@ -1,11 +1,23 @@
 /obj/item/clothing/mask/rogue/MiddleClick(mob/user) 
-	overarmor = !overarmor
-	to_chat(user, span_info("I [overarmor ? "wear \the [src] under my hair" : "wear \the [src] over my hair"]."))
-	if(overarmor)
-		alternate_worn_layer = HOOD_LAYER //Below Hair Layer
+	if((user.zone_selected == BODY_ZONE_PRECISE_NOSE) && (cansnout == TRUE))
+		if(snouting == TRUE)
+			snouting = FALSE
+		else
+			snouting = TRUE
+		to_chat(user, span_info("I [snouting ? "make space for my snout in \the [src]" : "wear \the [src] tighter"]."))
+		if(snouting)
+			icon_state = "[initial(icon_state)]_snout"
+		else
+			icon_state = "[initial(icon_state)]"
+		user.update_inv_wear_mask()
 	else
-		alternate_worn_layer = BACK_LAYER //Above Hair Layer
-	user.update_inv_wear_mask()
+		overarmor = !overarmor
+		to_chat(user, span_info("I [overarmor ? "wear \the [src] under my hair" : "wear \the [src] over my hair"]."))
+		if(overarmor)
+			alternate_worn_layer = HOOD_LAYER //Below Hair Layer
+		else
+			alternate_worn_layer = BACK_LAYER //Above Hair Layer
+		user.update_inv_wear_mask()
 
 /obj/item/clothing/mask/rogue
 	name = ""
@@ -300,13 +312,14 @@
 /obj/item/clothing/mask/rogue/ragmask
 	name = "rag mask"
 	icon_state = "ragmask"
-	flags_inv = HIDEFACE|HIDEFACIALHAIR|HIDESNOUT
+	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	body_parts_covered = NECK|MOUTH
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	experimental_onhip = TRUE
 	sewrepair = TRUE
+	cansnout = TRUE
 
 /obj/item/clothing/mask/rogue/ragmask/ComponentInitialize()
 	AddComponent(/datum/component/adjustable_clothing, NECK, null, null, 'sound/foley/equip/rummaging-03.ogg', null, (UPD_HEAD|UPD_MASK))	//Standard mask

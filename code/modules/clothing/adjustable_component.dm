@@ -100,7 +100,10 @@
 	C.flags_inv = initial(C.flags_inv)
 	C.flags_cover = initial(C.flags_cover)
 	C.block2add = initial(C.block2add)
-	C.icon_state = "[initial(C.icon_state)]"
+	if(C.snouting)
+		C.icon_state = "[initial(C.icon_state)]_snout"
+	else
+		C.icon_state = "[initial(C.icon_state)]"
 	toggled_open = FALSE
 
 /datum/component/adjustable_clothing/proc/update_inv(mob/living/carbon/human/H)
