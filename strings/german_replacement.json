@@ -5,7 +5,6 @@
         "beautiful": "schön",
 		"big": "groß",
         "great": "großartig",
-        "good bye": ["auf wiedersehen", "tschüss"],
         "goodbye": ["auf wiedersehen", "tschüss"],
         "swine": "schweinhund",
 		"you swine": "du schweinhund",
@@ -23,8 +22,6 @@
         "god": "gott",
 		"goddess": "göttin",
         "good": "gut",
-		"good day": "guten tag",
-		"good dae": "guten tag",
         "hello": "hallo",
         "helmet": "helm",
         "house": "haus",
@@ -35,7 +32,6 @@
 		"myself": "ich selbst",
         "no": "nein",
 		"nobody": "niemand",
-		"no one": "niemand",
         "old": "alt",
 		"self": "selbst",
         "shit": "scheiße",
@@ -47,7 +43,6 @@
         "sword": "schwert",
 		"thank": "dank",
         "thanks": "danke",
-        "thank you": "danke",
         "the": ["die", "der", "das"],
         "ugly": "hässlich",
         "very": "sehr",
@@ -89,16 +84,10 @@
 		"goblins": "gremlins",
 		"please": "bitte",
 		"help": "hilfe",
-		"help me": "hilf mir",
 		"damn": "verdammt",
-		"damn it": "verdammt nochmal",
 		"whoreson": "hurensohn",
-		"good evening": "guten abend",
-		"good night": "gute nacht",
 		"understood": "jawohl",
 		"wonderful": "wunderbar",
-		"many thanks": "vielen dank",
-		"of course": "natürlich",
 		"and": "und"
     },
     "start": {
@@ -108,6 +97,17 @@
 
     },
 	"multiword": {
+		"of course": "natürlich",
+		"damn it": "verdammt nochmal",
+		"good evening": "guten abend",
+		"good night": "gute nacht",
+		"many thanks": "vielen dank",
+		"good bye": ["auf wiedersehen", "tschüss"],
+		"thank you": "danke",
+		"good day": "guten tag",
+		"good dae": "guten tag",
+		"help me": "hilf mir",
+		"no one": "niemand"
 
 	},
     "syllable": {

@@ -69,3 +69,10 @@
 	M.faction |= "[REF(user)]"
 	M.apply_status_effect(STATUS_EFFECT_INLOVE, user)
 	qdel(src)
+
+/obj/item/reagent_containers/glass/bottle/rogue/zizopoison
+	name = "bottle of Zizo Poison"
+	desc = "A sinister bottle containing a forbidden liquid."
+	icon = 'icons/roguetown/misc/alchemy.dmi'
+	icon_state = "vial_bottle"
+	list_reagents = list(/datum/reagent/toxin/zizopoison = 30)
