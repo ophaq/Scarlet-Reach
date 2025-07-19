@@ -8490,7 +8490,7 @@
 /obj/structure/mineral_door/wood/fancywood{
 	locked = 1;
 	lockid = "shop";
-	name = "Clerk's Bedroom"
+	name = "Shophand's Bedroom"
 	},
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/town/shop)
@@ -34004,7 +34004,9 @@
 /turf/closed/wall/mineral/rogue/decostone/center,
 /area/rogue/indoors/shelter)
 "llx" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow{
+	max_integrity = 500
+	},
 /obj/structure/bars/passage/shutter{
 	redstone_id = "trader_stock_shutter"
 	},
@@ -51842,7 +51844,9 @@
 /turf/open/floor/rogue/church,
 /area/rogue/under/cave/orcdungeon)
 "rgz" = (
-/obj/structure/roguewindow,
+/obj/structure/roguewindow{
+	max_integrity = 500
+	},
 /obj/structure/bars/passage/shutter{
 	redstone_id = "trader_shutter"
 	},
