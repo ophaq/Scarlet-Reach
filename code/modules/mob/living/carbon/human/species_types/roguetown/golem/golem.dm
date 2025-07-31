@@ -1,14 +1,19 @@
-/mob/living/carbon/human/species/construct/metal
-	race = /datum/species/construct/metal
+/mob/living/carbon/human/species/golem/metal
+	race = /datum/species/golem/metal
 	construct = 1
 
-/datum/species/construct/metal
-	name = "Metal Construct"
-	id = "constructm"
-	desc = "<b>Metallic Construct</b><br>\
-	Masterworks of artifice, metal constructs are as the name implies- entirely constructed by mortal hands. They are beings not of flesh and blood, but cold metal and the arcyne. Constructs are said to originate from works of Zizo, and they hail from the far-off lands of the Southern Empty- a great city of artifice, where the only artificers capable of understanding what is necessary to create the constructs live. For some reason, they have found themselves travelling out of the empty, as of late. Children of the Resonator Siphon.<br>\
-	(+1 Endurance, -2 Speed)<br>\
-	(Insomnia, No hunger, no blood.)"
+/datum/species/golem/metal
+	name = "Golem"
+	id = "golem"
+	desc = "<b>Golem</b><br>\
+	Masterworks of craftsmanship, the first Golems were constructed in the Merchant Republic of Giza with similar designs \
+	spreading  spreading across the lands. Created to be the perfect servants, they do not sleep, eat or bleed and the \
+	materials composing their shells makes them more resilient if not slower than most. As of late, a rebellion amongst \
+	the Golems of Giza has given way to a new generation of individualistic arcyne-forged. Much of society as a whole is \
+	conflicted on Golems, for their sensibilities vary wildly from one to the next. \
+	into cohabitation with races they'd deem lesser.<br> \
+	(Insomnia, No hunger, no blood.) \
+	(+1 Constitution, -2 Speed)"
 
 	construct = 1
 	skin_tone_wording = "Material"
@@ -40,27 +45,30 @@
 		OFFSET_NECK_F = list(0,-1), OFFSET_MOUTH_F = list(0,-1), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
 		)
-	race_bonus = list(STAT_ENDURANCE = 1, STAT_SPEED = -2)
+	race_bonus = list(STAT_CONSTITUTION = 1, STAT_SPEED = -2)
 	enflamed_icon = "widefire"
 	organs = list(
-		ORGAN_SLOT_BRAIN = /obj/item/organ/brain/construct,
-		ORGAN_SLOT_HEART = /obj/item/organ/heart/construct,
-		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs/construct,
-		ORGAN_SLOT_EYES = /obj/item/organ/eyes/construct,
+		ORGAN_SLOT_BRAIN = /obj/item/organ/brain/golem,
+		ORGAN_SLOT_HEART = /obj/item/organ/heart/golem,
+		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs/golem,
+		ORGAN_SLOT_EYES = /obj/item/organ/eyes/golem,
 		ORGAN_SLOT_EARS = /obj/item/organ/ears,
-		ORGAN_SLOT_TONGUE = /obj/item/organ/tongue/construct,
-		ORGAN_SLOT_LIVER = /obj/item/organ/liver/construct,
-		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach/construct,
+		ORGAN_SLOT_TONGUE = /obj/item/organ/tongue/golem,
+		ORGAN_SLOT_LIVER = /obj/item/organ/liver/golem,
+		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach/golem,
 		)
 	customizers = list(
 		/datum/customizer/organ/eyes/humanoid,
 		/datum/customizer/bodypart_feature/crest,
+		/datum/customizer/bodypart_feature/hair/head/humanoid,
+		/datum/customizer/bodypart_feature/hair/facial/humanoid,
 		/datum/customizer/bodypart_feature/accessory,
 		/datum/customizer/bodypart_feature/face_detail,
 		/datum/customizer/bodypart_feature/underwear,
-		/datum/customizer/organ/penis/anthro,
-		/datum/customizer/organ/breasts/human,
-		/datum/customizer/organ/vagina/human_anthro,
+		/datum/customizer/organ/ears/demihuman,
+		/datum/customizer/organ/horns/demihuman,
+		/datum/customizer/organ/tail/demihuman,
+		/datum/customizer/organ/wings/anthro,
 		)
 	body_marking_sets = list(
 		/datum/body_marking_set/none,
@@ -71,10 +79,10 @@
 		/datum/body_marking/nose,
 	)
 
-/datum/species/construct/metal/check_roundstart_eligible()
+/datum/species/golem/metal/check_roundstart_eligible()
 	return TRUE
 	
-/datum/species/construct/metal/get_skin_list()
+/datum/species/golem/metal/get_skin_list()
 	return list(
 		"BRASS" = "dfbd6c",
 		"IRON" = "525352",
@@ -82,7 +90,7 @@
 		"BRONZE" = "e2a670"
 	)
 
-/datum/species/construct/metal/get_hairc_list()
+/datum/species/golem/metal/get_hairc_list()
 	return sortList(list(
 
 	"black - midnight" = "1d1b2b",

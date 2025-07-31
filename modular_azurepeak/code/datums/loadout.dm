@@ -117,6 +117,46 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Tabard"
 	path = /obj/item/clothing/cloak/tabard
 
+/datum/loadout_item/tabard/astrata
+	name = "Astrata Tabard"
+	path = /obj/item/clothing/cloak/templar/astrata
+
+/datum/loadout_item/tabard/noc
+	name = "Noc Tabard"
+	path = /obj/item/clothing/cloak/templar/noc
+
+/datum/loadout_item/tabard/dendor
+	name = "Dendor Tabard"
+	path = /obj/item/clothing/cloak/templar/dendor
+
+/datum/loadout_item/tabard/malum
+	name = "Malum Tabard"
+	path = /obj/item/clothing/cloak/templar/malum
+
+/datum/loadout_item/tabard/eora
+	name = "Eora Tabard"
+	path = /obj/item/clothing/cloak/templar/eora
+
+/datum/loadout_item/tabard/pestra
+	name = "Pestra Tabard"
+	path = /obj/item/clothing/cloak/templar/pestra
+
+/datum/loadout_item/tabard/ravox
+	name = "Ravox Tabard"
+	path = /obj/item/clothing/cloak/cleric/ravox
+
+/datum/loadout_item/tabard/abyssor
+	name = "Abyssor Tabard"
+	path = /obj/item/clothing/cloak/templar/abyssor
+
+/datum/loadout_item/tabard/necra
+	name = "Abyssor Tabard"
+	path = /obj/item/clothing/cloak/templar/necra
+
+/datum/loadout_item/tabard/psydon
+	name = "Psydon Tabard"
+	path = /obj/item/clothing/cloak/templar/psydon
+
 /datum/loadout_item/surcoat
 	name = "Surcoat"
 	path = /obj/item/clothing/cloak/stabard
@@ -421,14 +461,6 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Feather"
 	path = /obj/item/natural/feather
 
-/datum/loadout_item/collar
-	name = "Collar"
-	path = /obj/item/clothing/neck/roguetown/collar
-
-/datum/loadout_item/bell_collar
-	name = "Bell Collar"
-	path = /obj/item/clothing/neck/roguetown/collar/bell_collar
-
 /datum/loadout_item/cursed_collar
 	name = "Cursed Collar"
 	path = /obj/item/clothing/neck/roguetown/gorget/cursed_collar
@@ -513,6 +545,10 @@ GLOBAL_LIST_EMPTY(loadout_items)
     name = "Jester's Shoes"
     path = /obj/item/clothing/shoes/roguetown/jester
 
+/datum/loadout_item/zcross_iron
+	name = "Zizo Cross"
+	path = /obj/item/clothing/neck/roguetown/zcross/iron
+
 //Donator Section
 //All these items are stored in the donator_fluff.dm in the azure modular folder for simplicity.
 //All should be subtypes of existing weapons/clothes/armor/gear, whatever, to avoid balance issues I guess. Idk, I'm not your boss.
@@ -551,3 +587,27 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Donator Kit - Padded silky dress"
 	path = /obj/item/enchantingkit/zydras
 	ckeywhitelist = list("1ceres")
+
+/datum/loadout_item/leather_collar
+	name = "Leather Collar"
+	path = /obj/item/clothing/neck/roguetown/collar/leather
+
+/datum/loadout_item/cowbell_collar
+	name = "Cowbell Collar"
+	path = /obj/item/clothing/neck/roguetown/collar/cowbell
+
+/datum/loadout_item/catbell_collar
+	name = "Catbell Collar"
+	path = /obj/item/clothing/neck/roguetown/collar/catbell
+
+/datum/loadout_item/rope_leash
+	name = "Rope Leash"
+	path = /obj/item/leash
+
+/datum/loadout_item/leather_leash
+	name = "Leather Leash"
+	path = /obj/item/leash/leather
+
+/datum/loadout_item/chain_leash
+	name = "Chain Leash"
+	path = /obj/item/leash/chain

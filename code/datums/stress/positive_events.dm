@@ -251,3 +251,8 @@
 	stressadd = -5
 	desc = span_green("I feel inspired by the sermon.")
 	timer = 20 MINUTES
+
+/datum/stressevent/goodloving
+	timer = 5 MINUTES
+	stressadd = -3
+	desc = "<span class='green'>I got some love, and it was wonderful!</span>"

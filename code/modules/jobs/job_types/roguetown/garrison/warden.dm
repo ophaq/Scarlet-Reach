@@ -1,4 +1,4 @@
-/datum/job/roguetown/bogguardsman
+/datum/job/roguetown/warden
 	title = "Warden"
 	flag = BOGGUARD
 	department_flag = GARRISON
@@ -6,10 +6,8 @@
 	total_positions = 6
 	spawn_positions = 6
 	selection_color = JCOLOR_SOLDIER
-
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_ALL_KINDS
-	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	allowed_races = RACES_FEARED_UP
 	tutorial = "The downtrodden, the disgraced and the disorderly. Either by choice or against your will, you have taken the oath and now vigilantly protect the cursed lands from bandits, \
 				necromancers, and all manner of vile creatures. While the men-at-arms and knights are afforded authority in Scarlet Reach, you are the closest thing the wilds has to any \
 				semblance of law. \
@@ -17,18 +15,15 @@
 				While you are afforded a relative degree of freedom in the pursuit of justice, you ultimately answer to the Marshal and the Crown."
 	display_order = JDO_TOWNGUARD
 	whitelist_req = TRUE
-
-	outfit = /datum/outfit/job/roguetown/bogguardsman
+	outfit = /datum/outfit/job/roguetown/warden
 	advclass_cat_rolls = list(CTAG_WARDEN = 20)
-
 	give_bank_account = 50
 	min_pq = 0
 	max_pq = null
 	round_contrib_points = 2
-
 	cmode_music = 'sound/music/combat_warden.ogg'
 
-/datum/outfit/job/roguetown/bogguardsman
+/datum/outfit/job/roguetown/warden
 	head = /obj/item/clothing/head/roguetown/helmet/bascinet/antler
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/hide/warden
 	cloak = /obj/item/clothing/cloak/wardencloak
@@ -39,7 +34,7 @@
 	id = /obj/item/scomstone/bad/garrison
 	job_bitflag = BITFLAG_GARRISON
 
-/datum/job/roguetown/bogguardsman/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
+/datum/job/roguetown/warden/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
@@ -47,13 +42,13 @@
 		H.invisibility = INVISIBILITY_MAXIMUM
 		H.become_blind("advsetup")
 
-/datum/advclass/bogguardsman/ranger
+/datum/advclass/warden/ranger
 	name = "Ranger"
 	tutorial = "You are a ranger, a hunter who volunteered to become a part of the wardens. You have experience using bows and daggers."
-	outfit = /datum/outfit/job/roguetown/bogguardsman/ranger
+	outfit = /datum/outfit/job/roguetown/warden/ranger
 	category_tags = list(CTAG_WARDEN)
 
-/datum/outfit/job/roguetown/bogguardsman/ranger/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/warden/ranger/pre_equip(mob/living/carbon/human/H)
 	..()
 	neck = /obj/item/clothing/neck/roguetown/coif
 	gloves = /obj/item/clothing/gloves/roguetown/fingerless_leather
@@ -94,10 +89,10 @@
 /datum/advclass/bogguardsman/forester
 	name = "Forester"
 	tutorial = "You are a forester, a woodsman who volunteered to become a part of the wardens. You have experience using axes and polearms."
-	outfit = /datum/outfit/job/roguetown/bogguardsman/forester
+	outfit = /datum/outfit/job/roguetown/warden/forester
 	category_tags = list(CTAG_WARDEN)
 
-/datum/outfit/job/roguetown/bogguardsman/forester/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/warden/forester/pre_equip(mob/living/carbon/human/H)
 	..()
 	neck = /obj/item/clothing/neck/roguetown/chaincoif/iron
 	gloves = /obj/item/clothing/gloves/roguetown/chain/iron

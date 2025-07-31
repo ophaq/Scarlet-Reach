@@ -10,7 +10,7 @@ combat_guard.ogg: Deus Ex The Conspiracy (PS2) / Deus Ex Revision - Hong Kong Ca
 combat_guard3.ogg: Deus Ex The Conspiracy (PS2) / Deus Ex Revision - UNATCO Combat Theme
 combat_guard4.ogg: Deus Ex The Conspiracy (PS2) / Deus Ex Revision - NYC Combat Theme
 combat_guard_bog.ogg: Deus Ex The Conspiracy (PS2) / Deus Ex Revision - UNATCO HQ Combat Theme
-combat_physician.ogg: Pathologic (Classic) - Utroba Aggression
+combat_physician.ogg: Michael Anthony - Klaus Schwab Rap (Instrumental)
 combat_bum.ogg: Pathologic (Classic) - Most Combat Theme
 combat_squire.ogg: Dragon's Dogma OST: Tense Combat
 combat_duelist.ogg: Medieval Total War 2 OST: Spanish Battle Theme
