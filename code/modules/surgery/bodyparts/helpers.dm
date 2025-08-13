@@ -2,6 +2,7 @@
 /mob/living/proc/get_bodypart(zone)
 	return
 
+// Proposed change: Use check_zone instead of doing two loops.
 /mob/living/carbon/get_bodypart(zone)
 	RETURN_TYPE(/obj/item/bodypart)
 	if(!zone)
@@ -12,6 +13,17 @@
 		for(var/subzone in bodypart.subtargets)
 			if(subzone != zone)
 				continue
+			return bodypart
+
+/mob/living/proc/get_bodypart_shallow(zone)
+	return
+
+/mob/living/carbon/get_bodypart_shallow(zone)
+	RETURN_TYPE(/obj/item/bodypart)
+	if(!zone)
+		zone = BODY_ZONE_CHEST
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		if(bodypart.body_zone == zone)
 			return bodypart
 
 /mob/living/carbon/proc/get_bodypart_complex(list/zones)
@@ -31,14 +43,16 @@
 		return pick(targets)
 
 /mob/living/carbon/has_hand_for_held_index(i, extra_checks)
-	if(i)
-		var/obj/item/bodypart/L = hand_bodyparts[i]
-		if(L && !L.disabled)
-			if(extra_checks)
-				if(!L.fingers || HAS_TRAIT(L, TRAIT_FINGERLESS))
-					return FALSE
-			return L
-	return FALSE
+    if(!isnum(i) || i <= 0 || i > length(hand_bodyparts)) //Delinefortune: if they have no hands, this will return FALSE and nothing going to happen
+        return FALSE
+
+    var/obj/item/bodypart/L = hand_bodyparts[i]
+    if(L && !L.disabled)
+        if(extra_checks)
+            if(!L.fingers || HAS_TRAIT(L, TRAIT_FINGERLESS))
+                return FALSE
+        return L
+    return FALSE
 
 
 /mob/proc/has_left_hand(check_disabled = TRUE)

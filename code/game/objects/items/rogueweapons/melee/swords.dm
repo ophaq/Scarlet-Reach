@@ -289,6 +289,15 @@
 	desc = "An uncommon and elaborate type of longsword with a compound hilt like those seen on rapiers and smallswords. It has a marked unsharpened section for safe unarmored half-swording, and it's made of Calorian steel."
 	icon_state = "elongsword"
 
+/obj/item/rogueweapon/sword/long/frei		//Challenge weapon
+	name = "dueling longsword"
+	desc = "Fechtfeders are a type of training sword brought up by Grenzelhoft fencing guilds, their name - literally \"Feather\" - matches their construction; thinner, lighter, dull but more balanced - with a blade catcher to boot. Freifechters often modify them, giving them edges and a point for use in real dueling - this is one such example, and there's a reason they don't make it out of the fighting pit."
+	icon_state = "sharpfeder"
+	force = 22
+	force_wielded = 27
+	wdefense = 5		//+1
+	wbalance = WBALANCE_SWIFT
+
 /obj/item/rogueweapon/sword/long/malumflamm
 	name = "forgefiend flamberge"
 	desc = "This sword's creation took a riddle in its own making. A great sacrifice was made for a blade of perfect quality."
@@ -710,6 +719,17 @@
 	gripped_intents = null
 	minstr = 5
 	wdefense = 4
+
+/obj/item/rogueweapon/sword/iron/saber
+	name = "iron saber"
+	desc = "A Naledian sword mass produced for line infantry. Its fittings are simple, munitions grade, but the construction is sturdy and the blade as threatening \
+	as any."
+	icon_state = "isaber"
+	possible_item_intents = list(/datum/intent/sword/cut/sabre, /datum/intent/sword/thrust/sabre, /datum/intent/sword/peel, /datum/intent/sword/strike)
+	gripped_intents = null
+	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
+	swingsound = BLADEWOOSH_SMALL
+	wbalance = WBALANCE_SWIFT
 
 /obj/item/rogueweapon/sword/sabre
 	name = "sabre"

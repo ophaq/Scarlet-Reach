@@ -46,6 +46,8 @@
 			recipient.mind?.special_items["Pestra Psycross"] = /obj/item/clothing/neck/roguetown/psicross/pestra
 		if(/datum/patron/divine/eora) 
 			recipient.mind?.special_items["Eora Psycross"] = /obj/item/clothing/neck/roguetown/psicross/eora
+		if(/datum/patron/divine/xylix) 
+			recipient.mind?.special_items["Xylix Psycross"] = /obj/item/clothing/neck/roguetown/psicross/xylix
 		if(/datum/patron/divine/noc)
 			recipient.mind?.special_items["Noc Psycross"] = /obj/item/clothing/neck/roguetown/psicross/noc
 		if(/datum/patron/divine/ravox)
@@ -123,7 +125,7 @@
 /datum/virtue/combat/bowman
 	name = "Toxophilite"
 	desc = "I've had an interest in archery from a young age, and I always keep a spare bow and quiver around."
-	custom_text = "+1 to Bows, Up to Legendary, Minimum Apprentice"
+	custom_text = "+1 to Bows, Up to Journeyman, Minimum Apprentice"
 	added_stashed_items = list("Recurve Bow" = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve,
 								"Quiver (Arrows)" = /obj/item/quiver/arrows
 	)
@@ -132,7 +134,7 @@
 	if(recipient.get_skill_level(/datum/skill/combat/bows) < SKILL_LEVEL_APPRENTICE)
 		recipient.adjust_skillrank_up_to(/datum/skill/combat/bows, SKILL_LEVEL_APPRENTICE, silent = TRUE)
 	else
-		added_skills = list(list(/datum/skill/combat/bows, 1, 6))
+		added_skills = list(list(/datum/skill/combat/bows, 1, 3))
 /*/datum/virtue/combat/tavern_brawler
 	name = "Tavern Brawler"
 	desc = "I've never met a problem my fists couldn't solve."

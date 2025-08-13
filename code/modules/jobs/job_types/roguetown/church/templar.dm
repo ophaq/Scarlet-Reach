@@ -6,7 +6,7 @@
 	faction = "Station"
 	tutorial = "Templars are warriors who have forsaken wealth and title in lieu of service to the church, due to either zealotry or a past shame. They guard the church and its priest while keeping a watchful eye against heresy and nite-creechers. Within troubled dreams, they wonder if the blood they shed makes them holy or stained."
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = RACES_SECOND_CLASS_NO_GOLEM
+	allowed_races = RACES_SECOND_CLASS_UP
 	allowed_patrons = ALL_DIVINE_PATRONS
 	outfit = /datum/outfit/job/roguetown/templar
 	min_pq = 3 //Deus vult, but only according to the proper escalation rules
@@ -57,7 +57,7 @@
 			neck = /obj/item/clothing/neck/roguetown/psicross/abyssor
 			cloak = /obj/item/clothing/cloak/abyssortabard
 		if(/datum/patron/divine/xylix)
-			neck = /obj/item/clothing/neck/roguetown/luckcharm
+			neck = /obj/item/clothing/neck/roguetown/psicross/xylix // no more good luck charm,  you wanna cheat gambling? Xylix weeps
 			cloak = /obj/item/clothing/cloak/templar/xylixian
 		if(/datum/patron/divine/dendor)
 			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
@@ -189,6 +189,7 @@
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/abyssorgreathelm
 			cloak = /obj/item/clothing/cloak/abyssortabard
 		if(/datum/patron/divine/xylix)
+			wrists = /obj/item/clothing/neck/roguetown/psicross/xylix
 			cloak = /obj/item/clothing/cloak/templar/xylixian
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/xylixhelm
 		if(/datum/patron/divine/dendor)

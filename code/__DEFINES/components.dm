@@ -244,15 +244,17 @@
 #define COMSIG_MOB_EXAMINATE "mob_examinate"					//from base of /mob/verb/examinate(): (atom/target)
 #define COMSIG_MOB_UPDATE_SIGHT "mob_update_sight"				//from base of /mob/update_sight(): ()
 #define COMSIG_MOB_SAY "mob_say" // from /mob/living/say(): ()
+#define COMSIG_MOB_SAY_POSTPROCESS "mob_say_postprocess"
 	#define COMPONENT_UPPERCASE_SPEECH 1
 	// used to access COMSIG_MOB_SAY argslist
 	#define SPEECH_MESSAGE 1
 	// #define SPEECH_BUBBLE_TYPE 2
 	#define SPEECH_SPANS 3
-	/* #define SPEECH_SANITIZE 4
+	// #define SPEECH_SANITIZE 4
 	#define SPEECH_LANGUAGE 5
-	#define SPEECH_IGNORE_SPAM 6
+	/* #define SPEECH_IGNORE_SPAM 6
 	#define SPEECH_FORCED 7 */
+	#define SPEECH_MODE 8
 #define COMSIG_MOB_DEADSAY "mob_deadsay" // from /mob/say_dead(): (mob/speaker, message)
 	#define MOB_DEADSAY_SIGNAL_INTERCEPT 1
 // /mob/living signals
@@ -321,6 +323,8 @@
 	#define COMPONENT_BLOCK_MARK_RETRIEVAL 1
 #define COMSIG_ITEM_HIT_REACT "item_hit_react"					//from base of obj/item/hit_reaction(): (list/args)
 #define COMSIG_ITEM_WEARERCROSSED "wearer_crossed"                //called on item when crossed by something (): (/atom/movable, mob/living/crossed)
+#define COMSIG_ITEM_HIT_RESPONSE "item_hit_response"
+#define COMSIG_ITEM_ATTACK_TURF "item_attack_turf"
 
 // /obj/item/clothing signals
 #define COMSIG_CLOTHING_STEP_ACTION "clothing_step_action"			//from base of obj/item/proc/step_action(): ()

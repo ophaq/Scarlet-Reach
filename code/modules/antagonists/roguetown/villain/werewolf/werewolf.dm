@@ -14,10 +14,7 @@
 	var/transformed
 	var/transforming
 	var/untransforming
-	var/wwgenitals
-	var/wwbreastsize = 3
 	var/wolfname = "Verewolf"
-	var/wretch_antag = FALSE
 
 /datum/antagonist/werewolf/lesser
 	name = "Lesser Verewolf"
@@ -167,11 +164,11 @@
 	icon = 'icons/roguetown/weapons/32.dmi'
 	max_blade_int = 900
 	max_integrity = 900
-	force = 25
+	force = 35
 	block_chance = 0
-	wdefense = 2
+	wdefense = 10
 	blade_dulling = DULLING_SHAFT_GRAND
-	armor_penetration = 15
+	armor_penetration = 30
 	associated_skill = /datum/skill/combat/unarmed
 	wlength = WLENGTH_NORMAL
 	wbalance = WBALANCE_HEAVY

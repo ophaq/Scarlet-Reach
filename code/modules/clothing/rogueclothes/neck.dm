@@ -168,7 +168,7 @@
 	max_integrity = 350
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	resistance_flags = FIRE_PROOF
-	body_parts_covered = NECK|MOUTH|NOSE|HAIR|EARS|HEAD|CHEST
+	body_parts_covered = NECK|MOUTH|NOSE|HAIR|EARS|HEAD
 	adjustable = CAN_CADJUST
 	smeltresult = /obj/item/ingot/steel
 	smelt_bar_num = 2
@@ -212,7 +212,7 @@
 	max_integrity = 275
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	resistance_flags = FIRE_PROOF
-	body_parts_covered = NECK|MOUTH|NOSE|HAIR|EARS|HEAD|CHEST
+	body_parts_covered = NECK|MOUTH|NOSE|HAIR|EARS|HEAD
 	adjustable = CAN_CADJUST
 	smeltresult = /obj/item/ingot/iron
 	smelt_bar_num = 2
@@ -322,6 +322,7 @@
 	body_parts_covered = NECK
 	prevent_crits = list()
 	blocksound = PLATEHIT
+	leashable = TRUE
 
 /obj/item/clothing/neck/roguetown/gorget/cursed_collar/Initialize()
 	. = ..()
@@ -430,6 +431,11 @@
 	name = "amulet of Eora"
 	desc = "In a world full of horror and hardship, all we have is each other."
 	icon_state = "eora"
+
+/obj/item/clothing/neck/roguetown/psicross/xylix
+	name = "amulet of Xylix"
+	desc = "In lyfe a smile is sharper than any blade."
+	icon_state = "xylix"
 
 /obj/item/clothing/neck/roguetown/psicross/wood
 	name = "wooden psycross"
