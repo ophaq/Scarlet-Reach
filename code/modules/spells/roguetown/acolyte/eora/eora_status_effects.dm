@@ -252,15 +252,22 @@
 		var/mob/living/carbon/human/H = owner
 		// Ugly people might get hurt
 		if(HAS_TRAIT(H, TRAIT_UNSEEMLY) && prob(2))
-			to_chat(H, span_warning("The tree's beauty burns your eyes!"))
-			H.Dizzy(5)
-			H.blur_eyes(5)
-			H.adjustBruteLoss(10, 0)
+			if(H.construct)
+				to_chat(H, span_warning("Your shell and eyes sizzle upon witnessing the tree's splendor, but you are too dense to take damage."))
+				H.blur_eyes(5)
+			else
+				to_chat(H, span_warning("The tree's beauty burns your eyes!"))
+				H.Dizzy(5)
+				H.blur_eyes(5)
+				H.adjustBruteLoss(10, 0)
 
 		// Beautiful people might get healed
 		else if(HAS_TRAIT(H, TRAIT_BEAUTIFUL) && prob(10))
-			to_chat(H, span_good("The tree's beauty revitalizes you!"))
-			H.apply_status_effect(/datum/status_effect/buff/healing, 1)
+			if(H.construct)
+				to_chat(H, "The tree recognizes your crafted beauty, but cannot heal you.")
+			else
+				to_chat(H, span_good("The tree's beauty revitalizes you!"))
+				H.apply_status_effect(/datum/status_effect/buff/healing, 1)
 
 	// There is no beauty in death. Feed my tree.
 	if(owner.stat == DEAD)

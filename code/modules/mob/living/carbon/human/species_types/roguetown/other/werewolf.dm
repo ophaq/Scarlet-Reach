@@ -54,11 +54,8 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
-		//ORGAN_SLOT_TESTICLES = /obj/item/organ/testicles,
-		//ORGAN_SLOT_PENIS = /obj/item/organ/penis/knotted/big,
-		//ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
-		//ORGAN_SLOT_VAGINA = /obj/item/organ/vagina,
-		)
+	)
+
 	languages = list(
 		/datum/language/beast,
 	)
@@ -70,7 +67,12 @@
 	H.icon = 'icons/roguetown/mob/monster/werewolf.dmi'
 	H.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB)
 	if(H.gender == MALE)
-		H.icon_state = "wwolf_m"
+		if(H.sexcon.arousal >= 20 && H.sexcon.manual_arousal == 1 || H.sexcon.manual_arousal == 4)
+			H.icon_state = "wwolf_m-e"
+		else if(H.sexcon.arousal >= 10 && H.sexcon.manual_arousal == 1 || H.sexcon.manual_arousal == 3)
+			H.icon_state = "wwolf_m-p"
+		else
+			H.icon_state = "wwolf_m"
 	else
 		H.icon_state = "wwolf_f"
 	H.update_damage_overlays()

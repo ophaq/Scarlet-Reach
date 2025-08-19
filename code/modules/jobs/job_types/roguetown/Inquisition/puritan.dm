@@ -53,10 +53,11 @@
 	H.adjust_skillrank(/datum/skill/misc/lockpicking, 5, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/tracking, 5, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/sneaking, 5, TRUE)
+	H.adjust_skillrank(/datum/skill/misc/stealing, 5, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE)
+	H.adjust_skillrank(/datum/skill/misc/climbing, 6, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
@@ -64,24 +65,24 @@
 	H.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-	H.change_stat("strength", 2)
+	H.change_stat("strength", 1)
 	H.change_stat("endurance", 2)
-	H.change_stat("constitution", 3)
+	H.change_stat("constitution", 1)
 	H.change_stat("perception", 3)
-	H.change_stat("speed", 1)
+	H.change_stat("speed", 3)
 	H.change_stat("intelligence", 3)
 	H.verbs |= /mob/living/carbon/human/proc/faith_test
 	H.verbs |= /mob/living/carbon/human/proc/torture_victim
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_SILVER_BLESSED, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_INQUISITION, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_PERFECT_TRACKER, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_PURITAN, JOB_TRAIT)
+	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	// Weapon choice system
 	H.adjust_blindness(-3)
-	var/weapons = list("Crossbow & Bolts", "Recurve Bow & Arrows")
-	var/weapon_choice = input("Choose your ranged weapon.", "TAKE UP ARMS") as anything in weapons
+	var/weapons = list("Crossbow & Bolts", "Recurve Bow & Arrows", "Buckler")
+	var/weapon_choice = input("Choose your auxiliary.", "TAKE UP ARMS") as anything in weapons
 	switch(weapon_choice)
 		if("Crossbow & Bolts")
 			H.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
@@ -91,6 +92,8 @@
 			H.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve
 			beltr = /obj/item/quiver/bodkin
+		if("Buckler")
+			backl = /obj/item/rogueweapon/shield/buckler
 	H.set_blindness(0)
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/puritan
 	belt = /obj/item/storage/belt/rogue/leather/knifebelt/black/psydon
@@ -119,11 +122,11 @@
 	..()
 	H.adjust_skillrank(/datum/skill/misc/lockpicking, 5, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/tracking, 5, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/sneaking, 5, TRUE)
+	H.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
-	H.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE)
+	H.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
@@ -132,11 +135,12 @@
 	H.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
 	H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-	H.change_stat("strength", 2)
-	H.change_stat("endurance", 2)
+	H.adjust_skillrank(/datum/skill/magic/holy, 3, TRUE)
+	H.change_stat("strength", 3)
+	H.change_stat("endurance", 3)
 	H.change_stat("constitution", 3)
 	H.change_stat("perception", 3)
-	H.change_stat("speed", 1)
+	H.change_stat("speed", -1)
 	H.change_stat("intelligence", 3)
 	H.verbs |= /mob/living/carbon/human/proc/faith_test
 	H.verbs |= /mob/living/carbon/human/proc/torture_victim
@@ -151,7 +155,7 @@
 	belt = /obj/item/storage/belt/rogue/leather/steel
 	neck = /obj/item/clothing/neck/roguetown/chaincoif/chainmantle
 	shoes = /obj/item/clothing/shoes/roguetown/boots/otavan/inqboots
-	pants = /obj/item/clothing/under/roguetown/chainlegs/kilt
+	pants = /obj/item/clothing/under/roguetown/chainlegs
 	cloak = /obj/item/clothing/cloak/cape/puritan
 	backr = /obj/item/storage/backpack/rogue/satchel/black
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/rich

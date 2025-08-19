@@ -363,6 +363,8 @@
 						VDrinker.handle_vitae(1000)
 				else
 					to_chat(user, span_warning("No more vitae from this blood..."))
+		else if(HAS_TRAIT(user,TRAIT_NOMETABOLISM))
+			//for Golems. I'd use trait_nohunger but I'm not entirely sure whether it'd mess with any other stuff
 		else if(HAS_TRAIT(user, TRAIT_HORDE))
 			// Horde trait allows safe blood drinking
 		else

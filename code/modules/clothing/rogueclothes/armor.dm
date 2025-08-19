@@ -1336,11 +1336,12 @@
 	max_integrity = 200
 	sewrepair = TRUE
 	equip_delay_self = 4 SECONDS
-	armor_class = ARMOR_CLASS_MEDIUM
+	armor_class = ARMOR_CLASS_LIGHT
 	blocksound = SOFTHIT
 
-/obj/item/clothing/suit/roguetown/armor/plate/scale/inqcoat/ComponentInitialize()	//No movement rustle component.
-	return
+/obj/item/clothing/suit/roguetown/armor/plate/scale/inqcoat/ComponentInitialize()	//Storage because it's a duster.
+	. = ..()
+	AddComponent(/datum/component/storage/concrete/roguetown/cloak)
 
  //--------------- BLACKSTEEL ---------------------
 

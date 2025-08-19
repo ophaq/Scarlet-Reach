@@ -374,7 +374,7 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 	name = "Rune of Progress"
 	desc = "A Holy Rune of ZIZO"
 	icon_state = "zizo_chalky"
-	var/zizorites = list("Rite of Armaments", "Rite of the Dark Crystal", "Conversion")
+	var/zizorites = list("Rite of Armaments", "Rite of the Dark Crystal", "Conversion", "Path of Rituos")
 
 /obj/structure/ritualcircle/zizo/attack_hand(mob/living/user)
 	if((user.patron?.type) != /datum/patron/inhumen/zizo)
@@ -449,6 +449,33 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 							zizoconversion(target) // removed CD bc it's gonna be coal to sit there and wait for it to go off rite cooldown, this one is purely social in its nature
 							spawn(120)
 								icon_state = "zizo_chalky"
+		if("Path of Rituos")
+			if(!Adjacent(user))
+				to_chat(user, "You must stand close to the rune to receive Zizo's blessing.")
+				return
+			var/list/valids_on_rune = list()
+			for(var/mob/living/carbon/human/peep in range(0, loc))
+				if(HAS_TRAIT(peep, TRAIT_CABAL))
+					valids_on_rune += peep
+			if(!valids_on_rune.len)
+				loc.visible_message(span_cult("THE RITE REJECTS ONE NOT OF THE CABAL!"))
+				return
+			var/mob/living/carbon/human/target = input(user, "Choose a host") as null|anything in valids_on_rune
+			if(!target || QDELETED(target) || target.loc != loc)
+				return
+			if(do_after(user, 50))
+				user.say("ZIZO! ZIZO! DAME OF PROGRESS!!")
+				if(do_after(user, 50))
+					user.say("ZIZO! ZIZO! HEED MY CALL!!")
+					if(do_after(user, 50))
+						user.say("ZIZO! ZIZO! STRIP OUR BONE OF ANY FLESH!!")
+						if(do_after(user, 50))
+							icon_state = "zizo_active"							
+							rituosbone(target)
+							user.apply_status_effect(/datum/status_effect/debuff/ritesexpended)
+							spawn(120)
+								icon_state = "zizo_chalky"
+
 
 /obj/structure/ritualcircle/zizo/proc/zizoarmaments(src)
 	var/onrune = view(0, loc)
@@ -470,17 +497,10 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 	target.emote("Agony")
 	playsound(loc, 'sound/combat/newstuck.ogg', 50)
 	if(HAS_TRAIT(target, TRAIT_INFINITE_STAMINA) || (target.mob_biotypes & MOB_UNDEAD))
-		loc.visible_message(span_cult("Great hooks come from the rune, embedding into [target]'s ankles, pulling them onto the rune. Then, into their wrists. As their black, rotten lux is torn from their chest, the rune screeches and violently pulls back its hooks, tearing them apart! "))
-		var/obj/item/bodypart/limb
-		var/list/limb_list = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+		loc.visible_message(span_cult("Great hooks come from the rune, embedding into [target]'s ankles, pulling them onto the rune. Then, into their wrists. As their black, rotten lux is torn from their chest, the very essence of their body surges to form it into armor. "))
 		target.Paralyze(120)
-		for(var/zone in limb_list)
-			limb = target.get_bodypart(zone)
-			if(limb)
-				playsound(src,'sound/combat/newstuck.ogg', rand(30,60), TRUE)
-				target.apply_damage(50, def_zone = limb)
-		return
-	loc.visible_message(span_cult("Great hooks come from the rune, embedding into [target]'s ankles, pulling them onto the rune. Then, into their wrists. Their lux is torn from their chest, and reforms into armor. "))
+	else
+		loc.visible_message(span_cult("Great hooks come from the rune, embedding into [target]'s ankles, pulling them onto the rune. Then, into their wrists. Their lux is torn from their chest, and reforms into armor. "))
 	spawn(20)
 		playsound(loc, 'sound/combat/hits/onmetal/grille (2).ogg', 50)
 		target.equipOutfit(/datum/outfit/job/roguetown/darksteelrite)
@@ -502,6 +522,81 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 	backr = /obj/item/rogueweapon/sword/long/zizo
 	neck = /obj/item/clothing/neck/roguetown/bevor
 
+
+/obj/structure/ritualcircle/zizo/proc/rituosbone(mob/living/carbon/human/target)
+	if(!target || QDELETED(target) || target.loc != loc)
+		to_chat(usr, "Selected target is not on the rune! [target.p_they(TRUE)] must be directly on top of the rune to receive Zizo's blessing.")
+		return
+	if (!HAS_TRAIT(target, TRAIT_CABAL))
+		loc.visible_message(span_cult("THE RITE REJECTS ONE NOT OF THE CABAL!"))
+		return
+	if (target.mob_biotypes & MOB_UNDEAD)
+		loc.visible_message(span_cult("YOU HAVE NO MORE LYFE TO GIVE, FOR YOUR HEART DOES NOT BEAT!"))
+		return
+	if (target.mind?.has_antag_datum(/datum/antagonist/vampire/lesser))
+		loc.visible_message(span_cult("YOU HAVE NO MORE LYFE TO GIVE, FOR YOUR HEART DOES NOT BEAT, CHILDE OF KAIN!"))
+		return
+	if (target.mind?.has_antag_datum(/datum/antagonist/werewolf/lesser))
+		loc.visible_message(span_cult("YOU ARE CURSED BY DENDOR, UNDESERVING OF UNLYFE!"))
+		return
+	target.Stun(60)
+	target.Knockdown(60)
+	to_chat(target, span_userdanger("UNIMAGINABLE PAIN!"))
+	target.emote("Agony")
+	playsound(loc, 'sound/misc/astratascream.ogg', 50)
+	loc.visible_message(span_cult("The pallor of the grave descends across [target]'s skin in a wave of arcyne energy... Then, their flesh is flayed, revealing a ghastly bone, blood splattering all around them."))
+	spawn(20)
+		playsound(loc, 'sound/combat/dismemberment/dismem (6).ogg', 50)
+		playsound(target, 'sound/health/slowbeat.ogg', 50)
+		target.mind?.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/touch/prestidigitation) // gotta remove presiistitititginanon if you had one to avoid getting double
+		ADD_TRAIT(target, TRAIT_NOHUNGER, "[type]")
+		ADD_TRAIT(target, TRAIT_NOBREATH, "[type]")
+		ADD_TRAIT(target, TRAIT_NOPAIN, "[type]")
+		ADD_TRAIT(target, TRAIT_TOXIMMUNE, "[type]")
+		ADD_TRAIT(target, TRAIT_STEELHEARTED, "[type]")
+		ADD_TRAIT(target, TRAIT_INFINITE_STAMINA, "[type]")
+		ADD_TRAIT(target, TRAIT_BLOODLOSS_IMMUNE, "[type]")
+		ADD_TRAIT(target, TRAIT_LIMBATTACHMENT, "[type]")
+		ADD_TRAIT(target, TRAIT_EASYDISMEMBER, "[type]")
+		if (!HAS_TRAIT(target, TRAIT_ARCYNE_T3) && !HAS_TRAIT(target, TRAIT_ARCYNE_T4) || HAS_TRAIT(target, TRAIT_ARCYNE_T2))
+			REMOVE_TRAIT(target, TRAIT_ARCYNE_T2, "[type]")
+			ADD_TRAIT(target, TRAIT_ARCYNE_T3, "[type]")
+		target.dna.species.species_traits |= NOBLOOD
+		target.change_stat("speed", -1)
+		target.change_stat("constitution", -2)
+		var/arcyne_level = target.get_skill_level(/datum/skill/magic/arcane) // mages get better spellcasting skill, still no access to the greater fireball sloppp, should they??
+		if (arcyne_level >= 3)
+			target.adjust_skillrank(/datum/skill/magic/arcane, 1, TRUE)
+		else
+			target.adjust_skillrank(/datum/skill/magic/arcane, 3, TRUE)
+		target.mind?.AddSpell(new /obj/effect/proc_holder/spell/targeted/touch/prestidigitation) // gotta remove if you already have it fuck?
+		target.mind?.adjust_spellpoints(18)
+		target.mob_biotypes |= MOB_UNDEAD
+		spawn(40)
+			to_chat(target, span_purple("They are ignorant, backwards, without hope. You. You will be powerful."))
+		var/obj/item/bodypart/no_penis = target.getorganslot(ORGAN_SLOT_PENIS)
+		if(no_penis)
+			qdel(no_penis)
+		var/obj/item/bodypart/no_vagina = target.getorganslot(ORGAN_SLOT_VAGINA)
+		if(no_vagina)
+			qdel(no_vagina)
+		var/obj/item/bodypart/no_balls = target.getorganslot(ORGAN_SLOT_TESTICLES)
+		if(no_balls)
+			qdel(no_balls)
+		var/obj/item/bodypart/no_breasts = target.getorganslot(ORGAN_SLOT_BREASTS)
+		if(no_breasts)
+			qdel(no_breasts)
+		var/list/body_parts = target.bodyparts.Copy()
+		for(var/obj/item/bodypart/part in body_parts)
+			part.skeletonize(FALSE)
+		target.update_body_parts()
+		var/list/eyes_replaced = target.internal_organs.Copy()
+		var/obj/item/organ/eyes/eyes = target.getorganslot(eyes_replaced) // #define ORGAN_SLOT_PENIS "penis" ORGAN_SLOT_TESTICLES "testicles" ORGAN_SLOT_BREASTS "breasts" ORGAN_SLOT_VAGINA "vagina" do I wanna bother
+		eyes = new /obj/item/organ/eyes/night_vision/zombie
+		eyes.Insert(target)
+		target.update_body_parts()
+		target.ritual_skeletonization = TRUE
+
 /obj/structure/ritualcircle/zizo/proc/zizoconversion(mob/living/carbon/human/target)
 	if(!target || QDELETED(target) || target.loc != loc)
 		to_chat(usr, "Selected target is not on the rune! [target.p_they(TRUE)] must be directly on top of the rune to receive Zizo's blessing.")
@@ -512,11 +607,8 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 	if(target.already_converted_once)
 		loc.visible_message(span_cult("BLOODY NIMROD!!"))
 		target.apply_damage(150, BRUTE, BODY_ZONE_HEAD)
-		return 
-	//var/yesorno = list("SUBMISSION", "DEATH")
-	//var/dialoguechoice = input(target, "SUBMISSION OR DEATH", src) as null|anything in yesorno
+		return
 	var/prompt = alert(target, "SUBMISSION OR DEATH",, "SUBMISSION", "DEATH")
-	//switch(dialoguechoice) // fuuck
 	if(prompt == "SUBMISSION")
 		to_chat(target, span_warning("Images of Her Work most grandoise flood your mind, as the heretical knowledge is seared right into your very body and soul."))
 		target.Stun(60)
@@ -528,7 +620,6 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 		spawn(20)
 			playsound(target, 'sound/health/slowbeat.ogg', 60)
 			playsound(loc, 'sound/ambience/creepywind.ogg', 80)
-			//target.set_patron(new /datum/patron/inhumen/zizo) //lowkey wanna give convertees like 4-8 learning points for spells in addition to that, +2 arcyne skill levels
 			target.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 			target.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
 			target.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
@@ -564,6 +655,7 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 		target.apply_damage(100, BURN, BODY_ZONE_HEAD)
 		target.emote("Agony")
 		loc.visible_message(span_cult("[target] is violently thrashing atop the rune, writhing, as they dare to defy ZIZO."))
+
 
 
 
@@ -682,11 +774,8 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 	if(target.already_converted_once)
 		loc.visible_message(span_cult("BLOODY NIMROD!!"))
 		target.apply_damage(150, BRUTE, BODY_ZONE_HEAD)
-		return 
-	//var/yesorno = list("DEAL", "NO DEAL")
-	//var/dialoguechoice = input(target, "GOOD DEAL!", src) as null|anything in yesorno
+		return
 	var/prompt = alert(target, "GOOD DEAL?",, "GOOD DEAL!", "NO DEAL!")
-	//switch(dialoguechoice) // fuuck
 	if(prompt == "GOOD DEAL!")
 		target.Stun(60)
 		target.Knockdown(60)
@@ -856,10 +945,7 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 		loc.visible_message(span_cult("BLOODY NIMROD!!"))
 		target.apply_damage(150, BRUTE, BODY_ZONE_HEAD)
 		return 
-	//var/yesorno = list("KILL KILL KILL!!!", "I DEFY YOU!")
-	//var/dialoguechoice = input(target, "CALL TO CULLING", src) as null|anything in yesorno
 	var/prompt = alert(target, "CULL AND HUNT!",, "KILL KILL KILL!!", "I DEFY YOU!!")
-	//switch(dialoguechoice) // fuuck
 	if(prompt == "KILL KILL KILL!!")
 		target.Stun(60)
 		target.Knockdown(60)
@@ -869,10 +955,6 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 		spawn(20)
 			playsound(target, 'sound/misc/heroin_rush.ogg', 100)
 			playsound(target, 'sound/health/fastbeat.ogg', 100)
-			//if(previous_level == null)
-				//var/nada = previous_level
-				//return success
-				//var/no_level = 0
 			target.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
 			target.adjust_skillrank(/datum/skill/labor/butchering, 1, TRUE)
 			spawn(40)
@@ -966,9 +1048,6 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 		loc.visible_message(span_cult("BLOODY NIMROD!!"))
 		target.apply_damage(150, BRUTE, BODY_ZONE_HEAD)
 		return 
-	//var/yesorno = list("LEASH", "LASH")
-	//var/dialoguechoice = input(target, "LEASH OR LASH", src) as null|anything in yesorno
-	//switch(dialoguechoice) // fuuck
 	var/prompt = alert(target, "LEASH OF SUBMISSION OR LASH OF DEFIANCE?",, "LEASH", "LASH")
 	if(prompt == "LEASH")
 		to_chat(target, span_warning("Hedonistic visions of excess and indulgence echo in your brain, as a drug-addled haze settles over your mind. Your body yearns for more.")) // helloooOOOOOOOO
