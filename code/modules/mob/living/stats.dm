@@ -69,7 +69,8 @@
 		switch(H.age)
 			if(AGE_MIDDLEAGED)
 				change_stat("speed", -1)
-				change_stat("endurance", 1)
+				change_stat("constitution", 1)
+				change_stat("fortune", 1)
 			if(AGE_OLD)
 				change_stat("strength", -1)
 				change_stat("speed", -2)
@@ -304,3 +305,81 @@
 			return STASPD
 		if(STATKEY_LCK)
 			return STALUC
+
+/mob/living/proc/clamp_stat(stat, min_amt, max_amt) // i am such a genius
+	var/new_amt
+	var/result_amt
+	switch(stat)
+		if("strength")
+			get_stat_level(STATKEY_STR)
+			if(STASTR < min_amt)
+				result_amt = min_amt - STASTR
+				new_amt = STASTR + result_amt
+				STASTR = new_amt
+			if(STASTR > max_amt)
+				result_amt = STASTR - max_amt
+				new_amt = STASTR - result_amt
+				STASTR = new_amt
+
+		if("perception")
+			get_stat_level(STATKEY_PER)
+			if(STAPER < min_amt)
+				result_amt = min_amt - STAPER
+				new_amt = STAPER + result_amt
+				STAPER = new_amt
+			if(STAPER > max_amt)
+				result_amt = STAPER - max_amt
+				new_amt = STAPER - result_amt
+				STAPER = new_amt
+			update_fov_angles()
+
+		if("intelligence")
+			get_stat_level(STATKEY_INT)
+			if(STAINT < min_amt)
+				result_amt = min_amt - STAINT
+				new_amt = STAINT + result_amt
+			if(STAINT > max_amt)
+				result_amt = STAINT - max_amt
+				new_amt = STAINT - result_amt
+			STAINT = new_amt
+
+		if("constitution")
+			get_stat_level(STATKEY_CON)
+			if(STACON < min_amt)
+				result_amt = min_amt - STACON
+				new_amt = STACON + result_amt
+			if(STACON > max_amt)
+				result_amt = STACON - max_amt
+				new_amt = STACON - result_amt
+			STACON = new_amt
+
+		if("endurance")
+			get_stat_level(STATKEY_END)
+			if(STAEND < min_amt)
+				result_amt = min_amt - STAEND
+				new_amt = STAEND + result_amt
+			if(STAEND > max_amt)
+				result_amt = STAEND - max_amt
+				new_amt = STAEND - result_amt
+			STAEND = new_amt
+
+		if("speed")
+			get_stat_level(STATKEY_SPD)
+			if(STASPD < min_amt)
+				result_amt = min_amt - STASPD
+				new_amt = STASPD + result_amt
+			if(STASPD > max_amt)
+				result_amt = STASPD - max_amt
+				new_amt = STASPD - result_amt
+			STASPD = new_amt
+			update_move_intent_slowdown()
+
+		if("fortune")
+			get_stat_level(STATKEY_LCK)
+			if(STALUC < min_amt)
+				result_amt = min_amt - STALUC
+				new_amt = STALUC + result_amt
+			if(STALUC > max_amt)
+				result_amt = STALUC - max_amt
+				new_amt = STALUC - result_amt
+			STALUC = new_amt

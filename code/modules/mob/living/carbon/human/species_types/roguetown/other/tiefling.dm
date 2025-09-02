@@ -129,7 +129,8 @@
 		"Voibion" = SKIN_COLOR_VOIBION,
 		"Chyerno" = SKIN_COLOR_CHYERNO,
 		"Drema"	= SKIN_COLOR_DREMA,
-		"Chir"	= SKIN_COLOR_CHIR
+		"Chir"	= SKIN_COLOR_CHIR,
+		"Vesyl"	= SKIN_COLOR_VESYL
 	)
 
 /datum/species/tieberian/get_hairc_list()

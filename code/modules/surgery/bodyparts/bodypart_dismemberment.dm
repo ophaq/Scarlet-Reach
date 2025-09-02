@@ -32,10 +32,15 @@
 		if(!HAS_TRAIT(C, TRAIT_CRITICAL_WEAKNESS) && !HAS_TRAIT(C, TRAIT_EASYDISMEMBER))	//People with these traits can be decapped standing, or buckled, or however.
 			if(!isnull(C.mind) && (C.mobility_flags & MOBILITY_STAND) && !C.buckled) //Only allows upright decapitations if it's not a player. Unless they're buckled.
 				return FALSE
+			if(!istype(user.rmb_intent, /datum/rmb_intent/strong))
+				return FALSE //Only allow decapitations on Strong stance, unless they have crit weakness/easy dismemberment.
 	if(C.status_flags & GODMODE)
 		return FALSE
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return FALSE
+	if(user)
+		if(zone_precise in list(BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND))
+			return FALSE //No dismemberment on hand/feet.
 
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
@@ -94,6 +99,10 @@
 
 		if(grabbedby)
 			grabbedby.Cut()
+
+	if(length(wounds))
+		for(var/datum/wound/wound in wounds)
+			remove_wound(wound.type)
 
 	drop_limb()
 	if(dam_type == BURN)
@@ -285,6 +294,20 @@
 		C.update_inv_pants()
 
 /obj/item/bodypart/l_leg/drop_limb(special) //copypasta
+	var/mob/living/carbon/C = owner
+	. = ..()
+	if(C && !special)
+		if(C.legcuffed)
+			C.legcuffed.forceMove(C.drop_location())
+			C.legcuffed.dropped(C)
+			C.legcuffed = null
+			C.update_inv_legcuffed()
+		if(C.shoes && (C.get_num_legs(FALSE) < 1))
+			C.dropItemToGround(C.shoes, force = TRUE)
+		C.update_inv_shoes()
+		C.update_inv_pants()
+
+/obj/item/bodypart/lamian_tail/drop_limb(special) //copypasta
 	var/mob/living/carbon/C = owner
 	. = ..()
 	if(C && !special)

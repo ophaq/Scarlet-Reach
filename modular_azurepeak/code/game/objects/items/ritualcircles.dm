@@ -18,7 +18,7 @@
 /obj/structure/ritualcircle/astrata
 	name = "Rune of the Sun" // defines name of the circle itself
 	icon_state = "astrata_chalky" // the icon state, so, the sprite the runes use on the floor. As of making, we have 6, each needs an active/inactive state. 
-	desc = "A Holy Rune of Astrata" // description on examine
+	desc = "A Holy Rune of Astrata. Warmth irradiates from the rune." // description on examine
 	var/solarrites = list("Guiding Light") // This is important - This is the var which stores every ritual option available to a ritualist - Ideally, we'd have like, 3 for each God. Right now, just 1.
 
 /obj/structure/ritualcircle/astrata/attack_hand(mob/living/user) 
@@ -66,7 +66,7 @@
 /obj/structure/ritualcircle/noc
 	name = "Rune of the Moon"
 	icon_state = "noc_chalky"
-	desc = "A Holy Rune of Noc"
+	desc = "A Holy Rune of Noc. Moonlight shines upon thee."
 	var/lunarrites = list("Moonlight Dance") // list for more to be added later
 
 /obj/structure/ritualcircle/noc/attack_hand(mob/living/user)
@@ -100,15 +100,17 @@
 
 /obj/structure/ritualcircle/xylix
 	name = "Rune of Trickery"
-	desc = "A Holy Rune of Xylix"
+	icon_state = "xylix_chalky" //mortosasye sprite
+	desc = "A Holy Rune of Xylix. You can hear the wind and distant bells, in the distance."
 
 /obj/structure/ritualcircle/ravox
-	name = "Rune of the Warrior"
-	desc = "A Holy Rune of Ravox"
+	name = "Rune of Justice"
+	icon_state = "ravox_chalky" // mortosasye sprite
+	desc = "A Holy Rune of Ravox. A blade to protect the weak with." // whiteknight the god. bruh
 
 /obj/structure/ritualcircle/pestra
 	name = "Rune of Plague"
-	desc = "A Holy Rune of Pestra"
+	desc = "A Holy Rune of Pestra. A sickle to cleanse the weeds and bring forth life."
 	icon_state = "pestra_chalky"
 	var/plaguerites = list("Flylord's Triage")
 
@@ -157,7 +159,7 @@
 
 /obj/structure/ritualcircle/dendor
 	name = "Rune of Beasts"
-	desc = "A Holy Rune of Dendor"
+	desc = "A Holy Rune of Dendor. Becoming one with nature is to connect with ones true instinct."
 	icon_state = "dendor_chalky"
 	var/bestialrites = list("Rite of the Lesser Wolf")
 
@@ -200,7 +202,7 @@
 
 /obj/structure/ritualcircle/malum
 	name = "Rune of Forge"
-	desc = "A Holy Rune of Malum"
+	desc = "A Holy Rune of Malum. A hammer and heat, to fix any imperfections with."
 	icon_state = "malum_chalky"
 var/forgerites = list("Ritual of Blessed Reforgance")
 
@@ -247,11 +249,57 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 
 /obj/structure/ritualcircle/abyssor
 	name = "Rune of Storm"
-	desc = "A Holy Rune of Abyssor"
+	desc = "A Holy Rune of Abyssor. You sense your mind getting pulled into the drawn spiral."
+	icon_state = "abyssor_chalky" // mortosasye
+	var/stormrites = list("Rite of the Abyssal Call")
+
+/obj/structure/ritualcircle/abyssor_alt // For future use with more malicious rituals, for example.
+	name = "Rune of Stirring"
+	desc = "A Holy Rune of Abyssor. This one seems different to the rest. Something observes."
+	icon_state = "abyssoralt_active" // change to abyssoralt_chalky if adding a new ritual, and use the active state instead for it.
+
+/obj/structure/ritualcircle/abyssor/attack_hand(mob/living/user)
+	if((user.patron?.type) != /datum/patron/divine/abyssor)
+		to_chat(user,span_smallred("I don't know the proper rites for this..."))
+		return
+	if(!HAS_TRAIT(user, TRAIT_RITUALIST))
+		to_chat(user,span_smallred("I don't know the proper rites for this..."))
+		return
+	if(user.has_status_effect(/datum/status_effect/debuff/ritesexpended))
+		to_chat(user,span_smallred("I have performed enough rituals for the day... I must rest before communing more."))
+		return
+	var/riteselection = input(user, "Rituals of the Storm", src) as null|anything in stormrites
+	switch(riteselection)
+		if("Rite of the Abyssal Call")
+			if(do_after(user, 50))
+				user.say("#ABYSSOR! LORD OF THE DEEP WATERS!")
+				if(do_after(user, 50))
+					user.say("#HEED MY CALL, MASTER OF THE ABYSS!")
+				if(do_after(user, 50))
+					user.say("#BRING FORTH YOUR SACRED ANGLER!")
+				if(do_after(user, 50))
+					icon_state = "abyssoralt_active"
+					loc.visible_message(span_warning("[user] completes the ritual, and an angler fish materializes from the depths!"))
+					to_chat(user,span_cultsmall("Abyssor's power flows through the rune, summoning a sacred angler fish from the abyss!"))
+					playsound(loc, 'sound/foley/waterenter.ogg', 100, FALSE, -1)
+					abyssor_angler_summoning_ritual(src)
+					user.apply_status_effect(/datum/status_effect/debuff/ritesexpended)
+					spawn(120)
+						icon_state = "abyssor_chalky"
+
+/obj/structure/ritualcircle/abyssor/proc/abyssor_angler_summoning_ritual(src)
+	// Create an ultra rare angler fish at the ritual location
+	var/obj/item/reagent_containers/food/snacks/fish/angler/angler_fish = new(loc)
+	angler_fish.icon_state = "anglerultra"
+	angler_fish.name = "ultra-rare anglerfish"
+	angler_fish.desc = "A menacing abyssal predator summoned by Abyssor's power. Its bioluminescent lure pulses with otherworldly energy."
+	angler_fish.sellprice = 60 
+	angler_fish.dead = TRUE
+	angler_fish.rarity_rank = 2
 
 /obj/structure/ritualcircle/necra
 	name = "Rune of Death"
-	desc = "A Holy Rune of Necra"
+	desc = "A Holy Rune of Necra. Quiet acceptance stirs within you."
 	icon_state = "necra_chalky"
 	var/deathrites = list("Undermaiden's Bargain", "Vow to the Undermaiden")
 
@@ -329,7 +377,7 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 
 /obj/structure/ritualcircle/eora
 	name = "Rune of Love"
-	desc = "A Holy Rune of Eora"
+	desc = "A Holy Rune of Eora. A gentle warmth and joy spreads across your soul."
 	icon_state = "eora_chalky"
 
 	var/peacerites = list("Rite of Pacification")
@@ -367,12 +415,19 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 		target.visible_message(span_green("I feel the burdens of my heart lifting. Something feels very wrong... I don't mind at all..."))
 		target.apply_status_effect(/datum/status_effect/buff/pacify)
 
+// up the psy
+
+/obj/structure/ritualcircle/psydon // done as a joke, but it is good for Psydonites to decorate with.
+	name = "Rune of Enduring"
+	desc = "A Holy Rune of Psydon. It depicts His holy symbol, yet nothing stirs within you."
+	icon_state = "psydon_chalky" // mortosasye
+
 // TIME FOR THE ASCENDANT. These can be stronger. As they are pretty much antag exclusive - Iconoclast for Matthios, Lich for ZIZO. ZIZO!
 
 
 /obj/structure/ritualcircle/zizo
 	name = "Rune of Progress"
-	desc = "A Holy Rune of ZIZO"
+	desc = "A Holy Rune of ZIZO. Progress at any cost."
 	icon_state = "zizo_chalky"
 	var/zizorites = list("Rite of Armaments", "Rite of the Dark Crystal", "Conversion", "Path of Rituos")
 
@@ -661,7 +716,7 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 
 /obj/structure/ritualcircle/matthios
 	name = "Rune of Transaction"
-	desc = "A Holy Rune of Matthios."
+	desc = "A Holy Rune of Matthios. All has a price."
 	icon_state = "matthios_chalky"
 	var/matthiosrites = list("Rite of Armaments", "Conversion")
 
@@ -822,8 +877,8 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 
 /obj/structure/ritualcircle/graggar
 	name = "Rune of Violence"
-	desc = "A Holy Rune of Graggar."
-	icon_state = "graggar_chalkiest"
+	desc = "A Holy Rune of Graggar. Fate broken once, His gift is true freedom for all."
+	icon_state = "graggar_chalky"
 	var/graggarrites = list("Rite of Armaments", "Conversion")
 
 /obj/structure/ritualcircle/graggar/attack_hand(mob/living/user)
@@ -854,11 +909,11 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 					if(do_after(user, 50))
 						user.say("A slaughter awaits!!")
 						if(do_after(user, 50))
-							//icon_state = "graggar_active" when we have one
+							icon_state = "graggar_active"
 							user.apply_status_effect(/datum/status_effect/debuff/ritesexpended)
 							graggararmor(target)
-							//spawn(120)
-								//icon_state = "graggar_chalky" 
+							spawn(120)
+								icon_state = "graggar_chalky" 
 		if("Conversion")
 			if(!Adjacent(user))
 				to_chat(user, "You must stand close to the rune to receive Graggar's blessing.")
@@ -881,10 +936,10 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 					if(do_after(user, 50))
 						user.say("LET US CULL AND HUNT, CULL AND HUNT, TOGETHER!!")
 						if(do_after(user, 50))
-							//icon_state = "graggar_active" when we have one
+							icon_state = "graggar_active"
 							graggarconversion(target)
-							//spawn(120)
-								//icon_state = "graggar_chalky" 
+							spawn(120)
+								icon_state = "graggar_chalky" 
 
 /obj/structure/ritualcircle/graggar/proc/graggararmor(src)
 	var/onrune = view(0, loc)
@@ -994,8 +1049,8 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 
 /obj/structure/ritualcircle/baotha
 	name = "Rune of Desire"
-	desc = "A Holy Rune of BAOTHA"
-	icon_state = "eora_chalky" // hello mister placeholder
+	desc = "A Holy Rune of Baotha. Relief for the broken hearted."
+	icon_state = "baotha_chalky" // mortosasye
 	var/baotharites = list("Conversion")
 
 /obj/structure/ritualcircle/baotha/attack_hand(mob/living/user)
@@ -1030,12 +1085,12 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 				if(do_after(user, 50))
 					user.say("#We are alone. Abandoned. Embrace us both...")
 					if(do_after(user, 50))
-						user.say("#The world's momentary pleasures have left us wanting...") // can someone else write this instead of me
+						user.say("#The world's momentary pleasures have left us wanting...") // ty zeratino and pyrzal
 						if(do_after(user, 50))
-							icon_state = "eora_active" // hello mister placeholder
+							icon_state = "baotha_active" // mortosasye
 							baothaconversion(target) // removed CD bc it's gonna be coal to sit there and wait for it to go off rite cooldown, this one is purely social in its nature
 							spawn(120)
-								icon_state = "eora_chalky" // hello mister placeholder
+								icon_state = "baotha_chalky" // mortosasye
 
 /obj/structure/ritualcircle/baotha/proc/baothaconversion(mob/living/carbon/human/target)
 	if(!target || QDELETED(target) || target.loc != loc)
@@ -1084,7 +1139,7 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 						target.mind?.RemoveAllMiracles()
 						C.grant_miracles(target, cleric_tier = CLERIC_T1, passive_gain = CLERIC_REGEN_DEVOTEE, devotion_limit = CLERIC_REQ_1)	
 	if(prompt == "LASH")
-		to_chat(target, span_warning("All too asutere, aloof and prudish, aren't you? Bah, I shall not waste any more of my time on you.")) // gotta change it too
+		to_chat(target, span_warning("All too austere, aloof and prudish, aren't you? Bah, I shall not waste any more of my time on you.")) // gotta change it too
 		target.Stun(60)
 		target.Knockdown(60)
 		to_chat(target, span_userdanger("UNIMAGINABLE PAIN!"))

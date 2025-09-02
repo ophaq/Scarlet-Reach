@@ -1,5 +1,5 @@
 /datum/antagonist/werewolf
-	name = "Verewolf"
+	name = "Verevolf"
 	roundend_category = "Werewolves"
 	antagpanel_category = "Werewolf"
 	job_rank = ROLE_WEREWOLF
@@ -14,10 +14,10 @@
 	var/transformed
 	var/transforming
 	var/untransforming
-	var/wolfname = "Verewolf"
+	var/wolfname = "Verevolf"
 
 /datum/antagonist/werewolf/lesser
-	name = "Lesser Verewolf"
+	name = "Lesser Verevolf"
 	increase_votepwr = FALSE
 
 /datum/antagonist/werewolf/lesser/roundend_report()
@@ -128,7 +128,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/skin_armor/werewolf_skin
 	slot_flags = null
-	name = "verewolf's skin"
+	name = "verevolf's skin"
 	desc = ""
 	icon_state = null
 	body_parts_covered = FULL_BODY
@@ -164,11 +164,11 @@
 	icon = 'icons/roguetown/weapons/32.dmi'
 	max_blade_int = 900
 	max_integrity = 900
-	force = 35
+	force = 25
 	block_chance = 0
-	wdefense = 10
+	wdefense = 2
 	blade_dulling = DULLING_SHAFT_GRAND
-	armor_penetration = 30
+	armor_penetration = 15
 	associated_skill = /datum/skill/combat/unarmed
 	wlength = WLENGTH_NORMAL
 	wbalance = WBALANCE_HEAVY

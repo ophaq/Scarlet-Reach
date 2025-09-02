@@ -94,7 +94,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		ic_blocked = TRUE
 
 	if(sanitize)
-		message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+		message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
 	if(!message || message == "")
 		return
 
@@ -111,11 +111,11 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	var/in_critical = InCritical()
 
 	if(one_character_prefix[message_mode])
-		message = copytext(message, 2)
+		message = copytext_char(message, 2)
 	else if(message_mode || saymode)
-		message = copytext(message, 3)
+		message = copytext_char(message, 3)
 	if(findtext_char(message, " ", 1, 2))
-		message = copytext(message, 2)
+		message = copytext_char(message, 2)
 
 	if(message_mode == MODE_ADMIN)
 		if(client)
@@ -162,11 +162,11 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		// No, you cannot speak in xenocommon just because you know the key
 		if(can_speak_in_language(message_language))
 			language = message_language
-		message = copytext(message, 3)
+		message = copytext_char(message, 3)
 
 		// Trim the space if they said ",0 I LOVE LANGUAGES"
 		if(findtext_char(message, " ", 1, 2))
-			message = copytext(message, 2)
+			message = copytext_char(message, 2)
 
 	if(!language)
 		language = get_default_language()
@@ -203,7 +203,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 			var/health_diff = round(-HEALTH_THRESHOLD_DEAD + health)
 			// If we cut our message short, abruptly end it with a-..
 			var/message_len = length(message)
-			message = copytext(message, 1, health_diff) + "[message_len > health_diff ? "-.." : "..."]"
+			message = copytext_char(message, 1, health_diff) + "[message_len > health_diff ? "-.." : "..."]"
 			message = Ellipsis(message, 10, 1)
 			last_words = message
 			message_mode = MODE_WHISPER_CRIT
@@ -413,20 +413,20 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 			Zs_yell = TRUE
 		if(say_test(message) == "3")	//Big "!!" shout
 			Zs_all = TRUE
-	// AZURE EDIT: thaumaturgical loudness (from orisons)
+	// AZURE EDIT: thaumaturgical loudness (from orisons) //Vrell - This is so fucking scuffed.
 	if (has_status_effect(/datum/status_effect/thaumaturgy))
 		spans |= SPAN_REALLYBIG
 		var/datum/status_effect/thaumaturgy/buff = locate() in status_effects
 		message_range += (5 + buff.potency) // maximum 12 tiles extra, which is a lot!
-		for(var/obj/structure/roguemachine/scomm/S in SSroguemachine.scomm_machines)
+		for(var/datum/scommodule/S in SSroguemachine.scomm_commons)
 			if (prob(buff.potency * 3) && S.speaking) // 3% chance per holy level, per SCOM for it to shriek your message in town wherever you are
-				S.verb_say = "shrieks in terror"
-				S.verb_exclaim = "shrieks in terror"
-				S.verb_yell = "shrieks in terror"
-				S.say(message, spans = list("info", "reallybig"))
-				S.verb_say = initial(S.verb_say)
-				S.verb_exclaim = initial(S.verb_exclaim)
-				S.verb_yell = initial(S.verb_yell)
+				S.parent_object.verb_say = "shrieks in terror"
+				S.parent_object.verb_exclaim = "shrieks in terror"
+				S.parent_object.verb_yell = "shrieks in terror"
+				S.parent_object.say(message, spans = list("info", "reallybig"))
+				S.parent_object.verb_say = initial(S.parent_object.verb_say)
+				S.parent_object.verb_exclaim = initial(S.parent_object.verb_exclaim)
+				S.parent_object.verb_yell = initial(S.parent_object.verb_yell)
 		remove_status_effect(/datum/status_effect/thaumaturgy)
 	// AZURE EDIT END
 	var/list/listening = get_hearers_in_view(message_range+eavesdrop_range, source)
@@ -557,8 +557,8 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	return TRUE
 
 /mob/living/proc/can_speak_vocal(message) //Check AFTER handling of xeno and ling channels
-	if(HAS_TRAIT(src, TRAIT_MUTE)|| HAS_TRAIT(src, TRAIT_PERMAMUTE))
-		return FALSE
+	if(HAS_TRAIT(src, TRAIT_MUTE)|| HAS_TRAIT(src, TRAIT_PERMAMUTE) || HAS_TRAIT(src, TRAIT_BAGGED))
+		return FALSE	
 
 	if(is_muzzled())
 		return FALSE
@@ -569,13 +569,13 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	return TRUE
 
 /mob/living/proc/get_key(message)
-	var/key = copytext(message, 1, 2)
+	var/key = copytext_char(message, 1, 2)
 	if(key in GLOB.department_radio_prefixes)
-		return lowertext(copytext(message, 2, 3))
+		return lowertext(copytext_char(message, 2, 3))
 
 /mob/living/proc/get_message_language(message)
-	if(copytext(message, 1, 2) == ",")
-		var/key = copytext(message, 2, 3)
+	if(copytext_char(message, 1, 2) == ",")
+		var/key = copytext_char(message, 2, 3)
 		for(var/ld in GLOB.all_languages)
 			var/datum/language/LD = ld
 			if(initial(LD.key) == key)

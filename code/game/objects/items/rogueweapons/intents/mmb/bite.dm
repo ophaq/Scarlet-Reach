@@ -118,7 +118,8 @@
 			if(istype(user.dna.species, /datum/species/werewolf))
 				if(user.mind)
 					if(!HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
-						caused_wound?.werewolf_infect_attempt()
+						if(istype(caused_wound))
+							caused_wound.werewolf_infect_attempt()
 						
 				if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
 					to_chat(user, span_warning("BLEH! [bite_victim] tastes of SILVER! My gift cannot take hold."))
@@ -172,22 +173,29 @@
 	var/last_drink
 
 /obj/item/grabbing/bite/valid_check()
-	// We require adjacency to count the grab as valid
+	var/mob/living/user = ismob(grabbee) ? grabbee : null
+	var/mob/living/target = ismob(grabbed) ? grabbed : null
 
-	if(isdullahan(grabbee) && ishuman(grabbed))
-		var/mob/living/carbon/human/target = grabbed
-		var/mob/living/carbon/human/user_human = grabbee
+	if(!user || !target || QDELETED(user) || QDELETED(target))
+		if(user) user.stop_pulling(FALSE)
+		qdel(src)
+		return FALSE
 
-		var/datum/species/dullahan/user_species = user_human.dna.species
-		var/obj/item/bodypart/head/dullahan/user_head = user_species.my_head
+	if(isdullahan(user) && ishuman(target))
+		var/mob/living/carbon/human/user_human = user
+		var/mob/living/carbon/human/target_human = target
 
-		if(!user_species.headless && user_human.Adjacent(target))
+		var/datum/species/dullahan/user_species = user_human.dna?.species
+		var/obj/item/bodypart/head/dullahan/user_head = user_species?.my_head
+
+		if(user_species && !user_species.headless && user_human.Adjacent(target_human))
 			return TRUE
-		else if(user_species.headless && (get_turf(user_head) == get_turf(target) || target.is_holding(user_head)))
+		else if(user_species && user_species.headless && user_head && (get_turf(user_head) == get_turf(target_human) || target_human.is_holding(user_head)))
 			return TRUE
-	else if(grabbee.Adjacent(grabbed))
+	else if(user.Adjacent(target))
 		return TRUE
-	grabbee.stop_pulling(FALSE)
+
+	user.stop_pulling(FALSE)
 	qdel(src)
 	return FALSE
 
@@ -245,14 +253,14 @@
 	if(C.apply_damage(damage, BRUTE, limb_grabbed, armor_block))
 		playsound(C.loc, "smallslash", 100, FALSE, -1)
 		var/datum/wound/caused_wound = limb_grabbed.bodypart_attacked_by(BCLASS_BITE, damage, user, sublimb_grabbed, crit_message = TRUE)
-		if(user.mind && caused_wound)
+		if(user.mind && istype(caused_wound))
 			/*
 				WEREWOLF CHEW.
 			*/
 			if(istype(user.dna.species, /datum/species/werewolf))
 				if(user.mind)
 					if(!HAS_TRAIT(C, TRAIT_SILVER_BLESSED))
-						caused_wound?.werewolf_infect_attempt()
+						caused_wound.werewolf_infect_attempt()
 				if(prob(30))
 					user.werewolf_feed(C)
 
@@ -262,7 +270,7 @@
 			var/datum/antagonist/zombie/zombie_antag = user.mind.has_antag_datum(/datum/antagonist/zombie)
 			if(zombie_antag && zombie_antag.has_turned)
 				var/datum/antagonist/zombie/existing_zombie = C.mind?.has_antag_datum(/datum/antagonist/zombie) //If the bite target is a zombie
-				if(!existing_zombie && caused_wound?.zombie_infect_attempt())   // infect_attempt on wound
+				if(!existing_zombie && caused_wound.zombie_infect_attempt())   // infect_attempt on wound
 					to_chat(user, span_danger("You feel your gift trickling into [C]'s wound...")) //message to the zombie they infected the target
 /*
 	Code below is for a zombie smashing the brains of unit. The code expects the brain to be part of the head which is not the case with AP. Kept for posterity in case it's used in an overhaul.
@@ -332,11 +340,10 @@
 
 	if(user.mind)
 		var/datum/antagonist/vampirelord/VDrinker = user.mind.has_antag_datum(/datum/antagonist/vampirelord)
-		var/datum/antagonist/vampirelord/VVictim = C.mind.has_antag_datum(/datum/antagonist/vampirelord)
-		var/zomwerewolf = C.mind.has_antag_datum(/datum/antagonist/werewolf)
-		if(!zomwerewolf)
-			if(C.stat != DEAD)
-				zomwerewolf = C.mind.has_antag_datum(/datum/antagonist/zombie)
+		var/datum/antagonist/vampirelord/VVictim = C.mind?.has_antag_datum(/datum/antagonist/vampirelord)
+		var/zomwerewolf = C.mind?.has_antag_datum(/datum/antagonist/werewolf)
+		if(!zomwerewolf && C.stat != DEAD)
+			zomwerewolf = C.mind?.has_antag_datum(/datum/antagonist/zombie)
 		
 		if(VDrinker)
 			// Regular vampire lords
@@ -401,6 +408,7 @@
 					if("Yes")
 						user.visible_message("[user] begins to infuse dark magic into [C]")
 						if(do_after(user, 30))
+							C.grab_ghost(force = FALSE)
 							C.visible_message("[C] rises as a new spawn!")
 							var/datum/antagonist/vampirelord/lesser/new_antag = new /datum/antagonist/vampirelord/lesser()
 							new_antag.sired = TRUE

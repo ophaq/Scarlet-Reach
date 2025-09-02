@@ -36,9 +36,12 @@ GLOBAL_LIST_INIT(freqtospan, list(
 
 /atom/movable/proc/send_speech(message, range = 7, obj/source = src, bubble_type, list/spans, datum/language/message_language = null, message_mode)
 	var/rendered = compose_message(src, message_language, message, , spans, message_mode)
-	for(var/_AM in get_hearers_in_view(range, source))
-		var/atom/movable/AM = _AM
-		AM.Hear(rendered, src, message_language, message, , spans, message_mode)
+	for(var/atom/movable/hearing_movable as anything in get_hearers_in_view(range, source))
+		if(!hearing_movable) // Should not get nulls, but just in case.
+			stack_trace("somehow theres a null returned from get_hearers_in_view() in send_speech!")
+			continue
+
+		hearing_movable.Hear(rendered, src, message_language, message, , spans, message_mode)
 
 /atom/movable/proc/compose_message(atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, message_mode, face_name = FALSE)
 	//This proc uses text() because it is faster than appending strings. Thanks BYOND.
@@ -59,15 +62,15 @@ GLOBAL_LIST_INIT(freqtospan, list(
 			namepart = "[H.get_face_name()]" //So "fake" speaking like in hallucinations does not give the speaker away if disguised
 		if(H.voice_color)
 			colorpart = "<span style='color:#[H.voice_color];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>"
-		if(H.client && H.client.patreonlevel() >= GLOB.patreonsaylevel)
-			spans |= SPAN_PATREON_SAY
+		if(H.client && H.client.prefs.patreon_say_color_enabled && H.client.patreon_colored_say_allowed)
+			spans |= "#[H.client.prefs.patreon_say_color]"
 	if(speaker.voicecolor_override)
 		colorpart = "<span style='color:#[speaker.voicecolor_override];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>"
 	//End name span.
 	var/endspanpart = "</span></span>"
 
 	//Message
-	var/messagepart = " <span class='message'>[lang_treat(speaker, message_language, raw_message, spans, message_mode)]</span></span>"
+	var/messagepart = " <span class='message'>[lang_treat(speaker, message_language, "[raw_message]", spans, message_mode)]</span></span>"
 
 	var/arrowpart = ""
 
@@ -141,8 +144,8 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	return ""
 
 /atom/movable/proc/say_mod(input, message_mode)
-	var/ending = copytext(input, length(input))
-	if(copytext(input, length(input) - 1) == "!!")
+	var/ending = copytext_char(input, length(input))
+	if(copytext_char(input, length(input) - 1) == "!!")
 		return verb_yell
 	else if(ending == "?")
 		return verb_ask
@@ -155,7 +158,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	if(!input)
 		input = "..."
 
-	if(copytext(input, length(input) - 1) == "!!")
+	if(copytext_char(input, length(input) - 1) == "!!")
 		spans |= SPAN_YELL
 
 	input = parsemarkdown_basic(input, limited = TRUE, barebones = TRUE)
@@ -169,7 +172,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 /atom/movable/proc/quoteless_say_quote(input, list/spans = list(speech_span), message_mode)
 	input = parsemarkdown_basic(input, limited = TRUE, barebones = TRUE)
 	var/pos = findtext(input, "*")
-	return pos? copytext(input, pos + 1) : input
+	return pos? copytext_char(input, pos + 1) : input
 
 /atom/movable/proc/check_language_hear(language)
 	return FALSE
@@ -203,22 +206,26 @@ GLOBAL_LIST_INIT(freqtospan, list(
 /* 	var/returntext = GLOB.reverseradiochannels["[freq]"]
 	if(returntext)
 		return returntext
-	return "[copytext("[freq]", 1, 4)].[copytext("[freq]", 4, 5)]" */
+	return "[copytext_char("[freq]", 1, 4)].[copytext_char("[freq]", 4, 5)]" */
 
 /proc/attach_spans(input, list/spans)
-	return "[message_spans_start(spans)][input]</span>"
+	return "[message_spans_start(spans)][input]</span></span>"
 
 /proc/message_spans_start(list/spans)
 	var/output = "<span class='"
+	var/textcolor = null
 	for(var/S in spans)
-		output = "[output][S] "
-	output = "[output]'>"
+		if(copytext(S, 1, 2) == "#") // All classes that start with a # are colors since # cannot be the first character of a css class.
+			textcolor = S //Vrell - Only needs the "last" color since that one will overwrrite it.
+		else
+			output = "[output][S] "
+	output = "[output]'><span style='color:[textcolor]'>"
 	return output
 
 /proc/say_test(text)
-	if(copytext(text, length(text) - 1) == "!!")
+	if(copytext_char(text, length(text) - 1) == "!!")
 		return "3"
-	var/ending = copytext(text, length(text))
+	var/ending = copytext_char(text, length(text))
 	if (ending == "?")
 		return "1"
 	if (ending == "!")

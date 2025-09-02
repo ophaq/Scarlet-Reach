@@ -75,6 +75,7 @@
 	required_reagents = list(/datum/reagent/water/gross = 1, /datum/reagent/water = 1)
 
 
+#define WATER_BLOOD_RESTORE 5
 /datum/reagent/water/on_mob_life(mob/living/carbon/M)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -82,7 +83,9 @@
 			H.adjust_hydration(hydration)
 		if(M.blood_volume < BLOOD_VOLUME_NORMAL)
 			M.blood_volume = min(M.blood_volume+10, BLOOD_VOLUME_NORMAL)
+			M.blood_volume = min(M.blood_volume+WATER_BLOOD_RESTORE, BLOOD_VOLUME_NORMAL)
 	..()
+#undef WATER_BLOOD_RESTORE
 
 /datum/reagent/water/gross
 	taste_description = "something vile"
@@ -193,7 +196,7 @@
 		if(hotspot)
 			new /obj/effect/temp_visual/small_smoke(T)
 			qdel(hotspot)
-	
+
 	if(iswallturf(T))
 		if(!T.color)
 			return

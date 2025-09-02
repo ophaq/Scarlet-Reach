@@ -1063,6 +1063,24 @@ datum/crafting_recipe/roguetown/sewing/Purdress
 				/obj/item/natural/fibers = 4)
 	craftdiff = 2
 
+/datum/crafting_recipe/roguetown/sewing/battleskirt
+	name = "cloth military skirt (3 cloth, 1 leather)"
+	result = list(/obj/item/storage/belt/rogue/leather/battleskirt)
+	reqs = list(
+		/obj/item/natural/cloth = 3,
+		/obj/item/natural/hide/cured = 1
+	)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/sewing/fauldedbelt
+	name = "belt with faulds (3 cloth, 1 leather)"
+	result = list(/obj/item/storage/belt/rogue/leather/battleskirt/faulds)
+	reqs = list(
+		/obj/item/natural/cloth = 3,
+		/obj/item/natural/hide/cured = 1
+	)
+	craftdiff = 2
+
 /datum/crafting_recipe/roguetown/sewing/surgicalbag
 	name = "surgeon's bag (3 fibers, 1 cloth)"
 	result = list(/obj/item/storage/belt/rogue/surgery_bag/empty)

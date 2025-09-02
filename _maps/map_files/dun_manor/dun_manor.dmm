@@ -8894,9 +8894,9 @@
 /obj/item/listeningdevice,
 /obj/item/listeningdevice,
 /obj/item/listeningdevice,
-/obj/item/speakerinq,
-/obj/item/speakerinq,
-/obj/item/speakerinq,
+/obj/item/scomstone/speakerinq,
+/obj/item/scomstone/speakerinq,
+/obj/item/scomstone/speakerinq,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town/church/basement)
 "ghf" = (

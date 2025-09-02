@@ -1118,7 +1118,6 @@ SUBSYSTEM_DEF(gamemode)
 	GLOB.scarlet_round_stats[STATS_ALCOHOLICS] = 0
 	GLOB.scarlet_round_stats[STATS_JUNKIES] = 0
 	GLOB.scarlet_round_stats[STATS_GREEDY_PEOPLE] = 0
-	GLOB.scarlet_round_stats[STATS_PLEASURES] = 0
 
 	// Gender count
 	GLOB.scarlet_round_stats[STATS_MALE_POPULATION] = 0
@@ -1153,6 +1152,7 @@ SUBSYSTEM_DEF(gamemode)
 	GLOB.scarlet_round_stats[STATS_ALIVE_VULPS] = 0
 	GLOB.scarlet_round_stats[STATS_ALIVE_LUPIANS] = 0
 	GLOB.scarlet_round_stats[STATS_ALIVE_MOTHS] = 0
+	GLOB.scarlet_round_stats[STATS_ALIVE_LAMIA] = 0
 
 	for(var/client/client in GLOB.clients)
 		if(roundstart)
@@ -1264,7 +1264,8 @@ SUBSYSTEM_DEF(gamemode)
 				GLOB.scarlet_round_stats[STATS_ALIVE_LUPIANS]++
 			if(ismoth(human_mob))
 				GLOB.scarlet_round_stats[STATS_ALIVE_MOTHS]++
-
+			if(islamia(human_mob))
+				GLOB.scarlet_round_stats[STATS_ALIVE_LAMIA]++
 
 /// Returns total follower influence for the given storyteller
 /datum/controller/subsystem/gamemode/proc/get_follower_influence(datum/storyteller/chosen_storyteller)

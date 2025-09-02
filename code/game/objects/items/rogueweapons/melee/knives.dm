@@ -33,7 +33,7 @@
 	icon_state = "inpick"
 	attack_verb = list("stabs", "impales")
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-	penfactor = 80
+	penfactor = 75
 	clickcd = 14
 	swingdelay = 12
 	damfactor = 1.1
@@ -413,7 +413,7 @@
 			H.Paralyze(10)
 			H.adjustFireLoss(25)
 			H.fire_act(1,10)
-			
+
 /obj/item/weapon/knife/dagger/silver/arcyne
 	name = "glowing purple silver dagger"
 	desc = "This dagger glows a faint purple. Quicksilver runs across its blade."
