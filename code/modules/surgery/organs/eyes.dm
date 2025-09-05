@@ -70,6 +70,9 @@
 		if(eye_color)
 			HMN.eye_color = eye_color
 			HMN.regenerate_icons()
+			if(HMN.hud_used)
+				for(var/atom/movable/screen/eye_intent/eyes_hud in HMN.hud_used.static_inventory)//updates our eye hud color
+					eyes_hud.update_icon()
 		else
 			eye_color = HMN.eye_color
 		if(HAS_TRAIT(HMN, TRAIT_NIGHT_VISION) && !lighting_alpha)
@@ -180,11 +183,11 @@
 /obj/item/organ/eyes/night_vision/wild_goblin/on_life()
 	. = ..()
 	if (!isgoblinp(owner))
-		if (prob(10))
+		if (prob(50))
 			owner.adjustToxLoss(5)
-			applyOrganDamage(5)
+			applyOrganDamage(10)
 			owner.blur_eyes(3)
-			if(prob(50))
+			if(prob(20))
 				to_chat(owner, span_red("My eyes burn and my body aches."))
 
 /obj/item/organ/eyes/night_vision/mushroom

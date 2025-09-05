@@ -265,10 +265,12 @@
 
 /obj/item/book/rogue/law
 	name = "Tome of Justice"
-	desc = "The Tome of Laws, as passed from the Holy See to its many Ten-worshipping communities."
+	desc = "The Tome of Laws, as passed from the Holy See to its many Ten-worshipping communities. Its heft physicalizes a compelling maxim: the application of law should not be taken lightly."
 	icon_state ="lawtome_0"
 	base_icon_state = "lawtome"
 	bookfile = "law_2.json"
+	possible_item_intents = list(/datum/intent/mace/smash/wood)
+	force = 15
 
 /obj/item/book/rogue/cooking
 	name = "Tastes Fit For The Lord"
@@ -597,9 +599,8 @@
 		for(var/I in page_texts)
 			dat += "<p>[I]</p>"
 		dat += "<br>"
-		dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
 		dat += "</body></html>"
-		user << browse(dat, "window=reading;size=1000x700;can_close=1;can_minimize=0;can_maximize=0;can_resize=0;titlebar=0")
+		user << browse(dat, "window=reading;size=1000x700;can_close=1;can_minimize=0;can_maximize=0;can_resize=0;titlebar=1")
 		onclose(user, "reading", src)
 	else
 		return span_warning("I'm too far away to read it.")

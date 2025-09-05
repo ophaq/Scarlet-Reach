@@ -1270,3 +1270,21 @@
 /datum/status_effect/buff/adrenaline_rush/on_remove()
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_ADRENALINE_RUSH, INNATE_TRAIT)
+
+/atom/movable/screen/alert/status_effect/buff/recalling
+	name = "Recalling"
+	desc = "I'm in the middle of casting Recall. I need to stand still!"
+	icon_state = "buff"
+
+/datum/status_effect/buff/recalling
+	id = "recalling"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/recalling
+	var/effect_color
+	var/datum/stressevent/stress_to_apply
+	var/pulse = 0
+	var/ticks_to_apply = 5
+
+/datum/status_effect/buff/recalling/tick()
+	var/obj/effect/temp_visual/recall_smoke/M = new /obj/effect/temp_visual/recall_smoke(get_turf(owner))
+	M.color = effect_color
+	pulse += 1

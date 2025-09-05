@@ -43,6 +43,7 @@
 			close_trap()
 			C.visible_message(span_boldwarning("[C] triggers \the [src]."), \
 					span_userdanger("I trigger \the [src]!"))
+			to_chat(C, span_notice("Great job, Nimrod."))
 			C.emote("agony")
 			C.Stun(80)
 			BP.add_wound(/datum/wound/fracture)

@@ -1679,7 +1679,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			H.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 			if(I)
 				I.take_damage(1, BRUTE, I.d_type)
+				SEND_SIGNAL(I, COMSIG_ITEM_ATTACKBY_BLOCKED, H, user, I.damtype, def_zone) // attack was blocked by armor or other variables
 		if(!nodmg)
+			if(I)
+				SEND_SIGNAL(I, COMSIG_ITEM_ATTACKBY_SUCCESS, H, user, Iforce * weakness, I.damtype, def_zone) // attack was not blocked by armor or other variables
 			var/datum/wound/crit_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block+armor))/100), user, selzone, crit_message = TRUE)
 			if(should_embed_weapon(crit_wound, I))
 				var/can_impale = TRUE
