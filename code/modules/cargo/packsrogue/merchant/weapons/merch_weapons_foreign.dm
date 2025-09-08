@@ -55,3 +55,13 @@
 	cost = 80
 	contains = list(/obj/item/rogueweapon/sword/sabre/mulyeog,
 					/obj/item/scabbard/mulyeog)
+
+/datum/supply_pack/rogue/merc_weapons/tossbladekazengun
+	name = "Tossblade Belt, Eastern"
+	cost = 60
+	contains = list(/obj/item/storage/belt/rogue/leather/knifebelt/black/kazengun)
+
+/datum/supply_pack/rogue/merc_weapons/psysword
+	name = "Aged Psydonian Longsword"
+	cost = 80
+	contains = list(/obj/item/rogueweapon/sword/long/oldpsysword)

@@ -43,7 +43,7 @@
 	results = list(/datum/reagent/medicine/minorhealthpot = 10)
 	required_reagents = list(/datum/reagent/medicine/healthpot = 5, /datum/reagent/water = 5)
 
-/datum/chemical_reaction/minorpot
+/datum/chemical_reaction/healthpot
 	name = "Health Potion"
 	id = /datum/reagent/medicine/healthpot
 	results = list(/datum/reagent/medicine/healthpot = 10)
@@ -59,22 +59,29 @@
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
 
+//IMPORTANT READ THIS
+//Every bottle of health potion has 48 units. Each sip drinks 5 units. Each unit triggers EVERYTHING in the proc below, once. 
+//This means every bottle of health potion triggers the effect below FORTY EIGHT TIMES, and each sip triggers it FIVE times.
+//For this reason, it is VERY important to not overtune certain values.
+//Changing the metabolization_rate does NOT make it "heal fastah", it just makes the potion less efficient. Do not change the metabolization rate.
+
 /datum/reagent/medicine/healthpot/on_mob_life(mob/living/carbon/M)
 	var/list/wCount = M.get_wounds()
 	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-		M.blood_volume = min(M.blood_volume+50, BLOOD_VOLUME_MAXIMUM)
+		M.blood_volume = min(M.blood_volume+10, BLOOD_VOLUME_MAXIMUM) //Each sip restores 10%~ of your total blood, given every person has a max of 560 blood.
+		//Yes this is the same amount that water recovers, but this is the 'normal' health potion.
 	else
 		//can overfill you with blood, but at a slower rate
-		M.blood_volume = min(M.blood_volume+10, BLOOD_VOLUME_MAXIMUM)
+		M.blood_volume = min(M.blood_volume+5, BLOOD_VOLUME_MAXIMUM)
 	if(wCount.len > 0)
 		//some peeps dislike the church, this allows an alternative thats not a doctor or sleep.
-		M.heal_wounds(10)
+		M.heal_wounds(8)
 		M.update_damage_overlays()
 		if(prob(10))
 			to_chat(M, span_nicegreen("I feel my wounds mending."))
-	M.adjustBruteLoss(-3, 0)
-	M.adjustFireLoss(-3, 0)
-	M.adjustOxyLoss(-3, 0)
+	M.adjustBruteLoss(-5, 0) //25 brute damage healed per sip. More than before, but blood recovery and wound healing were nerfed.
+	M.adjustFireLoss(-5, 0)
+	M.adjustOxyLoss(-8, 0) //200 oxyloss kills you, this reduces it by 40 each sip.
 	M.adjustCloneLoss(-3, 0)
 	for(var/obj/item/organ/organny in M.internal_organs)
 		M.adjustOrganLoss(organny.slot, -3)
@@ -84,29 +91,35 @@
 /datum/reagent/medicine/stronghealth
 	name = "Strong Health Potion"
 	description = "Quickly regenerates all types of damage."
-	color = "#820000be"
+	color = "#820000"
 	taste_description = "rich lifeblood"
-	metabolization_rate = REAGENTS_METABOLISM * 3
+	metabolization_rate = REAGENTS_METABOLISM
 
 /datum/reagent/medicine/stronghealth/on_mob_life(mob/living/carbon/M)
 	var/list/wCount = M.get_wounds()
 	if(M.blood_volume < BLOOD_VOLUME_NORMAL)
-		M.blood_volume = min(M.blood_volume+100, BLOOD_VOLUME_MAXIMUM)
+		M.blood_volume = min(M.blood_volume+20, BLOOD_VOLUME_MAXIMUM) //+100 blood per sip, 960 blood per bottle. Still enough to fill up your blood twice over.
 	else
-		M.blood_volume = min(M.blood_volume+20, BLOOD_VOLUME_MAXIMUM)
+		M.blood_volume = min(M.blood_volume+10, BLOOD_VOLUME_MAXIMUM)
 	if(wCount.len > 0)
-		M.heal_wounds(20)
+		M.heal_wounds(12) //Less wound healing. Two sips will fix an artery, but only barely. 
 		M.update_damage_overlays()
 		if(prob(10))
 			to_chat(M, span_nicegreen("I feel my wounds mending."))
-	M.adjustBruteLoss(-7, 0) // 20u = 50 points of healing
-	M.adjustFireLoss(-7, 0)
-	M.adjustOxyLoss(-5, 0)
+	M.adjustBruteLoss(-8, 0) // 48u (1 bottle) = 384 brute damage healed. Enough to fully fix any one limb.
+	M.adjustFireLoss(-8, 0)
+	M.adjustOxyLoss(-15, 0) //You cannot die if this is fed to you, realistically.
 	M.adjustCloneLoss(-7, 0)
 	for(var/obj/item/organ/organny in M.internal_organs)
 		M.adjustOrganLoss(organny.slot, -7)
 	..()
 	. = 1
+
+/datum/chemical_reaction/manapotdilution
+	name = "Diluted Strong Mana Potion"
+	id = /datum/reagent/medicine/manapot
+	results = list(/datum/reagent/medicine/manapot = 10)
+	required_reagents = list(/datum/reagent/medicine/strongmana = 5, /datum/reagent/water = 5)
 
 //Someone please remember to change this to actually do mana at some point?
 /datum/reagent/medicine/manapot
@@ -135,6 +148,12 @@
 	if(!HAS_TRAIT(M,TRAIT_INFINITE_STAMINA))
 		M.energy_add(120)
 	..()
+
+/datum/chemical_reaction/stampot
+	name = "Diluted Strong Stamina Potion"
+	id = /datum/reagent/medicine/stampot
+	results = list(/datum/reagent/medicine/stampot = 10)
+	required_reagents = list(/datum/reagent/medicine/strongstam = 5, /datum/reagent/water = 5)
 
 /datum/reagent/medicine/stampot
 	name = "Stamina Potion"
@@ -357,9 +376,9 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	toxpwr = 0
 
 
-/datum/reagent/stampoison/on_mob_life(mob/living/carbon/M)
+/datum/reagent/toxin/stampoison/on_mob_life(mob/living/carbon/M)
 	if(!HAS_TRAIT(M,TRAIT_INFINITE_STAMINA))
-		M.energy_add(-45) //Slowly leech energy
+		M.stamina_add(15) //Slowly leech stam
 	return ..()
 
 /datum/reagent/toxin/strongstampoison
@@ -372,9 +391,9 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	toxpwr = 0
 
 
-/datum/reagent/strongstampoison/on_mob_life(mob/living/carbon/M)
+/datum/reagent/toxin/strongstampoison/on_mob_life(mob/living/carbon/M)
 	if(!HAS_TRAIT(M,TRAIT_INFINITE_STAMINA))
-		M.energy_add(-180) //Rapidly leech energy
+		M.stamina_add(45) //Rapidly leech stam
 	return ..()
 
 /datum/reagent/toxin/killersice

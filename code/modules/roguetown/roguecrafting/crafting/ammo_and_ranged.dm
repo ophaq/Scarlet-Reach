@@ -163,7 +163,7 @@
         )
     reqs = list(
         /obj/item/ammo_casing/caseless/rogue/arrow/iron = 5,
-        /datum/reagent/stampoison = 25,
+        /datum/reagent/toxin/stampoison = 25,
         )
 
     req_table = TRUE
@@ -180,7 +180,7 @@
         )
     reqs = list(
         /obj/item/ammo_casing/caseless/rogue/arrow/stone = 5,
-        /datum/reagent/stampoison = 25,
+        /datum/reagent/toxin/stampoison = 25,
         )
 
     req_table = TRUE

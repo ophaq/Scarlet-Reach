@@ -1054,7 +1054,7 @@
 		C.container_resist(src)
 
 	else if(mobility_flags & MOBILITY_MOVE)
-		if(on_fire)
+		if(on_fire && last_special <= world.time)
 			resist_fire() //stop, drop, and roll
 			changeNext_move(CLICK_CD_RESIST)
 		else if(has_status_effect(/datum/status_effect/leash_pet))
@@ -1914,7 +1914,10 @@
 				marked = TRUE
 				if(M.m_intent == MOVE_INTENT_SNEAK || M.mob_timers[MT_INVISIBILITY] > world.time)
 					emote("huh")
-					to_chat(M, span_danger("[src] sees me! I'm found!"))
+					if(!M.thicc_sneaking)
+						to_chat(M, span_danger("[src] sees me! I'm found!"))
+					else
+						to_chat(M, span_danger("[src] sees me! The clap of my asscheeks gave me away!"))
 					M.mob_timers[MT_INVISIBILITY] = world.time
 					M.mob_timers[MT_FOUNDSNEAK] = world.time
 					M.update_sneak_invis(reset = TRUE)

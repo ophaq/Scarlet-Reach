@@ -1108,6 +1108,13 @@ datum/crafting_recipe/roguetown/sewing/Purdress
 	reqs = list(/obj/item/natural/cloth = 1, /obj/item/natural/fibers = 1)
 	craftdiff = 1
 
+/datum/crafting_recipe/roguetown/sewing/inquisitori
+	name = "inquisitori tabard (1 fibers, 2 cloth)"
+	result = list(/obj/item/clothing/cloak/psydontabard)
+	reqs = list(/obj/item/natural/cloth = 2, /obj/item/natural/fibers = 1)
+	tools = list(/obj/item/needle)
+	craftdiff = 3
+	
 // tennite templar tabards
 
 /datum/crafting_recipe/roguetown/sewing/templar_astrata

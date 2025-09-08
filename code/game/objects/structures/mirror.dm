@@ -50,7 +50,7 @@
 
 
 	var/should_update = FALSE
-	var/list/choices = list("hairstyle", "facial hairstyle", "accessory", "face detail", "tail", "tail color one", "tail color two", "hair color", "facial hair color", "eye color", "natural gradient", "natural gradient color", "dye gradient", "dye gradient color", "penis", "testicles", "breasts", "vagina", "breast size", "penis size", "testicle size")
+	var/list/choices = list("hairstyle", "facial hairstyle", "accessory", "face detail", "horns", "ears", "ear color one", "ear color two", "tail", "tail color one", "tail color two", "hair color", "facial hair color", "eye color", "natural gradient", "natural gradient color", "dye gradient", "dye gradient color", "penis", "testicles", "breasts", "vagina", "breast size", "penis size", "testicle size")
 	var/chosen = input(user, "Change what?", "Appearance") as null|anything in choices
 
 	if(!chosen)
@@ -616,6 +616,98 @@
 					should_update = TRUE
 			else
 				to_chat(user, span_warning("You don't have a tail!"))
+		if("ears")
+			var/list/valid_ears = list("none")
+			for(var/ears_path in subtypesof(/datum/sprite_accessory/ears))
+				var/datum/sprite_accessory/ears/ears = new ears_path()
+				valid_ears[ears.name] = ears_path
+
+			var/new_style = input(user, "Choose your ears", "Ears Customization") as null|anything in valid_ears
+			if(new_style)
+				if(new_style == "none")
+					var/obj/item/organ/ears/ears = H.getorganslot(ORGAN_SLOT_EARS)
+					if(ears)
+						ears.Remove(H)
+						qdel(ears)
+						H.update_body()
+						should_update = TRUE
+				else
+					var/obj/item/organ/ears/ears = H.getorganslot(ORGAN_SLOT_EARS)
+					if(!ears)
+						ears = new /obj/item/organ/ears()
+						ears.Insert(H, TRUE, FALSE)
+					ears.accessory_type = valid_ears[new_style]
+					var/datum/sprite_accessory/ears/ears_type = SPRITE_ACCESSORY(ears.accessory_type)
+					ears.accessory_colors = ears_type.get_default_colors(list())
+					H.update_body()
+					should_update = TRUE
+
+		if("ear color one")
+			var/obj/item/organ/ears/ears = H.getorganslot(ORGAN_SLOT_EARS)
+			if(ears)
+				var/new_color = color_pick_sanitized(user, "Choose your primary ear color", "Ear Color One", "#FFFFFF")
+				if(new_color)
+					ears.Remove(H)
+					var/list/colors = list()
+					if(ears.accessory_colors)
+						colors = color_string_to_list(ears.accessory_colors)
+					if(!length(colors))
+						colors = list("#FFFFFF", "#FFFFFF") // Default colors if none set
+					colors[1] = sanitize_hexcolor(new_color, 6, TRUE)
+					ears.accessory_colors = color_list_to_string(colors)
+					ears.Insert(H, TRUE, FALSE)
+					H.dna.features["ears_color"] = colors[1]  // Update DNA features
+					H.update_body()
+					should_update = TRUE
+			else
+				to_chat(user, span_warning("You don't have ears!"))
+
+		if("ear color two")
+			var/obj/item/organ/ears/ears = H.getorganslot(ORGAN_SLOT_EARS)
+			if(ears)
+				var/new_color = color_pick_sanitized(user, "Choose your secondary ear color", "Ear Color Two", "#FFFFFF")
+				if(new_color)
+					ears.Remove(H)
+					var/list/colors = list()
+					if(ears.accessory_colors)
+						colors = color_string_to_list(ears.accessory_colors)
+					if(!length(colors))
+						colors = list("#FFFFFF", "#FFFFFF") // Default colors if none set
+					colors[2] = sanitize_hexcolor(new_color, 6, TRUE)
+					ears.accessory_colors = color_list_to_string(colors)
+					ears.Insert(H, TRUE, FALSE)
+					H.dna.features["ears_color2"] = colors[2]  // Update DNA features
+					H.update_body()
+					should_update = TRUE
+			else
+				to_chat(user, span_warning("You don't have a ears!"))
+				
+		if("horns")
+			var/list/valid_horns = list("none")
+			for(var/horns_path in subtypesof(/datum/sprite_accessory/horns))
+				var/datum/sprite_accessory/horns/horns = new horns_path()
+				valid_horns[horns.name] = horns_path
+
+			var/new_style = input(user, "Choose your horns", "Horns Customization") as null|anything in valid_horns
+			if(new_style)
+				if(new_style == "none")
+					var/obj/item/organ/horns/horns = H.getorganslot(ORGAN_SLOT_HORNS)
+					if(horns)
+						horns.Remove(H)
+						qdel(horns)
+						H.update_body()
+						should_update = TRUE
+				else
+					var/obj/item/organ/horns/horns = H.getorganslot(ORGAN_SLOT_HORNS)
+					if(!horns)
+						horns = new /obj/item/organ/horns()
+						horns.Insert(H, TRUE, FALSE)
+					horns.accessory_type = valid_horns[new_style]
+					var/datum/sprite_accessory/horns/horns_type = SPRITE_ACCESSORY(horns.accessory_type)
+					horns.accessory_colors = horns_type.get_default_colors(list())
+					H.update_body()
+					should_update = TRUE
+
 
 	if(should_update)
 		H.update_hair()

@@ -160,6 +160,8 @@
 
 /datum/virtue/combat/rotcured/apply_to_human(mob/living/carbon/human/recipient)
 	recipient.update_body() // applies the rot skin tone stuff
+	recipient.dna.species.soundpack_m = new /datum/voicepack/male/rotman()
+	recipient.dna.species.soundpack_f = new /datum/voicepack/female/rotman()
 
 /datum/virtue/combat/dualwielder
 	name = "Dual Wielder"

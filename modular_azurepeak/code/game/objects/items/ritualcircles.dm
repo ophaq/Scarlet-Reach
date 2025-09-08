@@ -335,6 +335,9 @@ var/forgerites = list("Ritual of Blessed Reforgance")
 						spawn(120)
 							icon_state = "necra_chalky"
 		if("Vow to the Undermaiden")
+			if(user.construct)//golems can't benefit from miracles so they can't do this
+				to_chat(user,span_warning("My body is already cold and lifeless. I have nothing to pledge."))
+				return
 			loc.visible_message(span_warning("[user] sways before the rune, they open their mouth, though no words come out..."))
 			playsound(user, 'sound/vo/mobs/ghost/whisper (3).ogg', 100, FALSE, -1)
 			if(do_after(user, 60))

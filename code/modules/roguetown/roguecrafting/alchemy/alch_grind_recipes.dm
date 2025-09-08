@@ -37,11 +37,17 @@
 	valid_outputs = list(/obj/item/alch/airdust = 1)
 	bonus_chance_outputs = list(/obj/item/alch/airdust = 33)
 
-/datum/alch_grind_recipe/bone
-	name = "Bone"
+/datum/alch_grind_recipe/tailbone
+	name = "Tail Bone"
 	valid_input = /obj/item/alch/bone
 	valid_outputs = list( /obj/item/alch/bonemeal = 2)
 	bonus_chance_outputs = list(/obj/item/alch/bonemeal = 50)
+
+/datum/alch_grind_recipe/bone
+	name = "Bone"
+	valid_input = /obj/item/natural/bone
+	valid_outputs = list( /obj/item/alch/bonemeal = 1)
+	bonus_chance_outputs = list(/obj/item/alch/bonemeal = 25)
 
 /datum/alch_grind_recipe/horn
 

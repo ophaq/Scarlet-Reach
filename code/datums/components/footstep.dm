@@ -53,13 +53,26 @@
 		if(!C.get_bodypart(BODY_ZONE_L_LEG) && !C.get_bodypart(BODY_ZONE_R_LEG))
 			return
 		if(C.m_intent == MOVE_INTENT_SNEAK && !T.footstepstealth)
-			return// stealth
+			if(!C.thicc_sneaking || C.rogue_sneaking)
+				return// stealth
+			steps++
+			if(steps&2 == 2) // Hrrghn... Colonel, I'm trying to sneak around, but I'm dummy thicc, and the clap of my asscheeks keeps ALERTING THE GUARDS
+				playsound(C, pick(list('sound/misc/mat/thicc (1).ogg','sound/misc/mat/thicc (2).ogg','sound/misc/mat/thicc (3).ogg','sound/misc/mat/thicc (4).ogg')), 15 * volume)
+			if(steps >= 6)
+				steps = 0
+			return// uhm... stealth?
 	steps++
 
 	if(steps >= 6)
 		steps = 0
 
-	if(steps % 2 && LM.m_intent == MOVE_INTENT_WALK && islamia(LM) || steps % 3 && LM.m_intent == MOVE_INTENT_RUN && islamia(LM) || steps % 2 && !islamia(LM))
+	if(islamia(LM))
+		if(LM.m_intent == MOVE_INTENT_RUN)
+			if(steps != 0 && steps != 3)
+				return
+		else if(steps&1)
+			return
+	else if(steps&1)
 		return
 
 	if(steps != 0 && !LM.has_gravity(T)) // don't need to step as often when you hop around

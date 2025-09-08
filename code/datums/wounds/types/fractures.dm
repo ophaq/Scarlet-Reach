@@ -9,7 +9,7 @@
 		"The bone snaps through the skin!",
 	)
 	sound_effect = "wetbreak"
-	whp = 40
+	whp = 80
 	woundpain = 100
 	mob_overlay = "frac"
 	can_sew = FALSE
@@ -73,7 +73,7 @@
 	/// Some head fractures instantly kill you if you have critical weakness. Others won't.
 	mortal = TRUE
 	/// Some head fractures will knock your lights out, if not flat-out paralyze you.
-	var/knockout = 10	//10 tick knockout (1 sec)
+	var/knockout = 1 MINUTES	//Full minute.
 
 /datum/wound/fracture/head/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -113,7 +113,7 @@
 	)
 	embed_chance = 100	// Didn't we remove embeding..?
 	bleed_rate = 10		// Aooouuugh.. my brain..
-	knockout = 20
+	knockout = 30 SECONDS //Less than blunt fracture but still enough to get someone out of a fight and prevent calls for help. 
 	paralysis = TRUE
 
 /datum/wound/fracture/head/eyes
@@ -150,7 +150,7 @@
 	)
 	embed_chance = 100
 	paralysis = FALSE
-	knockout = 25
+	knockout = 15 SECONDS
 	clotting_threshold = 0.3	//Ears gonna bleed worse than just a fracture
 
 /datum/wound/fracture/head/ears/on_mob_gain(mob/living/affected)
@@ -216,7 +216,7 @@
 		"The spine cracks!",
 		"The spine is broken!",
 	)
-	whp = 100
+	whp = 150
 
 /datum/wound/fracture/neck/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -271,7 +271,7 @@
 		"The pelvis is mauled!",
 		"The pelvic floor caves in!",
 	)
-	whp = 50
+	whp = 80
 	gain_emote = "groin"	//MY PIINTLE!!!!
 	mortal = FALSE
 	bleed_rate = 5

@@ -82,6 +82,12 @@
 	reqs = list(/obj/item/natural/hide/cured = 1)
 	sellprice = 26
 
+/datum/crafting_recipe/roguetown/leather/coif
+	name = "leather coif (1 leather)"
+	result = /obj/item/clothing/neck/roguetown/coif
+	reqs = list(/obj/item/natural/hide/cured = 1)
+	sellprice = 10
+
 /datum/crafting_recipe/roguetown/leather/vest
 	name = "leather vest (2 leather)"
 	result = /obj/item/clothing/suit/roguetown/armor/leather/vest

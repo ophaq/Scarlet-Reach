@@ -692,6 +692,7 @@
 	max_integrity = 300
 	force = 20
 	force_wielded = 35
+	is_silver = TRUE
 
 /obj/item/rogueweapon/halberd/bardiche
 	possible_item_intents = list(/datum/intent/spear/thrust/eaglebeak, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs

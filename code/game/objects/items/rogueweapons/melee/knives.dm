@@ -294,6 +294,7 @@
 	force = 25
 	max_integrity = 200
 	icon_state = "gsdagger"
+	is_silver = TRUE
 
 
 /obj/item/rogueweapon/huntingknife/idagger/steel/pestrasickle

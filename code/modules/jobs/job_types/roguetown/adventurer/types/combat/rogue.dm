@@ -129,11 +129,6 @@
 					shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/eastshirt1
 					cloak = /obj/item/clothing/cloak/thief_cloak
 					head = /obj/item/clothing/head/roguetown/mentorhat //other armor pieces are nerfed to justify this
-			H.change_stat("strength", -1)
-			H.change_stat("intelligence", 1)
-			H.change_stat("perception", 1)
-			H.change_stat("endurance", 1)
-			H.change_stat("speed", 3)
 
 		if("Bard")
 			to_chat(H, span_warning("You make your fortune in brothels, flop houses, and taverns – gaining fame for your songs and legends. If there is any truth to them, that is."))

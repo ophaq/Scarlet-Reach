@@ -42,7 +42,7 @@
 	check_name = span_artery("<B>CAROTID</B>")
 	severity = WOUND_SEVERITY_FATAL
 	crit_message = "Blood sprays from %VICTIM's throat!"
-	whp = 100
+	whp = 120
 	sewn_whp = 25
 	bleed_rate = 25
 	sewn_bleed_rate = 0.5
@@ -63,7 +63,7 @@
 	name = "aortic dissection"
 	check_name = span_artery("<B>AORTA</B>")
 	severity = WOUND_SEVERITY_FATAL
-	whp = 100
+	whp = 120
 	sewn_whp = 35
 	bleed_rate = 25
 	sewn_bleed_rate = 0.8
@@ -97,7 +97,7 @@
 	name = "replantation"
 	check_name = span_artery("<B>UNSEWN</B>")
 	severity = WOUND_SEVERITY_FATAL
-	whp = 100
+	whp = 120
 	sewn_whp = 25
 	bleed_rate = 25
 	sewn_bleed_rate = 0.5

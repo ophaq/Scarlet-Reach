@@ -222,6 +222,7 @@
 	gripped_intents = null
 	minstr = 4
 	wdefense = 4.5
+	wbalance = WBALANCE_SWIFT
 	wlength = WLENGTH_SHORT
 	w_class = WEIGHT_CLASS_NORMAL
 	grid_width = 32
@@ -653,6 +654,7 @@
 	gripped_intents = null
 	minstr = 4
 	wdefense = 3.5
+	wbalance = WBALANCE_SWIFT
 	wlength = WLENGTH_SHORT
 	w_class = WEIGHT_CLASS_NORMAL
 	grid_width = 32

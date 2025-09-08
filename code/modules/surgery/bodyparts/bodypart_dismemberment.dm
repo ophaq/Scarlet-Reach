@@ -147,7 +147,7 @@
 	testing("begin drop limb")
 	var/atom/drop_location = owner.drop_location()
 	var/mob/living/carbon/was_owner = owner
-	update_limb(dropping_limb = TRUE)
+	update_limb(TRUE, owner)
 
 	if(length(wounds))
 		var/list/stored_wounds = list()

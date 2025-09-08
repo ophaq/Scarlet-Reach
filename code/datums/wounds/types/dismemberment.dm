@@ -2,7 +2,7 @@
 	name = "bleeding stump"
 	check_name = span_danger("<B>STUMP</B>")
 	severity = WOUND_SEVERITY_CRITICAL
-	whp = 75
+	whp = 120
 	sewn_whp = 25
 	bleed_rate = 25
 	sewn_bleed_rate = 0.25

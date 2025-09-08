@@ -123,22 +123,48 @@
 	miracle = TRUE
 	devotion_cost = 50
 
+/obj/effect/proc_holder/spell/invoked/persistence/proc/get_most_damaged_limb(mob/living/carbon/C)
+	var/obj/item/bodypart/most_damaged_limb = null
+	var/highest_damage = 0
+	var/obj/item/bodypart/bleeding_limb = null
+	var/highest_bleed_rate = 0
+
+	// First prioritize bleeding
+	for(var/obj/item/bodypart/BP in C.bodyparts)
+		var/bleed_rate = BP.get_bleed_rate()
+		if(bleed_rate > highest_bleed_rate)
+			highest_bleed_rate = bleed_rate
+			bleeding_limb = BP
+
+	if(bleeding_limb)
+		return bleeding_limb
+
+	// Otherwise pick the most damaged limb
+	for(var/obj/item/bodypart/BP in C.bodyparts)
+		var/total_damage = BP.get_damage()
+		if(total_damage > highest_damage)
+			highest_damage = total_damage
+			most_damaged_limb = BP
+
+	return most_damaged_limb
+
 /obj/effect/proc_holder/spell/invoked/persistence/cast(list/targets, mob/living/user)
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
 		if(target.mob_biotypes & MOB_UNDEAD)
-			if(ishuman(target)) //BLEED AND PAIN
+			if(ishuman(target)) // BLEED AND PAIN
 				var/mob/living/carbon/human/human_target = target
 				var/datum/physiology/phy = human_target.physiology
 				phy.bleed_mod *= 1.5
 				phy.pain_mod *= 1.5
 				addtimer(VARSET_CALLBACK(phy, bleed_mod, phy.bleed_mod /= 1.5), 19 SECONDS)
 				addtimer(VARSET_CALLBACK(phy, pain_mod, phy.pain_mod /= 1.5), 19 SECONDS)
-				human_target.visible_message(span_danger("[target]'s wounds become inflammed as their vitality is sapped away!"), span_userdanger("Ravox inflammes my wounds and weakens my body!"))
+				human_target.visible_message(span_danger("[target]'s wounds become inflamed as their vitality is sapped away!"), span_userdanger("Ravox inflames my wounds and weakens my body!"))
 				return ..()
 			return FALSE
 
-		target.visible_message(span_info("Warmth radiates from [target] as their wounds seal over!"), span_notice("The pain from my wounds fade as warmth radiates from my soul!"))
+		// Healing case (non-undead)
+		target.visible_message(span_info("Warmth radiates from [target] as their wounds seal over!"), span_notice("The pain from my wounds fades as warmth radiates from my soul!"))
 		var/situational_bonus = 0.25
 		for(var/obj/effect/decal/cleanable/blood/O in oview(5, target))
 			situational_bonus = min(situational_bonus + 0.015, 1)
@@ -147,7 +173,7 @@
 
 		if(iscarbon(target))
 			var/mob/living/carbon/C = target
-			var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))
+			var/obj/item/bodypart/affecting = get_most_damaged_limb(C) 
 			if(affecting)
 				for(var/datum/wound/bleeder in affecting.wounds)
 					bleeder.woundpain = max(bleeder.sewn_woundpain, bleeder.woundpain * 0.25)
