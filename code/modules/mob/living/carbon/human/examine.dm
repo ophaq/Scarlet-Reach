@@ -53,14 +53,16 @@
 		"Unknown Man",
 		"Unknown Woman",
 	)
-	if(get_visible_name() in unknown_names)
+	if(get_face_name() != real_name)
 		obscure_name = TRUE
 
 	if(observer_privilege)
 		obscure_name = FALSE
 
-	if(obscure_name)
-		. = list(span_info("ø ------------ ø\nThis is <EM>Unknown</EM>."))
+	if(name in unknown_names)
+		. = list(span_info("ø ------------ ø\nThis is <EM>[name]</EM>."))
+	else if(obscure_name)
+		. = list(span_info("ø ------------ ø\nThis is an unknown <EM>[name]</EM>."))
 	else
 		on_examine_face(user)
 		var/used_name = name
@@ -110,11 +112,11 @@
 
 		// Leashed pet status effect message
 		if(has_status_effect(/datum/status_effect/leash_pet))
-			. += span_warning("A leash is hooked to their collar. They are being led like a pet.")
+			. += span_warning("A leash is hooked to [p_their()] collar. [m1] being led like a pet.")
 
 		// Knotted effect message
 		if(has_status_effect(/datum/status_effect/knot_tied))
-			. += span_warning("A knot is locked inside them. They're being pulled around like a pet.")
+			. += span_warning("A knot is locked inside [p_them()]. [m1] being pulled around like a pet.")
 
 		// Facial/Creampie effect message
 		var/facial = has_status_effect(/datum/status_effect/facial)
@@ -146,6 +148,8 @@
 				. += span_phobia("A disgraced member of the nobility...")
 			else
 				. += span_notice("A disgraced noble.")
+		if(HAS_TRAIT(src, TRAIT_DEADITE))
+			. += span_userdanger("DEADITE!")
 
 		//For tennite schism god-event
 		if(length(GLOB.tennite_schisms))
@@ -719,8 +723,12 @@
 						msg += "[m1] not stressed."
 					if(-19 to -10)
 						msg += "[m1] somewhat at peace."
+						if(user != src)
+							user.add_stress(/datum/stressevent/empath_happy)
 					if(-20 to INFINITY)
 						msg += "[m1] at peace inside."
+						if(user != src)
+							user.add_stress(/datum/stressevent/empath_superhappy)
 			else if(stress > 10)
 				msg += "[m3] stress all over [m2] face."
 
@@ -860,7 +868,7 @@
 		. += "<a href='?src=[REF(src)];task=view_headshot;'>Examine closer</a>"
 		//tiny picture when you are not examining closer, shouldnt take too much space.
 	var/list/lines
-	if((get_visible_name() in unknown_names) && !observer_privilege)
+	if((get_face_name() != real_name) && !observer_privilege)
 		lines = build_cool_description_unknown(get_mob_descriptors(obscure_name, user), src)
 	else
 		lines = build_cool_description(get_mob_descriptors(obscure_name, user), src)
