@@ -18,7 +18,6 @@
 		STATKEY_END = 1,
 		STATKEY_CON = 1
 	)
-
 	subclass_skills = list(
 		/datum/skill/combat/polearms = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/combat/axes = SKILL_LEVEL_JOURNEYMAN,
@@ -49,7 +48,6 @@
 	if (!(istype(H.patron, /datum/patron/inhumen/zizo) || istype(H.patron, /datum/patron/inhumen/matthios) || istype(H.patron, /datum/patron/inhumen/graggar) || istype(H.patron, /datum/patron/inhumen/baotha)))
 		to_chat(H, span_warning("My former deity has abandoned me.. Matthios is my new master."))
 		H.set_patron(/datum/patron/inhumen/matthios)	//We allow other heretics into the cool-kids club, but if you are a tennite/psydonian it sets you to matthiosan.
-
 	belt = /obj/item/storage/belt/rogue/leather/knifebelt/black/steel
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/random
@@ -79,15 +77,16 @@
 			H.adjust_skillrank_up_to(/datum/skill/combat/crossbows, SKILL_LEVEL_EXPERT, TRUE)
 		if("Bow & Sword") //Poacher
 			backl= /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve
-			beltl = /obj/item/rogueweapon/sword/short
+			l_hand = /obj/item/rogueweapon/sword/short
 			beltl = /obj/item/rogueweapon/scabbard/sword
 			beltr = /obj/item/quiver/arrows
 			head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm //cool hat
+			r_hand = /obj/item/restraints/legcuffs/beartrap // can't fit two in a bag LOL. it runtimes otherwise
 			backr = /obj/item/storage/backpack/rogue/satchel
 			backpack_contents = list(
 						/obj/item/needle/thorn = 1,
 						/obj/item/natural/cloth = 1,
-						/obj/item/restraints/legcuffs/beartrap = 2,
+						/obj/item/restraints/legcuffs/beartrap = 1,
 						/obj/item/flashlight/flare/torch = 1,
 						) //poacher gets mantraps
 			H.adjust_skillrank(/datum/skill/combat/bows, SKILL_LEVEL_EXPERT, TRUE)

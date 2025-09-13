@@ -194,6 +194,11 @@
 	icon_state = "heavyhood"
 	hidesnoutADJ = FALSE
 
+/obj/item/clothing/head/roguetown/roguehood/shalal/hijab/yoruku
+	name = "shadowed hood"
+	desc = "It sits just so, obscuring the face just enough to spoil recognition."
+	color = CLOTHING_BLACK
+
 /obj/item/clothing/neck/roguetown/roguehood/shalal/heavyhood/ComponentInitialize()
 	AddComponent(/datum/component/adjustable_clothing, NECK, null, null, null, null, (UPD_HEAD|UPD_MASK|UPD_NECK))
 

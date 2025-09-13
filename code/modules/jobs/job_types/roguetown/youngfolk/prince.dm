@@ -115,7 +115,7 @@
 	outfit = /datum/outfit/job/roguetown/heir/bookworm
 	category_tags = list(CTAG_HEIR)
 
-	traits_applied = list(TRAIT_ARCYNE_T1, TRAIT_MAGEARMOR)
+	traits_applied = list(TRAIT_ARCYNE_T2, TRAIT_MAGEARMOR)
 	subclass_stats = list(
 		STATKEY_STR = -1,
 		STATKEY_INT = 2,

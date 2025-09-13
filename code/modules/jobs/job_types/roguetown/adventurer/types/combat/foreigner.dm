@@ -6,7 +6,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/foreigner
 	category_tags = list(CTAG_ADVENTURER, CTAG_COURTAGENT)
 	class_select_category = CLASS_CAT_NOMAD
-
+	cmode_music = 'sound/music/combat_kazengite.ogg'
 	subclass_languages = list(/datum/language/kazengunese)
 
 	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN)
@@ -55,7 +55,7 @@
 	tutorial = "You are an ex-guardian, whenever that be for a petty noble, or a small shrine. You excel in defense with quarterstaffs, or have taken up the Naginata's offensive martial capabilities."
 	allowed_races = NON_DWARVEN_RACE_TYPES //roughneck & custodian sprites dont have dwarf variants - adjust if/when a second update comes out with dwarf sprites
 	outfit = /datum/outfit/job/roguetown/adventurer/custodian
-
+	cmode_music = 'sound/music/combat_kazengite.ogg'
 	subclass_languages = list(/datum/language/kazengunese)
 
 	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN)
@@ -100,19 +100,30 @@
 			backr = /obj/item/rogueweapon/woodstaff/quarterstaff/steel
 	H.cmode_music = 'sound/music/combat_kazengite.ogg'
 
-/*
+
 /datum/advclass/foreigner/yoruku
 	name = "Yoruku"
 	tutorial = "You are a Kazengunese agent trained in assassination, sabotage, and irregular combat. You are armed with daggers or a short sword, perfect \
 	for combat in the tight confines of castles and back alleys."
-	allowed_races = NON_DWARVEN_RACE_TYPES //roughneck & custodian sprites dont have dwarf variants - adjust if/when a second update comes out with dwarf sprites
+	allowed_races = NON_DWARVEN_RACE_TYPES //Clothing has no dwarf sprites.
 	outfit = /datum/outfit/job/roguetown/adventurer/yoruku
-
+	subclass_languages = list(/datum/language/kazengunese)
+	cmode_music = 'sound/music/combat_kazengite.ogg'
 	traits_applied = list(TRAIT_STEELHEARTED, TRAIT_DODGEEXPERT)
 	subclass_stats = list(
 		STATKEY_SPD = 3,
 		STATKEY_PER = 1,
 		STATKEY_END = 1,
+	)
+	subclass_skills = list(
+		/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,
+		/datum/skill/misc/tracking = SKILL_LEVEL_EXPERT,
+		/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
+		/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
+		/datum/skill/misc/sneaking = SKILL_LEVEL_EXPERT,
 	)
 
 /datum/outfit/job/roguetown/adventurer/yoruku/pre_equip(mob/living/carbon/human/H)
@@ -132,15 +143,6 @@
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/eastshirt1
 	cloak = /obj/item/clothing/cloak/thief_cloak/yoruku
 	shoes = /obj/item/clothing/shoes/roguetown/boots
-	/datum/skill/misc/climbing = SKILL_LEVEL_EXPERT,
-	/datum/skill/misc/tracking = SKILL_LEVEL_EXPERT,
-	/datum/skill/misc/swimming = SKILL_LEVEL_JOURNEYMAN,
-	/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
-	/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
-	/datum/skill/misc/athletics = SKILL_LEVEL_EXPERT,
-	/datum/skill/misc/reading = SKILL_LEVEL_NOVICE,
-	/datum/skill/misc/sneaking = SKILL_LEVEL_EXPERT,
-	/datum/skill/misc/lockpicking = SKILL_LEVEL_APPRENTICE,
 	H.set_blindness(0)
 	var/weapons = list("Tanto","Kodachi")
 	var/weapon_choice = input("Choose your weapon.", "TAKE UP ARMS") as anything in weapons
@@ -161,6 +163,3 @@
 		if("Kitsune")
 			mask = /obj/item/clothing/mask/rogue/facemask/yoruku_kitsune
 
-	H.cmode_music = 'sound/music/combat_kazengite.ogg'
-	H.grant_language(/datum/language/kazengunese)
-*/

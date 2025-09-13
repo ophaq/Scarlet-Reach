@@ -42,10 +42,6 @@
 		/datum/advclass/wretch/outlaw,
 		/datum/advclass/wretch/outlaw/marauder,
 		/datum/advclass/wretch/poacher,
-//		/datum/advclass/wretch/plaguebearer,
-//		/datum/advclass/wretch/pyromaniac,
-//		/datum/advclass/wretch/vigilante,
-//		/datum/advclass/wretch/blackoakwyrm
 	)
 
 /datum/job/roguetown/wretch/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
