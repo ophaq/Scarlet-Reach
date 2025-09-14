@@ -589,6 +589,11 @@
 	allowed_race = NON_DWARVEN_RACE_TYPES
 	flags_inv = HIDECROTCH
 
+/obj/item/clothing/under/roguetown/heavy_leather_pants/eastpants1/light
+	name = "cut-throat's pants"
+	desc = "Foreign pants worn by those from the Kazengun region."
+	armor = ARMOR_PADDED_BAD
+
 /obj/item/clothing/under/roguetown/heavy_leather_pants/eastpants2
 	name = "strange ripped pants"
 	desc = "Weird pants typically worn by the destitute in Kazengun. Or, those looking to make a fashion statement."

@@ -211,7 +211,7 @@
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket/gold
 		if (/datum/patron/divine/xylix)
 			cloak = /obj/item/clothing/cloak/templar/xylix
-			head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/xylixhelm
 		if (/datum/patron/divine/pestra)
 			cloak = /obj/item/clothing/cloak/templar/pestra
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/pestran
@@ -407,7 +407,7 @@
 			H.cmode_music = 'sound/music/combat_baotha.ogg'
 			ADD_TRAIT(H, TRAIT_HERESIARCH, TRAIT_GENERIC)
 		if(/datum/patron/divine/xylix)
-			neck = /obj/item/clothing/neck/roguetown/luckcharm
+			neck = /obj/item/clothing/neck/roguetown/psicross/xylix
 			H.cmode_music = 'sound/music/combat_jester.ogg'
 
 /datum/advclass/cleric/missionary

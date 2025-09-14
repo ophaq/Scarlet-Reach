@@ -387,6 +387,22 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Nun Habit"
 	path = /obj/item/clothing/suit/roguetown/shirt/robe/nun
 
+/datum/loadout_item/worn_dobo_robe
+	name = "Worn Dobo Robe"
+	path = /obj/item/clothing/suit/roguetown/armor/basiceast/mentorsuit/light
+
+/datum/loadout_item/floral_robe
+	name = "Floral Robes"
+	path = /obj/item/clothing/suit/roguetown/armor/basiceast/captainrobe/light
+
+/datum/loadout_item/formal_robe
+	name = "Formal Dobo Robe"
+	path = /obj/item/clothing/suit/roguetown/armor/basiceast/crafteast/light
+
+/datum/loadout_item/ronin_robe
+	name = "Ronin Dobo Robe"
+	path = /obj/item/clothing/suit/roguetown/armor/basiceast/light
+
 /datum/loadout_item/eastshirt1
 	name = "Black Foreign Shirt"
 	path = /obj/item/clothing/suit/roguetown/shirt/undershirt/eastshirt1
@@ -402,6 +418,10 @@ GLOBAL_LIST_EMPTY(loadout_items)
 /datum/loadout_item/leathertights
 	name = "Leather Tights"
 	path = /obj/item/clothing/under/roguetown/trou/leathertights
+
+/datum/loadout_item/rumaclanpants
+	name = "Cut-Throat Pants"
+	path = /obj/item/clothing/under/roguetown/heavy_leather_pants/eastpants1/light
 
 /datum/loadout_item/trou
 	name = "Work Trousers"
