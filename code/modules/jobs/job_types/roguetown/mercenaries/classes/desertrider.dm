@@ -48,10 +48,10 @@
 	gloves = /obj/item/clothing/gloves/roguetown/chain
 	pants = /obj/item/clothing/under/roguetown/splintlegs
 	backr = /obj/item/storage/backpack/rogue/satchel/black
+	id = /obj/item/clothing/neck/roguetown/shalal
 	backpack_contents = list(
 		/obj/item/roguekey/mercenary,
 		/obj/item/rogueweapon/huntingknife/idagger/navaja,
-		/obj/item/clothing/neck/roguetown/shalal,
 		/obj/item/flashlight/flare/torch,
 		/obj/item/rogueweapon/scabbard/sheath,
 		/obj/item/storage/belt/rogue/pouch/coins/poor
@@ -126,11 +126,11 @@
 	gloves = /obj/item/clothing/gloves/roguetown/angle
 	pants = /obj/item/clothing/under/roguetown/trou/leather/pontifex/raneshen
 	backr = /obj/item/storage/backpack/rogue/satchel/black
+	id = /obj/item/clothing/neck/roguetown/shalal
 	backpack_contents = list(
 		/obj/item/roguekey/mercenary,
 		/obj/item/rogueweapon/huntingknife/idagger/navaja,
 		/obj/item/rogueweapon/scabbard/sheath,
-		/obj/item/clothing/neck/roguetown/shalal,
 		/obj/item/flashlight/flare/torch,
 		/obj/item/storage/belt/rogue/pouch/coins/poor
 		)
@@ -147,8 +147,7 @@
 			H.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, SKILL_LEVEL_EXPERT, TRUE)
 			H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_EXPERT, TRUE)
 			r_hand = /obj/item/rogueweapon/whip
-			l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/parrying
-			backl = /obj/item/rogueweapon/scabbard/sheath
+			backpack_contents += /obj/item/rogueweapon/huntingknife/idagger/steel/parrying
 		if("Recurve Bow")
 			H.adjust_skillrank_up_to(/datum/skill/combat/bows, SKILL_LEVEL_EXPERT, TRUE)
 			r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve
@@ -156,7 +155,6 @@
 	shoes = /obj/item/clothing/shoes/roguetown/shalal
 	belt = /obj/item/storage/belt/rogue/leather/shalal
 	beltl = /obj/item/rogueweapon/scabbard/sword
-	beltr = /obj/item/rogueweapon/scabbard/sword
 	l_hand = /obj/item/rogueweapon/sword/sabre/shamshir
 
 /datum/advclass/mercenary/desert_rider/almah
@@ -211,11 +209,11 @@
 	gloves = /obj/item/clothing/gloves/roguetown/angle
 	pants = /obj/item/clothing/under/roguetown/trou/leather/pontifex/raneshen
 	backr = /obj/item/storage/backpack/rogue/satchel/black
+	id = /obj/item/clothing/neck/roguetown/shalal
 	backpack_contents = list(
 		/obj/item/roguekey/mercenary,
 		/obj/item/rogueweapon/huntingknife/idagger/navaja,
 		/obj/item/rogueweapon/scabbard/sheath,
-		/obj/item/clothing/neck/roguetown/shalal,
 		/obj/item/spellbook_unfinished/pre_arcyne,
 		/obj/item/flashlight/flare/torch,
 		/obj/item/storage/belt/rogue/pouch/coins/poor

@@ -355,45 +355,11 @@
 
 					var/dam2take = round((get_complex_damage(AB,user,used_weapon.blade_dulling)/2),1)
 					if(dam2take)
-						if(!user.mind)
-							dam2take = dam2take * 0.25
-						if(dam2take > 0 && (intenty.masteritem?.intdamage_factor != 1 || intenty.intent_intdamage_factor != 1))
-							var/higher_intfactor = max(intenty.masteritem?.intdamage_factor, intenty.intent_intdamage_factor)
-							var/lowest_intfactor = min(intenty.masteritem?.intdamage_factor, intenty.intent_intdamage_factor)
-							var/used_intfactor
-							if(lowest_intfactor < 1)	//Our intfactor multiplier can be either 0 to 1, or 1 to whatever.
-								used_intfactor = lowest_intfactor
-							if(higher_intfactor > 1)	//Make sure to keep your weapon and intent intfactors consistent to avoid problems here!
-								used_intfactor = higher_intfactor
-							dam2take *= used_intfactor
-					else	//This is normally handled in get_complex_damage, but it doesn't support simple mobs... at all, so we do a clunky mini-version of it.
-						if(istype(user, /mob/living/simple_animal))
-							var/mob/living/simple_animal/SM = user
-							dam2take = rand(SM.melee_damage_lower, SM.melee_damage_upper)
-							dam2take *= (SM.STASTR / 10)
-							dam2take *= 0.25
-							switch(used_weapon.blade_dulling)
-								if(DULLING_SHAFT_CONJURED)
-									dam2take *= 1.3
-								if(DULLING_SHAFT_METAL)
-									switch(SM.d_type)
-										if("slash")
-											dam2take *= 0.5
-										if("blunt")
-											dam2take *= 1.5
-								if(DULLING_SHAFT_WOOD)
-									switch(SM.d_type)
-										if("slash")
-											dam2take *= 1.5
-										if("blunt")
-											dam2take *= 0.5
-								if(DULLING_SHAFT_REINFORCED)
-									switch(SM.d_type)
-										if("slash")
-											dam2take *= 0.75
-										if("stab")
-											dam2take *= 1.5
-					used_weapon.take_damage(max(dam2take,1), BRUTE, used_weapon.d_type)
+						var/intdam = used_weapon.max_blade_int ? INTEG_PARRY_DECAY : INTEG_PARRY_DECAY_NOSHARP
+						if(used_weapon == offhand)
+							intdam = INTEG_PARRY_DECAY_NOSHARP
+						used_weapon.take_damage(intdam, BRUTE, used_weapon.d_type)
+						used_weapon.remove_bintegrity(SHARPNESS_ONHIT_DECAY, user)
 					return TRUE
 				else
 					return FALSE
@@ -525,6 +491,10 @@
 				src.visible_message(span_boldwarning("<b>[src]</b> ripostes [user] with [W]!"))
 			else
 				src.visible_message(span_boldwarning("<b>[src]</b> parries [user] with [W]!"))
+			if(W.max_blade_int)
+				W.remove_bintegrity(SHARPNESS_ONHIT_DECAY, user)
+			else
+				W.take_damage(INTEG_PARRY_DECAY_NOSHARP, BRUTE, "slash")
 			return TRUE
 		else
 			to_chat(src, span_warning("I'm too tired to parry!"))
@@ -708,47 +678,9 @@
 			var/lucmod = L.STALUC - U.STALUC
 			probclip += lucmod * 10
 		if(prob(probclip) && IS && IU)
-			var/dam2take = round((get_complex_damage(IU, user, FALSE)/2),1)
-			if(dam2take)
-				if(!user.mind)
-					dam2take = dam2take * 0.25
-				if(dam2take > 0 && (user.used_intent.masteritem?.intdamage_factor != 1 || user.used_intent.intent_intdamage_factor != 1))
-					var/higher_intfactor = max(user.used_intent.masteritem?.intdamage_factor, user.used_intent.intent_intdamage_factor)
-					var/lowest_intfactor = min(user.used_intent.masteritem?.intdamage_factor, user.used_intent.intent_intdamage_factor)
-					var/used_intfactor
-					if(lowest_intfactor < 1)	//Our intfactor multiplier can be either 0 to 1, or 1 to whatever.
-						used_intfactor = lowest_intfactor
-					if(higher_intfactor > 1)	//Make sure to keep your weapon and intent intfactors consistent to avoid problems here!
-						used_intfactor = higher_intfactor
-					dam2take *= used_intfactor
-				else
-					if(istype(user, /mob/living/simple_animal))
-						var/mob/living/simple_animal/SM = user
-						dam2take = rand(SM.melee_damage_lower, SM.melee_damage_upper)
-						dam2take *= (SM.STASTR / 10)
-						dam2take *= 0.25
-						switch(IS.blade_dulling)
-							if(DULLING_SHAFT_CONJURED)
-								dam2take *= 1.3
-							if(DULLING_SHAFT_METAL)
-								switch(SM.d_type)
-									if("slash")
-										dam2take *= 0.5
-									if("blunt")
-										dam2take *= 1.5
-							if(DULLING_SHAFT_WOOD)
-								switch(SM.d_type)
-									if("slash")
-										dam2take *= 1.5
-									if("blunt")
-										dam2take *= 0.5
-							if(DULLING_SHAFT_REINFORCED)
-								switch(SM.d_type)
-									if("slash")
-										dam2take *= 0.75
-									if("stab")
-										dam2take *= 1.5
-				IS.take_damage(max(dam2take,1), BRUTE, IU.d_type)
+			var/intdam = IS.max_blade_int ? INTEG_PARRY_DECAY : INTEG_PARRY_DECAY_NOSHARP
+			IS.take_damage(intdam, BRUTE, IU.d_type)
+			IS.remove_bintegrity(SHARPNESS_ONHIT_DECAY, src)
 
 			user.visible_message(span_warning("<b>[user]</b> clips [src]'s weapon!"))
 			playsound(user, 'sound/misc/weapon_clip.ogg', 100)
@@ -851,19 +783,16 @@
 	if(H.has_status_effect(/datum/status_effect/buff/clash))	//They also have Clash active. It'll trigger the special event.
 		clash(user, IM, IU)
 	else	//Otherwise, we just riposte them.
-		var/damage = get_complex_damage(IM, src, IU.blade_dulling)
-		if(IM.intdamage_factor != 1 || used_intent.intent_intdamage_factor != 1)
-			var/higher_intfactor = max(IM.intdamage_factor, used_intent.intent_intdamage_factor)
-			var/lowest_intfactor = min(IM.intdamage_factor, used_intent.intent_intdamage_factor)
-			var/used_intfactor
-			if(lowest_intfactor < 1)	//Our intfactor multiplier can be either 0 to 1, or 1 to whatever.
-				used_intfactor = lowest_intfactor
-			if(higher_intfactor > 1)	//Make sure to keep your weapon and intent intfactors consistent to avoid problems here!
-				used_intfactor = higher_intfactor
-			damage *= used_intfactor
-		if(IM.wbalance == WBALANCE_HEAVY)
-			damage *= 1.5
-		IU.take_damage(max(damage,1), BRUTE, IM.d_type)
+		var/sharpnesspenalty = SHARPNESS_ONHIT_DECAY * 5
+		if(IM.wbalance == WBALANCE_HEAVY || IU.blade_dulling == DULLING_SHAFT_CONJURED)
+			sharpnesspenalty *= 2
+		if(IU.max_blade_int)
+			IU.remove_bintegrity(sharpnesspenalty, user)
+		else
+			var/integdam = INTEG_PARRY_DECAY_NOSHARP * 5
+			if(IU.blade_dulling == DULLING_SHAFT_CONJURED)
+				integdam *= 2
+			IU.take_damage(integdam, BRUTE, IM.d_type)
 		visible_message(span_suicide("[src] ripostes [H] with \the [IM]!"))
 		playsound(src, 'sound/combat/clash_struck.ogg', 100)
 		var/staminadef = (stamina * 100) / max_stamina

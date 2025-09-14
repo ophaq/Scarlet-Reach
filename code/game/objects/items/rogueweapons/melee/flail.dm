@@ -15,7 +15,6 @@
 	smeltresult = /obj/item/ingot/iron
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = BLUNTWOOSH_MED
-	blade_dulling = DULLING_SHAFT_WOOD
 	throwforce = 5
 	wdefense = 0
 	minstr = 4
@@ -109,7 +108,6 @@
 	force = 22
 	max_integrity = 175
 	smeltresult = /obj/item/ingot/aalloy
-	blade_dulling = DULLING_SHAFT_CONJURED
 
 /obj/item/rogueweapon/flail/sflail/paflail
 	name = "ancient flail"
@@ -170,7 +168,6 @@
 	associated_skill = /datum/skill/combat/polearms
 	anvilrepair = /datum/skill/craft/carpentry
 	dropshrink = 0.9
-	blade_dulling = DULLING_SHAFT_WOOD
 	wdefense = 4
 	resistance_flags = FLAMMABLE
 
@@ -193,7 +190,6 @@
 	gripped_intents = list(/datum/intent/flail/strike/matthiosflail, /datum/intent/flail/strike/smash/matthiosflail)
 	associated_skill = /datum/skill/combat/whipsflails
 	slot_flags = ITEM_SLOT_BACK
-	blade_dulling = DULLING_SHAFT_GRAND
 	anvilrepair = /datum/skill/craft/weaponsmithing
 
 

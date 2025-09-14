@@ -5,7 +5,7 @@
 	faction = "Station"
 	total_positions = 3 // THREE GOONS!!
 	spawn_positions = 3
-	allowed_races = RACES_SECOND_CLASS_NO_GOLEM
+	allowed_races = RACES_SECOND_CLASS_NO_GOLEM // As opposed to the Inquisitor or Absolver, Orthodoxists could be "redeemed" "lesser" races and heretics.
 	disallowed_races = list(
 		/datum/species/lamia,
 	)

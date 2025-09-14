@@ -2,6 +2,8 @@
 	var/obj/item/organ/penis/penis = user.getorganslot(ORGAN_SLOT_PENIS)
 	if(!penis)
 		return FALSE
+	if(!penis.functional)
+		return FALSE
 	switch(penis.penis_type)
 		if(PENIS_TYPE_KNOTTED,PENIS_TYPE_TAPERED_KNOTTED,PENIS_TYPE_TAPERED_DOUBLE_KNOTTED,PENIS_TYPE_BARBED_KNOTTED)
 			return TRUE
@@ -12,7 +14,8 @@
 		return
 	var/datum/sex_action/action = SEX_ACTION(action_path)
 	if(action.user_sex_part & user.sexcon.knotted_part) // check if the knot is not blocking these actions, and thus requires a forceful removal
-		user.sexcon.knot_remove()
+		var/forced_insertion = force >= SEX_FORCE_EXTREME && speed >= SEX_SPEED_EXTREME
+		user.sexcon.knot_remove(forceful_removal = forced_insertion)
 	if(action.target_sex_part & target.sexcon.knotted_part)
 		target.sexcon.knot_remove()
 
@@ -21,8 +24,6 @@
 		return
 	var/datum/sex_action/action = SEX_ACTION(user.sexcon.current_action)
 	if(!action.knot_on_finish) // the current action does not support knot climaxing, abort
-		return
-	if(!user.sexcon.can_use_penis())
 		return
 	if(!user.sexcon.knot_penis_type()) // don't have that dog in 'em
 		return
@@ -147,7 +148,7 @@
 			to_chat(top, span_love("I feel [btm] tightening over my knot."))
 			to_chat(btm, span_love("I feel [top] rubbing inside."))
 		return
-	if(btm.pulling == top || top.pulling == btm)
+	if(top.pulling == btm || btm.pulling == top)
 		return
 	if(top.sexcon.considered_limp())
 		knot_remove()
@@ -341,6 +342,7 @@
 	if(istype(btm) && btm.sexcon.knotted_status)
 		if(!keep_btm_status) // only keep the status if we're reapplying the knot
 			btm.remove_status_effect(/datum/status_effect/knot_tied)
+			btm.reset_pull_offsets(btm, GRAB_AGGRESSIVE)
 		UnregisterSignal(btm.sexcon.user, COMSIG_MOVABLE_MOVED)
 		btm.sexcon.knotted_owner = null
 		btm.sexcon.knotted_recipient = null

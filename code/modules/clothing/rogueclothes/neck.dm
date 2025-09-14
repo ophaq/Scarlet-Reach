@@ -585,12 +585,15 @@
 
 /obj/item/clothing/neck/roguetown/shalal
 	name = "desert rider medal"
-	desc = ""
+	desc = "Blood, like the desert sand, stains your hands, a crimson testament to the gold you covet. A desert rider, renowned mercenary of the far east, your shamshir whispers tales of centuries-old tradition. Your loyalty, a fleeting mirage in the shifting sands, will yield to the allure of fortune."
 	icon_state = "shalal"
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
 	sellprice = 15
 	anvilrepair = /datum/skill/craft/armorsmithing
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_RING
+	grid_height = 32
+	grid_width = 32
 
 /obj/item/clothing/neck/roguetown/ornateamulet
 	name = "Ornate Amulet"

@@ -22,8 +22,6 @@
 		return FALSE
 	if(!target.getorganslot(ORGAN_SLOT_VAGINA))
 		return FALSE
-	if(!user.getorganslot(ORGAN_SLOT_PENIS))
-		return FALSE
 	if(!user.sexcon.can_use_penis())
 		return FALSE
 	return TRUE

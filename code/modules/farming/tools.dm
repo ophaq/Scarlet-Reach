@@ -78,7 +78,7 @@
 	//dropshrink = 0.8
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
-	max_blade_int = 50
+	max_blade_int = 300
 	smeltresult = /obj/item/ingot/iron
 
 /obj/item/rogueweapon/sickle/examine(mob/user)

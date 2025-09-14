@@ -252,7 +252,7 @@
 		/obj/item/ritechalk = 1,
 		)
 	H.cmode_music = 'sound/music/combat_heretic.ogg'
-	var/weapons = list("Rapier","Dagger", "Bow", "Crossbow")
+	var/weapons = list("Rapier","Dagger", "Whip & Hunting Knife", "Bow", "Crossbow")
 	var/weapon_choice = input("Choose your weapon.", "TAKE UP ARMS") as anything in weapons
 	H.set_blindness(0)
 	switch(weapon_choice)
@@ -264,6 +264,10 @@
 			H.adjust_skillrank_up_to(/datum/skill/combat/knives, SKILL_LEVEL_EXPERT, TRUE)
 			beltl = /obj/item/rogueweapon/scabbard/sheath
 			l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/special
+		if("Whip & Hunting Knife")
+			H.adjust_skillrank_up_to(/datum/skill/combat/whipsflails, SKILL_LEVEL_EXPERT, TRUE) // no adjustment for knives skill cos thats how the others are done
+			l_hand = /obj/item/rogueweapon/whip
+			backpack_contents += /obj/item/rogueweapon/huntingknife
 		if("Bow")
 			H.adjust_skillrank_up_to(/datum/skill/combat/bows, SKILL_LEVEL_JOURNEYMAN, TRUE)
 			beltl = /obj/item/quiver/arrows

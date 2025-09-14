@@ -92,7 +92,6 @@
 	smeltresult = /obj/item/ingot/iron
 	swingsound = BLUNTWOOSH_MED
 	minstr = 5
-	blade_dulling = DULLING_SHAFT_WOOD
 
 	grid_height = 96
 	grid_width = 32
@@ -272,7 +271,7 @@
 	wlength = WLENGTH_SHORT
 	w_class = WEIGHT_CLASS_SMALL
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
-	max_blade_int = 150
+	max_blade_int = 200
 	max_integrity = 80
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
 	associated_skill = /datum/skill/combat/unarmed
@@ -285,6 +284,7 @@
 	smeltresult = /obj/item/ingot/steel
 	pickup_sound = 'modular_helmsguard/sound/sheath_sounds/draw_dagger.ogg'
 	sheathe_sound = 'modular_helmsguard/sound/sheath_sounds/put_back_dagger.ogg'
+	sharpness_mod = 1.5
 
 /obj/item/rogueweapon/katar/getonmobprop(tag)
 	. = ..()
@@ -358,12 +358,11 @@
 	throwforce = 12
 	wdefense = 7
 	wbalance = WBALANCE_NORMAL
-	blade_dulling = DULLING_SHAFT_WOOD
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	smeltresult = /obj/item/ingot/steel
 	grid_width = 64
 	grid_height = 64
-	intdamage_factor = 1.1
+	intdamage_factor = 1.2
 
 /obj/item/rogueweapon/knuckles/getonmobprop(tag)
 	. = ..()
@@ -391,12 +390,12 @@
 	swingsound = list('sound/combat/wooshes/punch/punchwoosh (1).ogg','sound/combat/wooshes/punch/punchwoosh (2).ogg','sound/combat/wooshes/punch/punchwoosh (3).ogg')
 	associated_skill = /datum/skill/combat/unarmed
 	throwforce = 12
-	wdefense = 7	//literally no clue how else to balance these
+	wdefense = 7.5	//literally no clue how else to balance these
 	wbalance = WBALANCE_NORMAL
 	blade_dulling = DULLING_SHAFT_WOOD
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	smeltresult = /obj/item/ingot/bronze
-	intdamage_factor = 1.1
+	intdamage_factor = 1.25
 
 /obj/item/rogueweapon/knuckles/aknuckles
 	name = "decrepit knuckles"
@@ -436,7 +435,7 @@
 	sharpness = IS_SHARP
 	walking_stick = TRUE
 	wdefense = 6
-	max_blade_int = 80
+	max_blade_int = 140
 
 /obj/item/rogueweapon/woodstaff/militia/getonmobprop(tag)
 	. = ..()
@@ -456,7 +455,7 @@
 	force = 15
 	force_wielded = 25
 	minstr = 10
-	max_blade_int = 100
+	max_blade_int = 130
 	anvilrepair = /datum/skill/craft/carpentry
 	smeltresult = /obj/item/rogueore/coal
 	wdefense = 4
@@ -472,7 +471,7 @@
 	icon_state = "peasantwarspear"
 	icon = 'icons/roguetown/weapons/64.dmi'
 	minstr = 8
-	max_blade_int = 100
+	max_blade_int = 120
 	max_integrity = 200
 	anvilrepair = /datum/skill/craft/carpentry
 	smeltresult = /obj/item/rogueore/coal
@@ -603,7 +602,7 @@
 
 /obj/item/rogueweapon/scythe
 	force = 15
-	force_wielded = 20
+	force_wielded = 25
 	possible_item_intents = list(SPEAR_BASH)
 	gripped_intents = list(/datum/intent/spear/cut/scythe, SPEAR_BASH, MACE_STRIKE)
 	name = "scythe"
@@ -619,11 +618,10 @@
 	wlength = WLENGTH_GREAT
 	w_class = WEIGHT_CLASS_BULKY
 	minstr = 8
-	max_blade_int = 100
+	max_blade_int = 150
 	anvilrepair = /datum/skill/craft/carpentry
 	smeltresult = /obj/item/rogueore/coal
 	associated_skill = /datum/skill/combat/polearms
-	blade_dulling = DULLING_SHAFT_WOOD
 	walking_stick = TRUE
 	wdefense = 6
 	thrown_bclass = BCLASS_BLUNT
@@ -656,7 +654,7 @@
 	icon = 'icons/roguetown/weapons/32.dmi'
 	sharpness = IS_SHARP
 	wlength = WLENGTH_SHORT
-	max_blade_int = 80
+	max_blade_int = 120
 	max_integrity = 400
 	slot_flags = ITEM_SLOT_HIP
 	associated_skill = /datum/skill/combat/axes
@@ -671,7 +669,7 @@
 	name = "militia steel warpick"
 	desc = "At the end of the dae, a knight's bascinet isn't much different than a particularly large stone. After all, both tend to rupture with sobering ease when introduced to a sharpened pickend. This one is honed out of steel parts."
 	icon_state = "milsteelpick"
-	max_blade_int = 160
+	max_blade_int = 150
 	max_integrity = 600
 	associated_skill = /datum/skill/combat/axes
 	anvilrepair = /datum/skill/craft/weaponsmithing

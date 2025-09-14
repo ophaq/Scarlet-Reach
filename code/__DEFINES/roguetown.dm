@@ -134,12 +134,6 @@
 #define ARMOR_PANTS_CHAIN list("blunt" = 40, "slash" = 100, "stab" = 80, "piercing" = 50, "fire" = 0, "acid" = 0)
 #define ARMOR_PANTS_BRIGANDINE list("blunt" = 40, "slash" = 70, "stab" = 70, "piercing" = 50, "fire" = 0, "acid" = 0)
 
-// Weapon Armors (Yeah, we have this)
-#define ARMOR_SHIELD list("blunt" = 50, "slash" = 25, "stab" = 0, "piercing" = 0)
-#define ARMOR_GREATSWORD list("blunt" = 20, "slash" = 50, "stab" = 50, "piercing" = 0)
-#define ARMOR_BROADSWORD list("blunt" = 40, "slash" = 50, "stab" = 50, "piercing" = 0)
-#define ARMOR_SWORD list("blunt" = 60, "slash" = 50, "stab" = 50, "piercing" = 0)
-
 //Antag / Special / Unique armor defines
 #define ARMOR_VAMP list("blunt" = 80, "slash" = 200, "stab" = 100, "piercing" = 80, "fire" = 80, "acid" = 0) // vulnerable to blunt and piercing attacks
 #define ARMOR_WWOLF list("blunt" = 100, "slash" = 90, "stab" = 80, "piercing" = 70, "fire" = 40, "acid" = 0)
@@ -214,6 +208,9 @@
 	/datum/species/golem/metal,\
 	/datum/species/golem/porcelain,\
 
+#define RACES_WILDKIN \
+	/datum/species/anthromorph,\
+
 #define RACES_SECOND_CLASS \
     /datum/species/vulpkanin,\
     /datum/species/lupian,\
@@ -240,6 +237,8 @@
 #define RACES_NOBILITY_ELIGIBLE_UP list(RACES_NOBILITY_ELIGIBLE)
 
 #define RACES_CHURCH_FAVORED_UP list(RACES_NOBILITY_ELIGIBLE, RACES_CHURCH_FAVORED)
+
+#define RACES_CHURCH_FAVORED_UP_PLUS_WILDKIN list(RACES_NOBILITY_ELIGIBLE, RACES_CHURCH_FAVORED, RACES_WILDKIN)
 
 #define RACES_APPOINTED_OUTCASTS_UP list(RACES_NOBILITY_ELIGIBLE, RACES_CHURCH_FAVORED, RACES_APPOINTED_OUTCASTS)
 
