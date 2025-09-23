@@ -512,12 +512,16 @@
 //	to_chat(climber, span_warningbig("[stamina_cost_final] REMOVED!")) // debug msg
 	climber.stamina_add(stamina_cost_final) // every tick interval this much stamina is deducted
 	var/turf/tile_under_climber = climber.loc
-	var/list/branch_under_climber = list()
+	var/list/random_shit_under_climber = list()
 	for(var/obj/structure/flora/newbranch/branch in climber.loc)
-		branch_under_climber += branch
+		random_shit_under_climber += branch
+	for(var/obj/machinery/light/rogue/chand/chandelier in climber.loc)
+		random_shit_under_climber += chandelier
+	for(var/obj/structure/kybraxor/fucking_hatch in climber.loc)
+		random_shit_under_climber += fucking_hatch
 	if(!istype(tile_under_climber, /turf/open/transparent/openspace))// if we aren't on open space turf, remove debuff (aka our feet are on solid shi or water)
 		climber.remove_status_effect(/datum/status_effect/debuff/climbing_lfwb)
-	if(branch_under_climber.len) // branches dont remove open space turf, so we have to check for it separately
+	if(random_shit_under_climber.len) // branches dont remove open space turf, so we have to check for it separately
 		climber.remove_status_effect(/datum/status_effect/debuff/climbing_lfwb)
 	else if(climber.stamina >= climber.max_stamina) // if we run out of green bar stamina, we fall
 		to_chat(climber, span_dead("I can't hold onto the ledge for any longer!"))
