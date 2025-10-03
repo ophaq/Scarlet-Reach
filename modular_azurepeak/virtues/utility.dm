@@ -262,6 +262,11 @@
 	added_stashed_items = list("Lockpick Ring" = /obj/item/lockpickring/mundane)
 	added_skills = list(list(/datum/skill/misc/lockpicking, 3, 6))
 
+/datum/virtue/utility/swiftfingers
+	name = "Swift Fingers"
+	desc = "You have a natural talent for weaving your hands into the pockets of others unnoticed, or weightlessly untying a belt. You know how to take away goods from their owners far easier than most travelers."
+	added_skills = list(list(/datum/skill/misc/stealing, 3, 4))
+
 /datum/virtue/utility/granary
 	name = "Cunning Provisioner"
 	desc = "You've worked in or around the docks enough to steal away a sack of supplies that no one would surely miss, just in case. You've picked up on some cooking and fishing tips in your spare time, as well."
