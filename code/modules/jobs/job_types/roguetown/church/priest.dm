@@ -40,7 +40,7 @@ GLOBAL_LIST_EMPTY(heretical_players)
 		/datum/virtue/combat/hollow_life,
 	)
 
-	job_traits = list(TRAIT_CHOSEN, TRAIT_RITUALIST, TRAIT_GRAVEROBBER)
+	job_traits = list(TRAIT_CHOSEN, TRAIT_RITUALIST, TRAIT_GRAVEROBBER, TRAIT_SOUL_EXAMINE)
 	advclass_cat_rolls = list(CTAG_BISHOP = 2)
 	job_subclasses = list(
 		/datum/advclass/bishop
@@ -107,6 +107,7 @@ GLOBAL_LIST_EMPTY(heretical_players)
 		/obj/item/natural/worms/leech/cheele = 1, //little buddy
 		/obj/item/ritechalk = 1,
 		/obj/item/rogueweapon/huntingknife/idagger/steel/holysee = 1,	//Unique knife from the Holy See
+		/obj/item/rogueweapon/surgery/hammer = 1,
 		/obj/item/rogueweapon/scabbard/sheath = 1,
 	)
 
