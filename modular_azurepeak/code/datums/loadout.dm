@@ -112,6 +112,10 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Volf Helm"
 	path = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
 
+/datum/loadout_item/papakha
+	name = "Papakha"
+	path = /obj/item/clothing/head/roguetown/papakha
+
 //CLOAKS
 /datum/loadout_item/tabard
 	name = "Tabard"
