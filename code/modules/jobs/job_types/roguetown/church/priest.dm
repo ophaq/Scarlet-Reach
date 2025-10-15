@@ -37,6 +37,7 @@ GLOBAL_LIST_EMPTY(heretical_players)
 	//No nobility for you, being a member of the clergy means you gave UP your nobility. It says this in many of the church tutorial texts.
 	virtue_restrictions = list(
 		/datum/virtue/utility/noble,
+		/datum/virtue/utility/blueblooded,
 		/datum/virtue/combat/hollow_life,
 	)
 

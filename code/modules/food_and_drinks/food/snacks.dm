@@ -526,6 +526,16 @@ All foods are distributed among various categories. Use common sense.
 		if(!do_after(user, 30, target = src))
 			return FALSE
 		var/reagents_per_slice = reagents.total_volume/slices_num
+		if (istype(src,/obj/item/reagent_containers/food/snacks/grown/onion/rogue))
+			if (ishuman(user))
+				var/mob/living/carbon/H = user
+				var/obj/item/organ/eyes/E = H.getorganslot(ORGAN_SLOT_EYES) //FIXME: getorganslot() and getorgan() don't actually differentiate organ types! This means that transplanted golem eyes will still cry, but I need to mess with all of the organ checking code to unfuck this!
+				if (E && !(H.eyesclosed || HAS_TRAIT(H,TRAIT_NOPAIN) || H.is_eyes_covered() || HAS_TRAIT(H,TRAIT_BLIND) || H.get_skill_level(/datum/skill/craft/cooking) > SKILL_LEVEL_JOURNEYMAN)) //The painless will not be irritated by onions. Golems, skellies, meth-heads, etc. Expert+ chefs will also be unaffected.
+					to_chat(user,span_warning("The onion's juices sting my eyes!"))
+					user.blur_eyes(4)
+					if (prob(50))
+						user.emote("cry",forced=TRUE)
+		
 		var/add_reagents_from_knife = min(W?.reagents?.total_volume, 1) // if we're slicing with a tipped_item knife, poison some of the reagents into the cake (but not too much)
 		if(add_reagents_from_knife >= reagents_per_slice) // if the slice too small to inject into, don't attempt
 			add_reagents_from_knife = 0
