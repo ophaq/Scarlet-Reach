@@ -13,8 +13,9 @@
 	Over time, they were seen to prove as valuable asset and advisory role due to their intellectual prowess, it is \
 	unknown what provided them with such a gift. A master wanting more engaging conversation? A lord wanting a more \
 	efficient clerk? Regardless, who knows what thoughts their eyes of glass truly conceal?<br> \
-	(Insomnia, No hunger, no blood.) \
-	(+2 Intelligence, +1 Speed, -2 Strength)"
+	<span style='color: #cc0f0f;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>-1 STR</span> |<span style='color: #6a8cb7;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'> +2 INT | +1 SPD</b></span> </br> \
+	<span style='color: #cc0f0f;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b><span style='color: #6a8cb7;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>Hungerless, Insomnia, Bloodless</span></b></br>"
+
 
 	construct = 1
 	skin_tone_wording = "Paint"

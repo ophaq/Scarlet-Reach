@@ -117,13 +117,13 @@
 	if(HAS_TRAIT(src, TRAIT_NOBREATH))
 		return TRUE
 	if(HAS_TRAIT(src, TRAIT_HOLDBREATH))
-		adjustOxyLoss(5)
+		adjustOxyLoss(10)
 	if(istype(loc, /obj/structure/closet/dirthole))
 		adjustOxyLoss(5)
 	if(istype(loc, /obj/structure/closet/burial_shroud))
 		var/obj/O = loc
 		if(istype(O.loc, /obj/structure/closet/dirthole))
-			adjustOxyLoss(5)
+			adjustOxyLoss(10)
 	if(isopenturf(loc))
 		var/turf/open/T = loc
 		if(reagents && T.pollution)
@@ -140,7 +140,7 @@
 /mob/living/carbon/handle_inwater(turf/onturf, extinguish = TRUE, force_drown = FALSE)
 	..()
 	if(!(mobility_flags & MOBILITY_STAND) || force_drown)
-		if(HAS_TRAIT(src, TRAIT_NOBREATH) || HAS_TRAIT(src, TRAIT_WATERBREATHING))
+		if (HAS_TRAIT(src, TRAIT_NOBREATH) || HAS_TRAIT(src, TRAIT_WATERBREATHING) || HAS_TRAIT(src, TRAIT_HOLDBREATH))
 			return TRUE
 		if(stat == DEAD && client)
 			GLOB.scarlet_round_stats[STATS_PEOPLE_DROWNED]++
@@ -157,7 +157,8 @@
 /mob/living/carbon/human/handle_inwater(turf/onturf, extinguish = TRUE, force_drown = FALSE)
 	. = ..()
 	if(istype(onturf, /turf/open/water/sewer) && !HAS_TRAIT(src, TRAIT_NOSTINK))
-		add_stress(/datum/stressevent/sewertouched)
+		if(!HAS_TRAIT(src, TRAIT_HOLDBREATH))
+			add_stress(/datum/stressevent/sewertouched)
 
 /mob/living/carbon/proc/get_complex_pain()
 	. = 0
@@ -604,7 +605,7 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 				if (islist(wlist))
 					for (var/datum/wound/W in wlist)
 						var/sh = W?.sleep_healing
-						if (sh) 
+						if (sh)
 							W.heal_wound(sh * sleepy_mod)
 			adjustToxLoss(-sleepy_mod)
 			if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))

@@ -12,9 +12,9 @@
 	the Golems of Giza has given way to a new generation of individualistic arcyne-forged creations. Much of society as a whole is \
 	conflicted on Golems, for their sensibilities vary wildly from one to the next. \
 	<br> \
-	(Insomnia, No hunger, no blood, immune to both potions and poisons. Can only gain higher-level skills with skill exhibitors.) \
-	(+2 Constitution, -1 Speed)"
-
+	<span style='color: #cc0f0f;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>-1 SPD</span> |<span style='color: #6a8cb7;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'> +2 CON</b></span> </br> \
+	<span style='color: #cc0f0f;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b><span style='color: #6a8cb7;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>Hungerless, Insomnia, Potion/Poison-immunity</span></b></br> \
+	<span style='color: #cc0f0f;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'><b>(Golems can only gain higher-level skills with skill exhibitors.)</b></span> </br>"
 	construct = 1
 	skin_tone_wording = "Material"
 	default_color = "FFFFFF"

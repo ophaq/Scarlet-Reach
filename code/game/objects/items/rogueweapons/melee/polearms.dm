@@ -988,7 +988,7 @@
 	force = 25
 	icon_state = "psygsword"
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/peel, /datum/intent/sword/strike)
-	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust/exe, /datum/intent/rend, /datum/intent/axe/chop)
+	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/peel, /datum/intent/rend, /datum/intent/axe/chop)
 
 /obj/item/rogueweapon/greatsword/psygsword/relic/ComponentInitialize()		//Pre-blessed, +100 Blade int, +100 int, +2 def, make it silver
 	AddComponent(/datum/component/psyblessed, TRUE, 5, 100, 100, 2, TRUE)

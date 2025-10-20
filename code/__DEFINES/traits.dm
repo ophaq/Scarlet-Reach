@@ -204,6 +204,13 @@
 // ARMOR / CLOTHING GIVEN TRAITS (GIVEN BY WEARING CLOTHES/ARMOR PIECES)
 #define TRAIT_MONK_ROBE	"Holy Vestatures"
 
+//item and enchantment traits should go under here as new ones get added
+#define TRAIT_ENGINEERING_GOGGLES "Engineering Goggles"
+
+//role related traits
+#define TRAIT_MASTER_CARPENTER "Master Carpenter"
+#define TRAIT_MASTER_MASON "Master Masonry"
+
 GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_HERETIC_DEVOUT = span_necrosis("The scorn of Astrata shan't make me waiver, for my faith holds true."),
 	TRAIT_PACIFISM = span_info("I shall never harm a living being. Directly."),
@@ -369,7 +376,10 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_CURSE_MATTHIOS = span_warning("I am forsaken by the Dragon. Greed will be my only salvation."),
 	TRAIT_CURSE_BAOTHA = span_warning("I am forsaken by the Heartbreaker. I am drowning in her promises."),
 	TRAIT_DEADITE = span_danger("The Rot has overtaken me."),
-	TRAIT_PUZZLEMASTER = span_notice("I've solved an impossible puzzle!")
+	TRAIT_PUZZLEMASTER = span_notice("I've solved an impossible puzzle!"),
+	TRAIT_ENGINEERING_GOGGLES = span_warning("I can see structural details others can't"),
+	TRAIT_MASTER_CARPENTER = span_warning("I've been trained to make the most of wood"), 
+	TRAIT_MASTER_MASON = span_warning("I've been trained to make the most of stone"), 
 ))
 
 // trait accessor defines

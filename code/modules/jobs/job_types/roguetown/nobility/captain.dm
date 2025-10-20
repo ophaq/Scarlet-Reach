@@ -69,10 +69,6 @@
 					MF.known_people -= prev_real_name
 					H.mind.person_knows_me(MF)
 
-		H.advsetup = 1
-		H.invisibility = INVISIBILITY_MAXIMUM
-		H.become_blind("advsetup")
-
 /datum/advclass/captain/infantry
 	name = "Infantry Captain"
 	tutorial = "You've fought shoulder to shoulder with the realm's worthiest Knights while embedded directly within \

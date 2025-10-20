@@ -56,10 +56,10 @@
 		points += "!"
 	visible_message(span_danger("[src] falls down[points]"), \
 					span_danger("I fall down[points]"))
-	playsound(src.loc, 'sound/foley/zfall.ogg', 100, FALSE)
 	if(!isgroundlessturf(T))
+		playsound(src.loc, 'sound/foley/zfall.ogg', 100, FALSE)
 		ZImpactDamage(T, levels)
-		GLOB.scarlet_round_stats[STATS_MOAT_FALLERS]++
+		GLOB.scarlet_round_stats[STATS_MOAT_FALLERS]++// Wouldn't this only count if you DIDN'T fall in the moat?
 	return ..()
 
 /mob/living/proc/ZImpactDamage(turf/T, levels)

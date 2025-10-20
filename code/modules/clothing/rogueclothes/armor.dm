@@ -1377,6 +1377,7 @@
 	icon_state = "inqcoat"
 	item_state = "inqcoat"
 	sleevetype = "shirt"
+	sewrepair = TRUE
 	max_integrity = 300
 	anvilrepair = /datum/skill/craft/armorsmithing
 	equip_delay_self = 4 SECONDS

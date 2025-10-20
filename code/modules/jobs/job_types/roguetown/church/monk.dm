@@ -30,14 +30,6 @@
 		/datum/advclass/acolyte
 	)
 
-/datum/job/roguetown/monk/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
-	..()
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		H.advsetup = 1
-		H.invisibility = INVISIBILITY_MAXIMUM
-		H.become_blind("advsetup")
-
 /datum/advclass/acolyte
 	name = "Acolyte"
 	tutorial = "Chores, some more chores- Even more chores. Oh, how the life of a humble acolyte is exhausting… You have faith, but even you know you gave up a life of adventure for that of the security in the Church. Assist the Priest in their daily tasks, maybe today will be the day something interesting happens."

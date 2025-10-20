@@ -40,15 +40,6 @@
 	job_bitflag = BITFLAG_CHURCH	//Counts as church.
 	allowed_patrons = list(/datum/patron/old_god)
 
-/datum/job/roguetown/puritan/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
-	. = ..()
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		H.advsetup = 1
-		H.invisibility = INVISIBILITY_MAXIMUM
-		H.become_blind("advsetup")
-
-
 ////Classic Inquisitor with a much more underground twist. Use listening devices, sneak into places to gather evidence, track down suspicious individuals. Has relatively the same utility stats as Confessor, but fulfills a different niche in terms of their combative job as the head honcho. 
 
 /datum/advclass/puritan/inspector

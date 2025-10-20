@@ -1264,3 +1264,17 @@ datum/crafting_recipe/roguetown/sewing/Purdress
 	reqs = list(/obj/item/natural/cloth = 1, /obj/item/natural/fibers = 1)
 	tools = list(/obj/item/needle)
 	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/sewing/sackmask
+	name = "sackmask (3 leather, 2 cloth)"
+	result = list(/obj/item/clothing/mask/rogue/sack)
+	reqs = list(/obj/item/natural/cloth = 2, /obj/item/natural/hide/cured = 3)
+	tools = list(/obj/item/needle)
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/sewing/sackmask/psy
+	name = "psydonian sack mask (chalk)"
+	result = list(/obj/item/clothing/mask/rogue/sack/psy)
+	reqs = list(/obj/item/clothing/mask/rogue/sack = 1)
+	tools = list(/obj/item/ritechalk)
+	craftdiff = 0

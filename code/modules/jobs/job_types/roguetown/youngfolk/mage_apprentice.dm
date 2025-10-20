@@ -39,16 +39,8 @@
 	backr = /obj/item/rogueweapon/woodstaff
 	shoes = /obj/item/clothing/shoes/roguetown/gladiator // FANCY SANDALS
 
-/datum/job/roguetown/wapprentice/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
-	. = ..()
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		H.advsetup = 1
-		H.invisibility = INVISIBILITY_MAXIMUM
-		H.become_blind("advsetup")
-
 /datum/advclass/wapprentice/associate
-	name = "Magician's Associate"
+	name = "Magician Associate"
 	tutorial = "You were once an apprentice, though through your studies and practice you've mastered the basics of the arcyne. You now spend your days working under your master, honing your skills so that you might one day be considered a true master yourself."
 	outfit = /datum/outfit/job/roguetown/wapprentice/associate
 	category_tags = list(CTAG_WAPPRENTICE)
@@ -85,7 +77,7 @@
 		/obj/item/spellbook_unfinished/pre_arcyne = 1,
 		/obj/item/recipe_book/alchemy = 1,
 		/obj/item/recipe_book/magic = 1,
-		/obj/item/chalk = 1,
+		/obj/item/ritechalk = 1,
 		)
 	if(H.age == AGE_OLD)
 		H.adjust_skillrank(/datum/skill/magic/arcane, 1, TRUE)
@@ -135,7 +127,7 @@
 		/obj/item/seeds/pipeweed = 1,
 		/obj/item/recipe_book/alchemy = 1,
 		/obj/item/recipe_book/magic = 1,
-		/obj/item/chalk = 1,
+		/obj/item/ritechalk = 1,
 		/obj/item/spellbook_unfinished/pre_arcyne = 1
 		)
 
@@ -148,7 +140,7 @@
 			H.cmode_music = 'sound/music/combat_cult.ogg'
 
 /datum/advclass/wapprentice/apprentice
-	name = "Magician's Apprentice"
+	name = "Magician Apprentice"
 	tutorial = "Your master once saw potential in you, although you are uncertain if they still do, given how rigorous and difficult your studies have been. The path to using magic is a treacherous and untamed one, and you are still decades away from calling yourself even a journeyman in the field. Listen and serve, and someday you will earn your hat."
 	outfit = /datum/outfit/job/roguetown/wapprentice/apprentice
 	category_tags = list(CTAG_WAPPRENTICE)
@@ -176,7 +168,7 @@
 		/obj/item/recipe_book/alchemy = 1,
 		/obj/item/recipe_book/magic = 1,
 		/obj/item/spellbook_unfinished/pre_arcyne = 1,
-		/obj/item/chalk = 1,
+		/obj/item/ritechalk = 1,
 		)
 
 	if(H.age == AGE_OLD)

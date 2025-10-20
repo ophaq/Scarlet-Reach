@@ -26,14 +26,6 @@
 		/datum/advclass/guildsman/architect
 	)
 
-/datum/job/roguetown/guildsman/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
-	. = ..()
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		H.advsetup = 1
-		H.invisibility = INVISIBILITY_MAXIMUM
-		H.become_blind("advsetup")
-
 /datum/advclass/guildsman/blacksmith
 	name = "Guild Blacksmith"
 	tutorial = "You've studied for many yils under quite a number of master smiths. Whether it's cookware or tools of war, you're unmatched at the art of bending metal to your will."
@@ -118,15 +110,15 @@
 		/datum/skill/combat/maces = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/wrestling = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/combat/unarmed = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/craft/crafting = SKILL_LEVEL_EXPERT,
-		/datum/skill/craft/engineering = SKILL_LEVEL_EXPERT,
+		/datum/skill/craft/crafting = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/craft/engineering = SKILL_LEVEL_MASTER,
 		/datum/skill/craft/blacksmithing = SKILL_LEVEL_APPRENTICE, // Artificer makes for a crappy substitute blacksmith but have the same spread
 		/datum/skill/craft/armorsmithing = SKILL_LEVEL_APPRENTICE, 
 		/datum/skill/craft/weaponsmithing = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/magic/arcane = SKILL_LEVEL_APPRENTICE,
-		/datum/skill/misc/climbing = SKILL_LEVEL_JOURNEYMAN,
+		/datum/skill/misc/climbing = SKILL_LEVEL_NOVICE,
 		/datum/skill/misc/lockpicking = SKILL_LEVEL_EXPERT,
-		/datum/skill/craft/smelting = SKILL_LEVEL_EXPERT,
+		/datum/skill/craft/smelting = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/craft/traps = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/ceramics = SKILL_LEVEL_JOURNEYMAN,	//Just for basic pottery/glass stuff.
@@ -145,7 +137,6 @@
 	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/mid
 	beltl = /obj/item/roguekey/crafterguild
-	mask = /obj/item/clothing/mask/rogue/spectacles/golden
 	backl = /obj/item/storage/backpack/rogue/backpack
 	backpack_contents = list(
 						/obj/item/rogueweapon/hammer/steel = 1,
@@ -156,7 +147,9 @@
 						/obj/item/recipe_book/builder = 1,
 						/obj/item/recipe_book/survival = 1,
 						/obj/item/recipe_book/magic = 1,
-						/obj/item/chalk = 1,
+						/obj/item/clothing/mask/rogue/spectacles/golden = 1,
+						/obj/item/contraption/linker,
+						/obj/item/ritechalk = 1,
 						)
 	// Not a real mage, no free spell point. Take Arcyne Potential if you want it.
 	if(H.mind)
@@ -227,3 +220,5 @@
 						/obj/item/recipe_book/survival = 1,
 						/obj/item/roguekey/crafterguild = 1
 						)
+	ADD_TRAIT(H, TRAIT_MASTER_CARPENTER, TRAIT_GENERIC)		
+	ADD_TRAIT(H, TRAIT_MASTER_MASON, TRAIT_GENERIC)	

@@ -13,7 +13,28 @@
 	if(isliving(mob_to_summon))
 		summoned = mob_to_summon
 	else
+		var/mob/living/simple_animal/hostile/retaliate/rogue/arcane/noc_guard/guard
+		if(tier >= 3) // CHANGE THIS NUMBER MAN!!
+			playsound(user.loc, 'sound/misc/carriage1.ogg', 100)
+			var/turf/invoker_turf = get_step(get_turf(user), user.dir)
+			guard = new /mob/living/simple_animal/hostile/retaliate/rogue/arcane/noc_guard(invoker_turf)
+			guard.apply_guard_stuff()
+			animate(guard, alpha = 155, time = 20, easing = EASE_IN, flags = ANIMATION_PARALLEL)
+			sleep(25)
+		//extinguish lights and shit ; stolen from zizo snuff lights
+			for(var/obj/O in range(9, user))	
+				O.extinguish()
+			for(var/mob/M in range(9, user))
+				for(var/obj/O in M.contents)
+					O.extinguish()
+		//light extinguish stop
+			guard.alpha = 155
+			guard.say("T H R E A T  D E T E C T E D", spans = list(SPAN_MACHINA))
+			sleep(25)
 		summoned = new mob_to_summon(loc)
+		if(guard)
+			guard.remove_guard_stuff()
+			qdel(guard)
 		ADD_TRAIT(summoned, TRAIT_PACIFISM, TRAIT_GENERIC)	//can't kill while planar bound.
 		summoned.status_flags += GODMODE//It's not meant to be killable until released from it's planar binding.
 		summoned.candodge = FALSE
@@ -22,6 +43,14 @@
 		summoned.binded = TRUE
 		summoned.SetParalyzed(900)
 		return summoned
+
+/datum/runeritual/summoning/noc_guard
+	name = "T? - noc guard"
+	desc = "summons a noc guard"
+	blacklisted = FALSE
+	tier = 2
+	required_atoms = list(/obj/item/reagent_containers/food/snacks/grown/manabloom = 1, /obj/item/magic/obsidian = 1, /obj/item/magic/melded/t1 = 1)
+	mob_to_summon = /mob/living/simple_animal/hostile/retaliate/rogue/arcane/noc_guard
 
 /datum/runeritual/summoning/imp
 	name = "T1 - lesser infernal"
@@ -124,5 +153,5 @@
 	desc = "summons a long forgotten creature"
 	blacklisted = FALSE
 	tier = 4
-	required_atoms = list(/obj/item/magic/melded/t5 =1)
+	required_atoms = list(/obj/item/magic/melded/t5 = 1)
 	mob_to_summon = /mob/living/simple_animal/hostile/retaliate/rogue/voiddragon

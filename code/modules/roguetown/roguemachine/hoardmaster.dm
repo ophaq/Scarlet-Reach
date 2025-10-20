@@ -111,6 +111,8 @@
 			unlocked_cats+="Knave"
 		if("Iconoclast")
 			unlocked_cats+="Iconoclast"
+		if("Pioneer")
+			unlocked_cats+="Pioneer"	
    
 	if(current_cat == "1")
 		contents += "<center>"

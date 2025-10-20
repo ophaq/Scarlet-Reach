@@ -131,7 +131,7 @@
 	added_stashed_items = list(
 		"Quill" = /obj/item/natural/feather,
 		"Scroll" = /obj/item/paper/scroll,
-		"Book" = /obj/item/book/rogue/playerbook
+		"Unfinished Skillbook" = /obj/item/skillbook/unfinished
 	)
 
 /datum/virtue/utility/linguist/apply_to_human(mob/living/carbon/human/recipient)

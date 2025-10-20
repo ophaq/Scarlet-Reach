@@ -382,6 +382,13 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			var/datum/organ_dna/new_dna = neworgan.create_organ_dna()
 			C.dna.organ_dna[slot] = new_dna
 
+/datum/species/proc/apply_organ_stuff_species(mob/living/carbon/C)
+	var/obj/item/organ/organ
+
+	for(organ in C.internal_organs)
+		if(organ.should_regenerate)
+			organ.Insert(C, TRUE, FALSE)
+
 /datum/species/proc/random_character(mob/living/carbon/human/H)
 	H.real_name = random_name(H.gender,1)
 //	H.age = pick(possible_ages)

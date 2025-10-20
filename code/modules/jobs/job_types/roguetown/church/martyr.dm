@@ -469,14 +469,6 @@
 		/datum/advclass/martyr
 	)
 
-/datum/job/roguetown/martyr/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
-	..()
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		H.advsetup = 1
-		H.invisibility = INVISIBILITY_MAXIMUM
-		H.become_blind("advsetup")
-
 /datum/advclass/martyr
 	name = "Martyr"
 	tutorial = "Martyrs are hand-picked among the most devout of the Holy See. They are given one of the See's cherished relics to protect the Church, and to inspire hope and lead by example of grace, kindness and vicious intolerance to any who do not share the belief of the Ten. They have sworn an Oath in the sight of the gods, and will fulfill it to the bitter end."
@@ -630,6 +622,10 @@
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	flags_inv = HIDECROTCH|HIDEBOOB
 
+/obj/item/clothing/cloak/martyr/ComponentInitialize()
+    . = ..()
+    AddComponent(/datum/component/storage/concrete/roguetown/cloak)
+
 /obj/item/clothing/suit/roguetown/armor/plate/full/holysee
 	name = "holy silver plate"
 	desc = "Silver-clad plate for the guardians and the warriors, for the spears and shields of the Ten."
@@ -695,6 +691,10 @@
 	flags_inv = HIDECROTCH|HIDEBOOB
 	var/overarmor = TRUE
 	sellprice = 300
+
+/obj/item/clothing/cloak/holysee/ComponentInitialize()
+    . = ..()
+    AddComponent(/datum/component/storage/concrete/roguetown/cloak)
 
 /obj/item/clothing/cloak/holysee/MiddleClick(mob/user)
 	overarmor = !overarmor
