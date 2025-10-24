@@ -2530,6 +2530,7 @@
 #include "modular_helmsguard\code\modules\mobs\farm\horse.dm"
 #include "modular_helmsguard\code\modules\mobs\farm\wraiths.dm"
 #include "modular_scarletreach\code\datums\loadout.dm"
+#include "modular_scarletreach\code\datums\character_flaw\lawless.dm"
 #include "modular_scarletreach\code\game\objects\items\donator_fluff_items.dm"
 #include "modular_scarletreach\code\game\objects\items\donator_modkit.dm"
 #include "modular_scarletreach\code\modules\mob\living\carbon\human\voicepacks\female\tabaxi.dm"

@@ -152,7 +152,7 @@
 	id = "bleedingt1"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/bleedingt1
 	effectedstats = list("speed" = -1)
-	duration = 100
+	duration = -1
 
 /atom/movable/screen/alert/status_effect/debuff/bleedingt1
 	name = "Dizzy"
@@ -163,7 +163,7 @@
 	id = "bleedingt2"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/bleedingt2
 	effectedstats = list("strength" = -1, "speed" = -2)
-	duration = 100
+	duration = -1
 
 /atom/movable/screen/alert/status_effect/debuff/bleedingt2
 	name = "Faint"
@@ -174,7 +174,7 @@
 	id = "bleedingt3"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/bleedingt3
 	effectedstats = list("strength" = -3, "speed" = -4)
-	duration = 100
+	duration = -1
 
 /atom/movable/screen/alert/status_effect/debuff/bleedingt3
 	name = "Drained"

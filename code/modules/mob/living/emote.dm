@@ -469,6 +469,7 @@
 	message = "blows a kiss."
 	message_param = "kisses %t."
 	emote_type = EMOTE_VISIBLE
+	use_params_for_runechat = TRUE
 
 /mob/living/carbon/human/verb/emote_kiss()
 	set name = "Kiss"
@@ -508,6 +509,53 @@
 	if(user.mind)
 		GLOB.scarlet_round_stats[STATS_KISSES_MADE]++
 
+/datum/emote/living/lick
+	key = "lick"
+	key_third_person = "licks"
+	message = "licks their lips."
+	message_param = "licks %t."
+	emote_type = EMOTE_VISIBLE
+	use_params_for_runechat = TRUE
+
+/mob/living/carbon/human/verb/emote_lick()
+	set name = "Lick"
+	set category = "Emotes"
+
+	emote("lick", intentional = TRUE, targetted = TRUE)
+
+/datum/emote/living/lick/adjacentaction(mob/user, mob/target)
+	. = ..()
+	message_param = initial(message_param)
+	if(!user || !target)
+		return
+	if(ishuman(user) && ishuman(target))
+		var/mob/living/carbon/human/J = user
+		var/do_change
+		if(target.loc == user.loc)
+			do_change = TRUE
+		if(!do_change)
+			if(J.pulling == target)
+				do_change = TRUE
+		if(do_change)
+			if(J.zone_selected == BODY_ZONE_PRECISE_MOUTH)
+				message_param = "licks %t's lips."
+			else if(J.zone_selected == BODY_ZONE_PRECISE_EARS)
+				message_param = "licks the ear of %t."
+				var/mob/living/carbon/human/O = target
+				if(iself(O) || ishalfelf(O) || isdarkelf(O))
+					if(!O.cmode)
+						if (O.has_flaw(/datum/charflaw/addiction/lovefiend))
+							to_chat(target, span_love("That feels... <b>good</b>..."))
+						else
+							to_chat(target, span_love("That tickles..."))
+			else if(J.zone_selected == BODY_ZONE_PRECISE_GROIN)
+				message_param = "licks %t between the legs."
+				to_chat(target, span_love("It is somewhat stimulating..."))
+			else if(J.zone_selected == BODY_ZONE_HEAD)
+				message_param = "licks %t's cheek."
+			else
+				message_param = "licks %t's [parse_zone(J.zone_selected)]."
+	playsound(target.loc, pick("sound/vo/lick.ogg"), 100, FALSE, -1)	
 
 /datum/emote/living/spit
 	key = "spit"

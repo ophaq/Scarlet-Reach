@@ -194,8 +194,9 @@
 			to_chat(user, span_warning("[M] is not a Golem. It will have no effect."))
 		return
 	if(user.construct && !self_usable)
-		to_chat(user, span_warning("I am unable to modify Golems. I must ask another."))//Golems NEED to ask organics to modify them.
-		return
+		if(!isdoll(user))//dolls can install skill exhibitors in themselves or in other golems
+			to_chat(user, span_warning("I am unable to modify Golems. I must ask another."))//Golems NEED to ask organics to modify them.
+			return
 	if(user.get_skill_level(/datum/skill/craft/engineering) < SKILL_LEVEL_APPRENTICE && !self_usable) //need to be at least level 2 skill level in engineering to use this
 		to_chat(user, span_warning("I fiddle around trying to properly insert [src] into [M], but I'm not skilled enough."))
 		return
@@ -243,6 +244,7 @@
 					to_chat(M, span_boldgreen("Gaining such exquisite expertise in [lowertext(skill_choice)] is a true TRIUMPH."))
 					M.adjust_triumphs(1)
 				M.allmig_reward++//we also need to do this for RCP and endround triumphs- it's the closest thing Golems have to sleeping.
+				add_sleep_experience(user, /datum/skill/craft/engineering, user.STAINT)//give some engi exp for the installer as a reward since it's a skill check
 				qdel(src)
 				return
 	else //if you click "cancel" in the dialog

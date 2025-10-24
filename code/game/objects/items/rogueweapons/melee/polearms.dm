@@ -119,7 +119,7 @@
 	animname = "cut"
 	blade_class = BCLASS_CHOP
 	reach = 1
-	penfactor = BLUNT_DEFAULT_PENFACTOR
+	penfactor = -100 // hard set to not penetrate armor as its original design intended
 	damfactor = 2.5
 	clickcd = CLICK_CD_CHARGED
 	no_early_release = TRUE
@@ -130,7 +130,7 @@
 
 /datum/intent/rend/reach
 	name = "long rend"
-	penfactor = BLUNT_DEFAULT_PENFACTOR
+	penfactor = -100
 	misscost = 5
 	clickcd = CLICK_CD_HEAVY
 	damfactor = 2
