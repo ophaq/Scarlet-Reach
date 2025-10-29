@@ -688,7 +688,7 @@
 					var/mob/living/carbon/human/parent = vomitrelay.loc
 					var/amt = 5 * parent.physiology.bleed_mod
 					blood_volume = max(blood_volume - amt, 0)
-					GLOB.scarlet_round_stats[STATS_BLOOD_SPILT] += amt
+					record_round_statistic(STATS_BLOOD_SPILT, amt)
 					if(isturf(vomit_source.loc))
 						add_drip_floor(vomit_source.loc, amt)
 					var/vol2use
@@ -703,9 +703,6 @@
 					updatehealth()
 				else
 					bleed(5)
-		else if(src.reagents.has_reagent(/datum/reagent/consumable/ethanol/blazaam, needs_metabolizing = TRUE))
-			if(T)
-				T.add_vomit_floor(src, VOMIT_PURPLE)
 		else
 			if(T)
 				T.add_vomit_floor(src, VOMIT_TOXIC)//toxic barf looks different

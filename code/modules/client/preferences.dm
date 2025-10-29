@@ -199,6 +199,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/tail_color = "ffffff"
 	var/tail_markings_color = "ffffff"
 
+	/// Assoc list of culinary preferences, where the key is the type of the culinary preference, and value is food/drink typepath
+	var/list/culinary_preferences = list()
+
 /datum/preferences/New(client/C)
 	parent = C
 	migrant  = new /datum/migrant_pref(src)
@@ -250,7 +253,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 		if(pref_species.desc)
 			to_chat(user, "[pref_species.desc]")
 		to_chat(user, "<font color='red'>Classes reset.</font>")
-	random_character(gender)
+	random_character(gender, FALSE, FALSE)
 	accessory = "Nothing"
 
 	nsfw_headshot_link = null
@@ -422,6 +425,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 			var/musicname = (combat_music.shortname ? combat_music.shortname : combat_music.name)
 			dat += "<b>Combat Music:</b> <a href='?_src_=prefs;preference=combat_music;task=input'>[musicname || "FUCK!"]</a><BR>"
+			dat += "<b>Food Preferences:</b> <a href='?_src_=prefs;preference=culinary;task=menu'>Change</a><BR>"
 
 /*
 			dat += "<br><br><b>Special Names:</b><BR>"
@@ -1342,6 +1346,9 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 			to_chat(usr, span_warning("You are not Age Verified. To access features like Headshots, OOC Extras, and more, please go into our Discord and make a ticket to verify your age. <b>ID is a requirement.</b>"))
 		else
 			to_chat(usr, span_nicegreen("You are already Age Verified. <b>Yippee!</b>"))
+	else if(href_list["preference"] == "culinary")
+		show_culinary_ui(user)
+		return
 
 	else if(href_list["preference"] == "markings")
 		ShowMarkings(user)
@@ -1450,6 +1457,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 			handle_descriptors_topic(user, href_list)
 			show_descriptors_ui(user)
 			return
+		if("change_culinary_preferences")
+			handle_culinary_topic(user, href_list)
+			show_culinary_ui(user)
+			return
 		if("random")
 			switch(href_list["preference"])
 				if("name")
@@ -1468,7 +1479,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 				if("suit")
 					jumpsuit_style = PREF_SUIT
 				if("all")
-					random_character(gender)
+					random_character(gender, FALSE, FALSE)
 
 		if("input")
 
@@ -2574,11 +2585,11 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 	if(!(pref_species.name in GLOB.roundstart_races))
 		set_new_race(new /datum/species/human/northern)
 
-		random_character(gender)
+		random_character(gender, FALSE, FALSE)
 	if(parent)
 		if(pref_species.patreon_req > parent.patreonlevel())
 			set_new_race(new /datum/species/human/northern)
-			random_character(gender)
+			random_character(gender, FALSE, FALSE)
 
 	character.age = age
 	character.dna.features = features.Copy()
@@ -2683,7 +2694,8 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 
 	character.char_accent = char_accent
 	
-
+	if(culinary_preferences)
+		apply_culinary_preferences(character)
 
 
 /datum/preferences/proc/get_default_name(name_id)

@@ -474,7 +474,7 @@
 		var/datum/wound/applied = add_wound(wound_type, silent, crit_message)
 		if(applied)
 			if(user?.client)
-				GLOB.scarlet_round_stats[STATS_CRITS_MADE]++
+				record_round_statistic(STATS_CRITS_MADE)
 			return applied
 	return FALSE
 

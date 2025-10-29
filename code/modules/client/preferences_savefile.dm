@@ -387,6 +387,15 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		charflaw = GLOB.character_flaws[charflaw]
 		charflaw = new charflaw()
 
+/datum/preferences/proc/_load_culinary_preferences(S)
+	var/list/loaded_culinary_preferences
+	S["culinary_preferences"] >> loaded_culinary_preferences
+	if(loaded_culinary_preferences)
+		culinary_preferences = loaded_culinary_preferences
+		validate_culinary_preferences()
+	else
+		reset_culinary_preferences()
+
 /datum/preferences/proc/_load_statpack(S)
 	var/statpack_type
 	S["statpack"] >> statpack_type
@@ -510,6 +519,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	_load_virtue(S)
 	_load_flaw(S)
+
+	_load_culinary_preferences(S)
 
 	// LETHALSTONE edit: jank-ass load our statpack choice
 	_load_statpack(S)
@@ -703,6 +714,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_ethcolor"]					, features["ethcolor"])
 	WRITE_FILE(S["nickname"]			, nickname)
 	WRITE_FILE(S["highlight_color"]		, highlight_color)
+	WRITE_FILE(S["culinary_preferences"], culinary_preferences)
 	WRITE_FILE(S["tail_color"]			, tail_color)
 	WRITE_FILE(S["tail_markings_color"]			, tail_markings_color)
 	WRITE_FILE(S["tail_type"] , tail_type)

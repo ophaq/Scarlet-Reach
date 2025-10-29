@@ -554,7 +554,7 @@
 	if(owner.blood_volume < BLOOD_VOLUME_NORMAL)
 		owner.blood_volume = min(owner.blood_volume + (healing_on_tick + 10), BLOOD_VOLUME_NORMAL)
 	if(wCount.len > 0)
-		owner.heal_wounds(healing_on_tick, list(/datum/wound/slash, /datum/wound/puncture, /datum/wound/bite, /datum/wound/bruise))
+		owner.heal_wounds(healing_on_tick, list(/datum/wound/slash, /datum/wound/puncture, /datum/wound/bite, /datum/wound/bruise, /datum/wound/dynamic))
 		owner.update_damage_overlays()
 	owner.adjustBruteLoss(-healing_on_tick, 0)
 	owner.adjustFireLoss(-healing_on_tick, 0)
@@ -1045,6 +1045,29 @@
 /datum/status_effect/buff/pacify/on_remove()
 	. = ..()
 	to_chat(owner, span_warning("My mind is my own again, no longer awash with foggy peace!"))
+	REMOVE_TRAIT(owner, TRAIT_PACIFISM, id)
+
+//A lesser variant of Eoran blessing meant for peacecake consumption.
+/atom/movable/screen/alert/status_effect/buff/peacecake
+	name = "Lesser blessing of Eora"
+	desc = "I feel my heart lighten. All my worries ease away."
+	icon_state = "buff"
+
+/datum/status_effect/buff/peacecake
+	id = "peacecake"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/peacecake
+	duration = 5 MINUTES
+
+/datum/status_effect/buff/peacecake/on_apply()
+	. = ..()
+	to_chat(owner, span_green("Everything feels better."))
+	owner.add_stress(/datum/stressevent/pacified)
+	ADD_TRAIT(owner, TRAIT_PACIFISM, id)
+	playsound(owner, 'sound/misc/peacefulwake.ogg', 100, FALSE, -1)
+
+/datum/status_effect/buff/peacecake/on_remove()
+	. = ..()
+	to_chat(owner, span_warning("My mind is clear again, no longer clouded with foggy peace!"))
 	REMOVE_TRAIT(owner, TRAIT_PACIFISM, id)
 
 /datum/status_effect/buff/call_to_arms

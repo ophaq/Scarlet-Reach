@@ -238,7 +238,7 @@
 					return
 				M.mind.sleep_adv.adjust_sleep_xp(real_skill, -M.mind.sleep_adv.get_requried_sleep_xp_for_skill(real_skill, 1))
 				M.adjust_skillrank(real_skill, 1, FALSE)
-				//GLOB.scarlet_round_stats[STATS_SKILLS_DREAMED]++ //up for debate whether golems gaining skills like this should count
+				//record_round_statistic(STATS_SKILLS_DREAMED) //up for debate whether golems gaining skills like this should count
 				M.visible_message(span_notice("[M] absorbs [src]."), span_notice("I absorb [src] into myself, becoming more skilled."))
 				if(M.get_skill_level(real_skill) >= 4)//if our skill is now expert or more, gain a triumph
 					to_chat(M, span_boldgreen("Gaining such exquisite expertise in [lowertext(skill_choice)] is a true TRIUMPH."))

@@ -507,7 +507,7 @@
 				message_param = "kisses %t on \the [parse_zone(H.zone_selected)]."
 	playsound(target.loc, pick('sound/vo/kiss (1).ogg','sound/vo/kiss (2).ogg'), 100, FALSE, -1)
 	if(user.mind)
-		GLOB.scarlet_round_stats[STATS_KISSES_MADE]++
+		record_round_statistic(STATS_KISSES_MADE)
 
 /datum/emote/living/lick
 	key = "lick"
@@ -613,7 +613,7 @@
 	if(ishuman(target))
 		playsound(target.loc, pick('sound/body/hug.ogg'), 100, FALSE, -1)
 		if(user.mind)
-			GLOB.scarlet_round_stats[STATS_HUGS_MADE]++
+			record_round_statistic(STATS_HUGS_MADE)
 			SEND_SIGNAL(user, COMSIG_MOB_HUGGED, target)
 
 /datum/emote/living/holdbreath
@@ -716,7 +716,7 @@
 /datum/emote/living/laugh/run_emote(mob/user, params, type_override, intentional, targetted)
 	. = ..()
 	if(. && user.mind)
-		GLOB.scarlet_round_stats[STATS_LAUGHS_MADE]++
+		record_round_statistic(STATS_LAUGHS_MADE)
 
 /datum/emote/living/laugh
 	key = "laugh"
@@ -982,7 +982,7 @@
 /datum/emote/living/rage/run_emote(mob/user, params, type_override, intentional, targetted)
 	. = ..()
 	if(. && user.mind)
-		GLOB.scarlet_round_stats[STATS_WARCRIES]++
+		record_round_statistic(STATS_WARCRIES)
 
 /datum/emote/living/attnwhistle
 	key = "attnwhistle"
