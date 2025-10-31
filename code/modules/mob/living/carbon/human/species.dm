@@ -1724,7 +1724,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	//dismemberment
 	var/bloody = 0
 	var/probability = I.get_dismemberment_chance(affecting, user, selzone)
-	if(affecting.brute_dam && prob(probability) && affecting.dismember(I.damtype, user.used_intent?.blade_class, user, selzone))
+	if(affecting.brute_dam && prob(probability) && affecting.dismember(I.damtype, user.used_intent?.blade_class, user, selzone, vorpal = I.vorpal))
 		bloody = 1
 		I.add_mob_blood(H)
 		user.update_inv_hands()

@@ -184,7 +184,7 @@
 #define TRAIT_DARKVISION "Darksight"
 #define TRAIT_NOCSHADES "Nocshaded"
 #define TRAIT_LIGHT_STEP	"Light Step"
-#define TRAIT_AZURENATIVE "Azure Native"
+#define TRAIT_REACHNATIVE "Reach Native"
 #define TRAIT_SLEUTH	"Sleuth"
 #define TRAIT_HARDSHELL "Hardshell"
 #define TRAIT_WOODWALKER "Woodwalker"
@@ -339,7 +339,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_RESIDENT = span_info("I've been granted a Meister account, and the ownership of a house in Scarlet Reach."),
 	TRAIT_LIGHT_STEP = span_info("My steps are light and swift. I make less noise while sneaking, and can sneak much quicker."),
 	TRAIT_NOMOOD = span_info("I feel no sorrow, no joy, and no stress."),
-	TRAIT_AZURENATIVE = span_info("I've grown up and lived all my lyfe in these lands. I can only trigger ambushes if I sprint through them."),
+	TRAIT_REACHNATIVE = span_info("I've grown up and lived all my lyfe in these lands. I can only trigger ambushes if I sprint through them."),
 	TRAIT_SLEUTH = span_info("I can spot my tracked Mark's trail without needing to approach it, and can spot them at a distance. I can track more frequently, and the act is not impaired by movement. I can examine tracks right away, and others will not notice my efforts to search."),
 	TRAIT_HARDSHELL = span_info("The bulk of this armor prevents me from parrying effectively, but I can still move out of the way."),
 	TRAIT_MATTHIOS_EYES = span_notice("I have a sense for what the most valuable item someone has is."),

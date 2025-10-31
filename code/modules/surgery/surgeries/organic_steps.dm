@@ -5,6 +5,7 @@
 	name = "Incise"
 	implements = list(
 		TOOL_SCALPEL = 80,
+		TOOL_IMPROVISED_SCALPEL = 70,
 		TOOL_SHARP = 60,
 	) // 60% success with any sharp item.
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)

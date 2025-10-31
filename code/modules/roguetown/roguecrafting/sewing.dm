@@ -328,9 +328,23 @@
 	result = list(/obj/item/clothing/cloak/stabard/guardhood)
 
 /datum/crafting_recipe/roguetown/sewing/poncho
-	name = "cloth poncho"
+	name = "cloth poncho (1 fiber, 2 cloth)"
 	result = /obj/item/clothing/cloak/poncho
 	reqs = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1,)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/sewing/geta
+	name = "geta (4 fibers, 1 cloth)"
+	result = /obj/item/clothing/shoes/roguetown/armor/geta
+	reqs = list(/obj/item/natural/cloth = 1,
+				/obj/item/natural/fibers = 4,)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/sewing/rumaclan
+	name = "raised sandals (1 log, 1 fiber)"
+	result = /obj/item/clothing/shoes/roguetown/armor/rumaclan
+	reqs = list(/obj/item/grown/log/tree/small = 1,
 				/obj/item/natural/fibers = 1,)
 	craftdiff = 2
 
@@ -641,6 +655,22 @@ datum/crafting_recipe/roguetown/sewing/Purdress
 	result = list(/obj/item/clothing/head/roguetown/roguehood/shalal/heavyhood)
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/sewing/hijabkazengunese
+	name = "kazengunese headwrap (2 silk, 2 fibers, 3 cloth)"
+	result = list(/obj/item/clothing/head/roguetown/roguehood/shalal/hijab/kazengunese)
+	reqs = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 2,
+				/obj/item/natural/silk = 2)
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/sewing/hijabyoroku
+	name = "shadowed hood (2 silk, 1 fiber, 2 cloth)"
+	result = list(/obj/item/clothing/head/roguetown/roguehood/shalal/hijab/yoruku)
+	reqs = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1,
+				/obj/item/natural/silk = 2)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/sewing/royalgown
