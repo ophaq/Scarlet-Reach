@@ -328,7 +328,7 @@
 		spawn(30)
 			if(loc == user)
 				user.adjust_fire_stacks(5)
-				user.IgniteMob()
+				user.ignite_mob()
 
 /obj/item/clothing/head/roguetown/roguehood/red
 	color = CLOTHING_RED
@@ -1063,7 +1063,7 @@
 	if(!HAS_TRAIT(user, TRAIT_HORDE))
 		to_chat(user, "<font color='red'>UNWORTHY HANDS TOUCHING THIS HELM, CEASE OR BE RENDED ASUNDER!</font>")
 		user.adjust_fire_stacks(5)
-		user.IgniteMob()
+		user.ignite_mob()
 		user.Stun(40)
 	..()
 
@@ -1071,7 +1071,7 @@
 	if(!HAS_TRAIT(user, TRAIT_COMMIE))
 		to_chat(user, "<font color='yellow'>UNWORTHY HANDS TOUCH THE VISAGE, CEASE OR BE PUNISHED</font>")
 		user.adjust_fire_stacks(5)
-		user.IgniteMob()
+		user.ignite_mob()
 		user.Stun(40)
 	..()
 
@@ -1107,7 +1107,7 @@
 	if(!HAS_TRAIT(user, TRAIT_CABAL))
 		to_chat(user, "<font color='purple'>UNWORTHY HANDS TOUCH THE HELMET, CEASE OR BE PUNISHED</font>")
 		user.adjust_fire_stacks(5)
-		user.IgniteMob()
+		user.ignite_mob()
 		user.Stun(40)
 	..()
 

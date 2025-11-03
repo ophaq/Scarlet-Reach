@@ -64,6 +64,8 @@
 		return 0
 	if(istype(C.wear_mask, /obj/item/clothing/mask/rogue/facemask/steel/confessor))
 		return 0
+	if(HAS_TRAIT(C, TRAIT_NOBREATH) || HAS_TRAIT(C, TRAIT_NOMETABOLISM))
+		return 0
 	C.smoke_delay++
 	addtimer(CALLBACK(src, PROC_REF(remove_smoke_delay), C), 10)
 	return 1
@@ -193,7 +195,7 @@
 	if(..())
 		M.adjustFireLoss(-3, 0)
 		M.adjust_fire_stacks(3)
-		M.IgniteMob()
+		M.ignite_mob()
 		M.emote("scream")
 		return 1
 
@@ -205,7 +207,7 @@
 // BLIND_GAS
 /////////////////////////////////////////////
 
-obj/effect/particle_effect/smoke/blind_gas
+/obj/effect/particle_effect/smoke/blind_gas
 	color = "#292822"
 	lifetime = 5
 
@@ -226,7 +228,7 @@ obj/effect/particle_effect/smoke/blind_gas
 // MUTE_GAS
 /////////////////////////////////////////////
 
-obj/effect/particle_effect/smoke/mute_gas
+/obj/effect/particle_effect/smoke/mute_gas
 	color = "#529bfc"
 	lifetime = 10
 
@@ -245,7 +247,7 @@ obj/effect/particle_effect/smoke/mute_gas
 // Sleep smoke
 /////////////////////////////////////////////
 
-obj/effect/particle_effect/smoke/sleeping
+/obj/effect/particle_effect/smoke/sleeping
 	color = "#9C3636"
 	lifetime = 10
 

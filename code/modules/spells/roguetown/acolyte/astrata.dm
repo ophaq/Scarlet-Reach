@@ -43,11 +43,11 @@
 			damage *= fuck_that_guy_multiplier
 			M.adjust_fire_stacks(10) //4 pats to put it out
 			visible_message(span_warning("[target] erupts in flame upon being struck by [src]!"))
-			M.IgniteMob()
+			M.ignite_mob()
 		else
 			M.adjust_fire_stacks(4) //2 pats to put it out
 			visible_message(span_warning("[src] ignites [target]!"))
-			M.IgniteMob()
+			M.ignite_mob()
 	return FALSE
 
 /obj/effect/proc_holder/spell/invoked/ignition

@@ -134,7 +134,6 @@
 	H.update_inv_hands()
 	H.update_inv_handcuffed()
 	H.update_inv_legcuffed()
-	H.update_fire()
 	H.update_body()
 	var/mob/living/carbon/human/species/goblin/G = H
 	G.update_wearable()
@@ -327,7 +326,7 @@
 				head = /obj/item/clothing/head/roguetown/helmet/leather/goblin
 		if(4) //lightly armored sword/flail/daggers
 			if(prob(50))
-				r_hand = /obj/item/rogueweapon/sword/iron
+				r_hand = /obj/item/rogueweapon/sword/stone
 			else
 				r_hand = /obj/item/rogueweapon/mace/spiked
 			if(prob(30))
@@ -349,7 +348,7 @@
 			else
 				head = /obj/item/clothing/head/roguetown/helmet/leather/goblin
 			if(prob(50))
-				r_hand = /obj/item/rogueweapon/sword/iron
+				r_hand = /obj/item/rogueweapon/sword/stone
 			else
 				r_hand = /obj/item/rogueweapon/mace/spiked
 			if(prob(20))
