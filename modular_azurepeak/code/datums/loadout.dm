@@ -327,6 +327,10 @@ GLOBAL_LIST_EMPTY(loadout_items)
 	name = "Leather Jacket"
 	path = /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor
 
+/datum/loadout_item/velvetcoat
+	name = "Velvet Coat"
+	path = /obj/item/clothing/suit/roguetown/armor/velvetcoat
+
 /datum/loadout_item/priestrobe
 	name = "Undervestments"
 	path = /obj/item/clothing/suit/roguetown/shirt/undershirt/priest
@@ -406,6 +410,14 @@ GLOBAL_LIST_EMPTY(loadout_items)
 /datum/loadout_item/nun_habit
 	name = "Nun Habit"
 	path = /obj/item/clothing/suit/roguetown/shirt/robe/nun
+
+/datum/loadout_item/handcarved_kitsune_mask
+	name = "Handcarved Kitsune Mask"
+	path = /obj/item/clothing/mask/rogue/facemask/cheap_kitsune
+
+/datum/loadout_item/handcarved_oni_mask
+	name = "Handcarved Oni Mask"
+	path = /obj/item/clothing/mask/rogue/facemask/cheap_oni
 
 /datum/loadout_item/worn_dobo_robe
 	name = "Worn Dobo Robe"

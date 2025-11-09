@@ -210,7 +210,7 @@
 
 /obj/item/book/rogue/bibble/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
-	if(user.mind?.assigned_role == "Bishop" && isitem(target) && user.used_intent?.type == /datum/intent/bless)
+	if(user.mind?.assigned_role == "Priest" && isitem(target) && user.used_intent?.type == /datum/intent/bless)
 		var/datum/component/silverbless/CP = target.GetComponent(/datum/component/silverbless)
 		if(!CP)
 			to_chat(user, span_info("\The [target] can not be blessed."))
