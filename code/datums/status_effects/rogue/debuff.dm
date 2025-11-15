@@ -672,6 +672,7 @@
 	harpy.add_movespeed_modifier(MOVESPEED_ID_SPECIES, TRUE, 100, override=TRUE, multiplicative_slowdown = harpy.dna.species.speedmod)
 	harpy.apply_status_effect(/datum/status_effect/debuff/flight_sound_loop)
 	ADD_TRAIT(harpy, TRAIT_SPELLCOCKBLOCK, ORGAN_TRAIT)
+	harpy.flying = TRUE
 	init_signals()
 
 /datum/status_effect/debuff/harpy_flight/tick()
@@ -713,6 +714,7 @@
 	remove_signals()
 	animate(harpy)
 	REMOVE_TRAIT(harpy, TRAIT_SPELLCOCKBLOCK, ORGAN_TRAIT)
+	harpy.flying = FALSE
 	if(harpy.is_holding_item_of_type(/obj/item/rogueweapon/huntingknife/idagger/harpy_talons))
 		for(var/obj/item/rogueweapon/huntingknife/idagger/harpy_talons/talons in harpy.held_items)
 			harpy.dropItemToGround(talons, TRUE)
@@ -837,24 +839,3 @@
 /////////////////////////////
 ///HARPY FLIGHT STUFF END///
 ///////////////////////////
-
-/datum/status_effect/debuff/quest_lock
-	id = "quest_lock"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/quest_lock
-	duration = 20 MINUTES
-
-/atom/movable/screen/alert/status_effect/debuff/quest_lock
-	name = "Edict of the Ten"
-	desc = "A sliver of sacred favor clings to you. Followers of the Ten will not enlist your aid in their routine."
-	icon_state = "debuff"
-
-/datum/status_effect/debuff/silver_curse
-	id = "silver_curse"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/silver_curse
-	effectedstats = list("strength" = -2,"perception" = -2,"intelligence" = -2, "constitution" = -2, "endurance" = -2, "speed" = -2)
-	duration = 45 SECONDS
-
-/atom/movable/screen/alert/status_effect/debuff/silver_curse
-	name = "Silver Curse"
-	desc = "My BANE!"
-	icon_state = "hunger3"

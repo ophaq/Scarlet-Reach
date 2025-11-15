@@ -1003,14 +1003,6 @@
 	max_integrity = 150
 	smeltresult = /obj/item/ingot/aalloy
 
-
-/obj/item/clothing/suit/roguetown/armor/plate/paalloy
-	name = "ancient half-plate"
-	desc = "Plate formed out of ancient alloys. Aeon's grasp has been lifted from it."
-	icon_state = "ancientplate"
-	item_state = "ancientplate"
-	smeltresult = /obj/item/ingot/aaslag
-
 /obj/item/clothing/suit/roguetown/armor/plate/fluted
 	name = "fluted half-plate"
 	desc = "A sturdily made fluted half-plate armour-set, complete with pauldrons and shoulder-guards. \
@@ -1127,6 +1119,12 @@
 		return
 	qdel(src)
 
+/obj/item/clothing/suit/roguetown/armor/plate/full/paalloy
+	name = "ancient full-plate" //why was this half plate?
+	desc = "Plate formed out of ancient alloys. Aeon's grasp has been lifted from it."
+	icon_state = "ancientplate"
+	item_state = "ancientplate"
+	smeltresult = /obj/item/ingot/aaslag
 
 /obj/item/clothing/suit/roguetown/armor/plate/full/bikini
 	slot_flags = ITEM_SLOT_ARMOR
