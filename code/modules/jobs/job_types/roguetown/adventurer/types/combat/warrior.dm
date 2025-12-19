@@ -355,6 +355,7 @@
 		/datum/skill/misc/athletics = SKILL_LEVEL_JOURNEYMAN,
 		/datum/skill/misc/climbing = SKILL_LEVEL_APPRENTICE,
 		/datum/skill/misc/reading = SKILL_LEVEL_APPRENTICE,
+		/datum/skill/misc/medicine = SKILL_LEVEL_APPRENTICE
 	)
 
 /datum/outfit/job/adventurer/flagellant/pre_equip(mob/living/carbon/human/H, visualsOnly)
@@ -363,6 +364,7 @@
 
 	H.set_blindness(0)
 
+	head = /obj/item/clothing/head/roguetown/helmet/bascinet/klapplong
 	pants = /obj/item/clothing/under/roguetown/tights/black
 	shirt = /obj/item/clothing/suit/roguetown/shirt/tunic/black
 	shoes = /obj/item/clothing/shoes/roguetown/boots
