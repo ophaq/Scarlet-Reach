@@ -26,7 +26,6 @@
 	social_rank = SOCIAL_RANK_NOBLE
 
 	virtue_restrictions = list(
-		/datum/virtue/utility/failed_squire,
 		/datum/virtue/utility/blacksmith, // we don't want you repairing your stuff in combat, sorry...
 	)
 	job_traits = list(TRAIT_HEAVYARMOR, TRAIT_STEELHEARTED, TRAIT_NOBLE, TRAIT_GUARDSMAN_NOBLE)
@@ -64,8 +63,6 @@
 		var/prev_real_name = H.real_name
 		var/prev_name = H.name
 		var/honorary = "Ser"
-		if(should_wear_femme_clothes(H))
-			honorary = "Dame"
 		GLOB.chosen_names -= prev_real_name
 		H.real_name = "[honorary] [prev_real_name]"
 		H.name = "[honorary] [prev_name]"

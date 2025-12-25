@@ -1331,7 +1331,8 @@
 
 /datum/status_effect/buff/clash/on_remove()
 	. = ..()
-	owner.apply_status_effect(/datum/status_effect/debuff/clashcd)
+	var/newcd = 30 SECONDS - owner.get_tempo_bonus(TEMPO_TAG_RCLICK_CD_BONUS)
+	owner.apply_status_effect(/datum/status_effect/debuff/clashcd, newcd)
 	var/newdur = world.time - dur
 	var/mob/living/carbon/human/H = owner
 	if(newdur > (initial(duration) - 0.2 SECONDS))	//Not checking exact duration to account for lag and any other tick / timing inconsistencies.
@@ -1499,8 +1500,28 @@
 	effectedstats = list(STATKEY_SPD = 1)
 	status_type = STATUS_EFFECT_REPLACE
 
+/atom/movable/screen/alert/status_effect/buff/celerity
+	name = "Celerity"
+	desc = "Your body is under perfect control."
+	icon_state = "buff"
+
 /datum/status_effect/buff/celerity/New(list/arguments)
 	effectedstats[STATKEY_SPD] = arguments[2]
+	. = ..()
+
+/datum/status_effect/buff/potence
+	id = "potence"
+	alert_type = /atom/movable/screen/alert/status_effect/buff
+	effectedstats = list(STATKEY_STR = 1)
+	status_type = STATUS_EFFECT_REPLACE
+
+/atom/movable/screen/alert/status_effect/buff/potence
+	name = "Potence"
+	desc = "I am a force of destruction."
+	icon_state = "buff"
+
+/datum/status_effect/buff/potence/New(list/arguments)
+	effectedstats[STATKEY_STR] = arguments[2]
 	. = ..()
 
 /datum/status_effect/buff/fotv
