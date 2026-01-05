@@ -14,9 +14,11 @@
 					/obj/effect/proc_holder/spell/invoked/lesser_heal 			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/blood_heal			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/projectile/lightningbolt/sacred_flame_rogue	= CLERIC_T1,
+					/obj/effect/proc_holder/spell/self/scorch					= CLERIC_T2,
 					/obj/effect/proc_holder/spell/invoked/heal					= CLERIC_T2,
 					/obj/effect/proc_holder/spell/invoked/revive				= CLERIC_T3,
 					/obj/effect/proc_holder/spell/invoked/wound_heal			= CLERIC_T4,
+					/obj/effect/proc_holder/spell/invoked/invoked_reverence		= CLERIC_T4
 	)
 	confess_lines = list(
 		"ASTRATA IS MY LIGHT!",
@@ -44,9 +46,11 @@
 					/obj/effect/proc_holder/spell/invoked/lesser_heal 			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/blood_heal			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/projectile/lightningbolt/sacred_flame_rogue	= CLERIC_T1,
+					/obj/effect/proc_holder/spell/self/scorch					= CLERIC_T2,
 					/obj/effect/proc_holder/spell/invoked/heal					= CLERIC_T2,
 					/obj/effect/proc_holder/spell/invoked/revive				= CLERIC_T3,
 					/obj/effect/proc_holder/spell/invoked/wound_heal			= CLERIC_T4,
+					/obj/effect/proc_holder/spell/invoked/invoked_reverence		= CLERIC_T4
 	)
 
 /datum/patron/divine/astrata/kazengun/lingyue
@@ -65,8 +69,8 @@
 					/obj/effect/proc_holder/spell/invoked/lesser_heal 			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/blood_heal			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/invisibility/miracle	= CLERIC_T1,
-					/obj/effect/proc_holder/spell/self/noc_spell_bundle			= CLERIC_T3,
-					/obj/effect/proc_holder/spell/invoked/wound_heal			= CLERIC_T4,
+					/obj/effect/proc_holder/spell/self/noc_spell_bundle			= CLERIC_T2,
+					/obj/effect/proc_holder/spell/invoked/wound_heal			= CLERIC_T3,
 	)
 	confess_lines = list(
 		"NOC IS NIGHT!",
@@ -308,7 +312,7 @@
 					/obj/effect/proc_holder/spell/invoked/mockery					= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/blood_heal				= CLERIC_T2,
 					/obj/effect/proc_holder/spell/invoked/mastersillusion			= CLERIC_T2,
-					/obj/effect/proc_holder/spell/invoked/wound_heal				= CLERIC_T4,
+					/obj/effect/proc_holder/spell/invoked/wound_heal				= CLERIC_T3,
 	)
 	confess_lines = list(
 		"ASTRATA IS MY LIGHT!",
